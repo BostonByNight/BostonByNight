@@ -1,4 +1,4 @@
-name: build_image
+name: Build Image for ACR
 on:
   push:
     branches: [master]
@@ -11,16 +11,16 @@ jobs:
         id: acr
         uses: azure/acr-build@v1
         with:
-          service_principal: ${{ secrets.service_principal }}
+          service_principal: ca1407b1-d2ec-4c61-aa97-2006ce099385
           service_principal_password: ${{ secrets.service_principal_password }}
-          tenant: ${{ secrets.tenant }}
-          registry: ${{ secrets.registry }}
-          repository: ${{ secrets.repository }}
+          tenant: b4a3e2d3-2d99-4b3e-a15e-5a85d655c544
+          registry: bostonbynightgdr
+          repository: bostonbynight-gdr
           image: bostonbynight-gdr
           git_access_token: ${{ secrets.GITHUB_TOKEN }}
           dockerfile: DockerfileGithubAction
           branch: master
-          build-args: |
+          args: |
             db_url=${{ secrets.POSTGRES_CONN_STRING }}
             secret_key=${{ secrets.SECRET_KEY_STRING }}
             mail_smtps_server=smtps.aruba.it
