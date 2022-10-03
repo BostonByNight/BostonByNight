@@ -22,10 +22,10 @@ jobs:
           branch: master
           build_args: |
             [
-              "db_url": "${{ secrets.POSTGRES_CONN_STRING }}"
-              "secret_key": "${{ secrets.SECRET_KEY_STRING }}"
-              "mail_smtps_server": "smtps.aruba.it"
-              "mail_port": 465
-              "mail_user": "postmaster@vtmbaires.eu"
-              "mail_pass": "${{ secrets.MAIL_PWD }}"
+              {"db_url": "${{ secrets.POSTGRES_CONN_STRING }}"}
+              {"secret_key": "${{ secrets.SECRET_KEY_STRING }}"}
+              {"mail_smtps_server": "smtps.aruba.it"}
+              {"mail_port": 465}
+              {"mail_user": "postmaster@vtmbaires.eu"}
+              {"mail_pass": "${{ secrets.MAIL_PWD }}"}
             ]
