@@ -10,7 +10,7 @@ import Config
 # which you should run after static files are built and
 # before starting your production server.
 config :vtm_web, VtmWeb.Endpoint,
-  url: [host: "bostonbynight-gdr.it", port: 80],
+  url: [host: "test.bostonbynight-gdr.it", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 config :vtm_web, :environment, :prod
