@@ -1,7 +1,7 @@
 name: Build Image for ACR
 on:
   push:
-    branches: [master]
+    branches: [master, fix-acr]
 
 jobs:
   build:
@@ -20,10 +20,21 @@ jobs:
           git_access_token: ${{ secrets.GITHUB_TOKEN }}
           dockerfile: DockerfileGithubAction
           branch: master
-          args: |
-            db_url=${{ secrets.POSTGRES_CONN_STRING }}
-            secret_key=${{ secrets.SECRET_KEY_STRING }}
-            mail_smtps_server=smtps.aruba.it
-            mail_port=465
-            mail_user=postmaster@vtmbaires.eu
-            mail_pass=${{ secrets.MAIL_PWD }}
+          build_args: |
+            [
+              {"db_url": "${{ secrets.POSTGRES_CONN_STRING }}"},
+              {"secret_key": "${{ secrets.SECRET_KEY_STRING }}"},
+              {"mail_smtps_server": "smtps.aruba.it"},
+              {"mail_port": 465},
+              {"mail_user": "postmaster@vtmbaires.eu"},
+              {"mail_pass": "${{ secrets.MAIL_PWD }}"}
+            ]
+
+      # - name: Update Docker Compose
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.TEST_HOST }}
+      #     username: ${{ secrets.TEST_USERNAME }}
+      #     password: ${{ secrets.TEST_PASSWORD }}
+      #     port: ${{ secrets.TEST_PORT }}
+      #     script: /usr/bin/deploy.sh
