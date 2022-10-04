@@ -30,11 +30,11 @@ jobs:
               {"mail_pass": "${{ secrets.MAIL_PWD }}"}
             ]
 
-      - name: Update Docker Compose
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.TEST_HOST }}
-          username: ${{ secrets.TEST_USERNAME }}
-          password: ${{ secrets.TEST_PASSWORD }}
-          port: ${{ secrets.TEST_PORT }}
-          script: /usr/bin/deploy.sh
+      # - name: Update Docker Compose
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.TEST_HOST }}
+      #     username: ${{ secrets.TEST_USERNAME }}
+      #     password: ${{ secrets.TEST_PASSWORD }}
+      #     port: ${{ secrets.TEST_PORT }}
+      #     script: /usr/bin/deploy.sh
