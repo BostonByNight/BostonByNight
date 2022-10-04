@@ -1,7 +1,7 @@
 name: Build Image for ACR
 on:
   push:
-    branches: [master, fix-acr]
+    branches: [master]
 
 jobs:
   build:

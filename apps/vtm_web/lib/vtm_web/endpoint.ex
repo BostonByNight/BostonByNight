@@ -58,5 +58,6 @@ defmodule VtmWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+  plug CORSPlug, origin: ["http://localhost", "https://test.bostonbynight-gdr.it", "https://bostonbynight-gdr.it"]
   plug VtmWeb.Router
 end

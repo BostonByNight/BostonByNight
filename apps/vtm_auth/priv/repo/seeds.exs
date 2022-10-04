@@ -21,12 +21,24 @@ case VtmAuth.Accounts.get_user_by_email("postmaster@vtmbaires.eu") do
     })
 end
 
+case VtmAuth.Accounts.get_user_by_email("daniele.pezzato@gmail.com") do
+  {:ok, user = %{email: "daniele.pezzato@gmail.com"}} ->
+    {:ok, user}
+  _ ->
+    VtmAuth.Accounts.create_user(%{
+      "email" => "daniele.pezzato@gmail.com",
+      "role" => "master",
+      "name" => "Storyteller",
+      "password" => "PassW0rd1!"
+    })
+end
+
 case VtmAuth.Accounts.get_user_by_email("utente@vtmbaires.eu") do
   {:ok, user = %{email: "utente@vtmbaires.eu"}} ->
     {:ok, user}
   _ ->
     VtmAuth.Accounts.create_user(%{
-      "email" => "utente@vtmbaires.eu",
+      "email" => "utente@bostonbynight-gdr.it",
       "role" => "player",
       "name" => "Utente",
       "password" => "utente"
