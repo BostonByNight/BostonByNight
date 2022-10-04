@@ -27,3 +27,8 @@ The app communicate with the back end using GraphQL, but the client code is auto
 The client development will not take GraphQL into consideration at all, this is back end development responsibility,
 so Pull Request with manual modifications to generated file will not be taken into consideration and considered 
 wrong.
+
+### Images
+
+For performance reasons, the only image extension allowed to be pushed to main will be **webp**. There are a good 
+number of online tools that can convert from traditional image extensions to webp.
