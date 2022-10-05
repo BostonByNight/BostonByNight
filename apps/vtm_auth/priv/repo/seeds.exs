@@ -33,8 +33,8 @@ case VtmAuth.Accounts.get_user_by_email("daniele.pezzato@gmail.com") do
     })
 end
 
-case VtmAuth.Accounts.get_user_by_email("utente@vtmbaires.eu") do
-  {:ok, user = %{email: "utente@vtmbaires.eu"}} ->
+case VtmAuth.Accounts.get_user_by_email("utente@bostonbynight-gdr.it") do
+  {:ok, user = %{email: "utente@bostonbynight-gdr.it"}} ->
     {:ok, user}
   _ ->
     VtmAuth.Accounts.create_user(%{
