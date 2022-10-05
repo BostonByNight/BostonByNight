@@ -19,7 +19,7 @@ jobs:
           image: bostonbynight-gdr
           git_access_token: ${{ secrets.GITHUB_TOKEN }}
           dockerfile: DockerfileGithubAction
-          branch: master
+          branch: main
           build_args: |
             [
               {"db_url": "${{ secrets.POSTGRES_CONN_STRING }}"},
