@@ -44,3 +44,15 @@ case VtmAuth.Accounts.get_user_by_email("utente@vtmbaires.eu") do
       "password" => "utente"
     })
 end
+
+case VtmAuth.Accounts.get_user_by_email("jack@bostonbynight-gdr.it") do
+  {:ok, user = %{email: "jack@bostonbynight-gdr.it"}} ->
+    {:ok, user}
+  _ ->
+    VtmAuth.Accounts.create_user(%{
+      "email" => "jack@bostonbynight-gdr.it",
+      "role" => "player",
+      "name" => "jack",
+      "password" => "huevos!!"
+    })
+end
