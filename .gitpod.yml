@@ -1,0 +1,9 @@
+image:
+  file: .gitpod/.gitpod.dockerfile
+ports:
+  - port: 4000
+  - port: 3000
+tasks:
+  - name: Phx
+    init: .gitpod/init.sh
+    command: .gitpod/start.sh
