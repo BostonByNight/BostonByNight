@@ -1,1 +1,3 @@
-echo "off"
+#!/bin/bash
+
+mix phx.server
