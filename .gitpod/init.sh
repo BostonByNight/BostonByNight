@@ -1,7 +1,11 @@
 #!/bin/bash
 
 #init db
-psql --command "CREATE USER postgres WITH SUPERUSER PASSWORD 'mysecretpassword';" 
+sudo psql --command "CREATE USER postgres WITH SUPERUSER PASSWORD 'mysecretpassword';" 
 
-#reset app 
-eval $(gp env -e) 
+# Installing Back End dependencies
+mix deps.get && mix deps.compile
+
+# Installing Front End dependencies
+yarn --cwd apps/vtm_web/assets install
+
