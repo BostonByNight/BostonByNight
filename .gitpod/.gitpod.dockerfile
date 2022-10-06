@@ -19,3 +19,4 @@ RUN mix local.hex --force \
     && mix local.rebar --force \
     && mix archive.install hex phx_new
 
+USER root
