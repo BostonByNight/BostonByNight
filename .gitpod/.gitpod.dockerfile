@@ -11,10 +11,13 @@ RUN sudo apt-get install curl software-properties-common apt-transport-https lsb
     && apt-get install erlang -y \
     && apt-get install elixir -y \
     && apt-get install inotify-tools -y \
-    && mix local.hex --force \
+    && apt-get clean && rm -rf /var/cache/apt/* && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/*
+
+USER gitpod
+
+RUN mix local.hex --force \
     && mix local.rebar --force \
     && mix archive.install hex phx_new \
-    && apt-get clean && rm -rf /var/cache/apt/* && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/*
 
 # Allow gitpod group to edit 
 RUN true \
