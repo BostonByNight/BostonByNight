@@ -17,9 +17,5 @@ USER gitpod
 
 RUN mix local.hex --force \
     && mix local.rebar --force \
-    && mix archive.install hex phx_new \
+    && mix archive.install hex phx_new
 
-# Allow gitpod group to edit 
-RUN true \
-	&& chown -R root:gitpod /home/gitpod/.mix \
-    && chmod -R g+rw /home/gitpod/.mix
