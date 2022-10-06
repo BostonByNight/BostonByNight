@@ -4,11 +4,11 @@ USER root
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN sudo apt install curl software-properties-common apt-transport-https lsb-release \
+RUN sudo apt-get install curl software-properties-common apt-transport-https lsb-release -y \
     && curl -fsSL https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/erlang.gpg \
     && echo "deb https://packages.erlang-solutions.com/ubuntu $(lsb_release -cs) contrib" | sudo tee /etc/apt/sources.list.d/erlang.list \
-    && apt update \
-    && apt install erlang -y \
+    && apt-get update -y \
+    && apt-get install erlang -y \
     && apt-get install elixir -y \
     && apt-get install inotify-tools -y \
     && mix local.hex --force \
