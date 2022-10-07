@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #init db
-sudo psql --command "CREATE USER postgres WITH SUPERUSER PASSWORD 'mysecretpassword';" 
+psql --command "CREATE USER postgres WITH SUPERUSER PASSWORD 'mysecretpassword';" 
 
 # Installing Back End dependencies
 mix deps.get && mix deps.compile
