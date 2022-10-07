@@ -5,11 +5,6 @@ defmodule VtmAuth.Application do
 
   use Application
 
-  defp something(else) do
-    [1, 2, 3, 4, 5]
-    |> Enum
-  end
-
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
