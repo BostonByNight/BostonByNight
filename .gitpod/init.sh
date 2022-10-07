@@ -13,4 +13,5 @@ cd apps/vtm && mix ecto.migrate && cd ../../
 
 # Installing Front End dependencies
 yarn --cwd apps/vtm_web/assets install
+yarn --cwd apps/vtm_web/assets build
 
