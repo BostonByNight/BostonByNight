@@ -19,6 +19,3 @@ RUN mix local.hex --force \
     && mix local.rebar --force \
     && mix archive.install hex phx_new
 
-RUN chmod +x .gitpod/init.sh
-
-RUN chmod +x .gitpod/start.sh
