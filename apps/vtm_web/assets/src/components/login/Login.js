@@ -66,7 +66,7 @@ const LoginComponent = (): Node => {
                 stopWait()
                 setUser(res.data.user);
                 setTimeout(() => {
-                    history.push(Routes.main);
+                    history.push(Routes.map);
                 }, 200);
                 return res;
             })

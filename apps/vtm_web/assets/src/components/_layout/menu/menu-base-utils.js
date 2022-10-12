@@ -25,10 +25,11 @@ export const menuIconStyle = {
 
 export const menuTextStyle = {
     ...whiteOnHover,
-    fontFamily: "Disturbed",
-    fontSize: "1.1rem",
-    color: "primary.light",
-    textShadow: "5px 5px 5px black",
+    fontFamily: "'Gothic', serif",
+    fontWeight: 700,
+    fontSize: "1.5rem",
+    color: "white",
+    textTransform: 'uppercase'
 };
 
 export const menuTextStyleHover = {

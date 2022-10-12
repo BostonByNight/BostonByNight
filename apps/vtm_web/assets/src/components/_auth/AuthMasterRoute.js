@@ -16,7 +16,7 @@ const AuthMasterRoute = ({ children, component, ...rest }: Props): GenericReactC
     const user = useRecoilValue(sessionStateAtom);
 
     const loginRedirection = location => ({
-        pathname: Routes.main,
+        pathname: Routes.map,
         state: { from: location }
     });
 

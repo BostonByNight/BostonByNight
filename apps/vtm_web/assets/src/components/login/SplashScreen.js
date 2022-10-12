@@ -17,7 +17,7 @@ const SplashScreen = (): GenericReactComponent => {
 
     useEffect(() => {
         if (user?.id != null) {
-            history.push(Routes.main);
+            history.push(Routes.map);
         }
         else {
             history.push(LoginRoutes.login);

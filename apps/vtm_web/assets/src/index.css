@@ -5,6 +5,13 @@
 }
 
 @font-face {
+  font-family: "Gothic";
+  src: local("SF Gothican"), url("./fonts/Gothican.ttf");
+  font-display: swap;
+}
+
+
+@font-face {
   font-family: "ThroughTheNight";
   src: local("ThroughTheNight"), url("./fonts/through-the-night.ttf");
   font-display: swap;
