@@ -75,7 +75,7 @@ const App = (): Node => {
             MuiDivider: {
                 styleOverrides: {
                     root: {
-                        borderImage: 'url(https://www.worldofdarkness.com/packs/media/misc/doily-8401e635.png) 40'
+                        borderImage: 'url(/grunge_border_image.png) 40'
                     }
                 }
             },
