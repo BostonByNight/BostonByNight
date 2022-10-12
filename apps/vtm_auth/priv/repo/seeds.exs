@@ -45,13 +45,8 @@ case VtmAuth.Accounts.get_user_by_email("utente@bostonbynight-gdr.it") do
     })
 end
 
-<<<<<<< Updated upstream
 case VtmAuth.Accounts.get_user_by_email("jack@bostonbynight-gdr.it") do
   {:ok, user = %{email: "jack@bostonbynight-gdr.it"}} ->
-=======
-case VtmAuth.Accounts.get_user_by_email("jack@vtmbaires.eu") do
-  {:ok, user = %{email: "jack@vtmbaires.eu"}} ->
->>>>>>> Stashed changes
     {:ok, user}
   _ ->
     VtmAuth.Accounts.create_user(%{
