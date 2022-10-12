@@ -45,8 +45,11 @@ const PageDrawer = ({open, setOpen, children}) => {
                         '& .MuiDrawer-paper': {
                             boxSizing: 'border-box',
                             width: drawerWidth,
-                            background: "transparent"
-                        },
+                            position: 'relative',
+                            height: '100%',
+                            border: 0,
+                            backgroundColor: 'inherit',
+                        }
                     }}
                     open>
                 {children}
@@ -120,27 +123,20 @@ const MainLayout = ({children}: {children: any}): GenericReactComponent => {
     };
 
     const title = () => {
-        if (showCompressedTitle) {
-            return "VTM Baires";
-        }
-
-        if (showPartialTitle) {
-            return "Vampire TM: Buenos Aires by Night";
-        }
-
-        return "Vampire the Masquerade: Buenos Aires by Night";
+        return "Boston by Night";
     }
 
     const drawerContent = () => (
-        <Box>
+        <Box sx={{
+            borderRight: '1px solid #fff',
+            borderImage: 'url(https://www.worldofdarkness.com/packs/media/misc/doily-8401e635.png) 40',
+        }}>
             <Toolbar />
-            <Divider />
             <List>
                 <MainListItems drawerDone={closeOnSelected}
                                onUpdate={onCharacterUpdate}
                                reloadCount={characterFetchKey} />
             </List>
-            <Divider />
             {masterMenu()}
             <Divider />
             <CommonListItems />
@@ -150,21 +146,13 @@ const MainLayout = ({children}: {children: any}): GenericReactComponent => {
     return (
         <Box sx={{
             display: 'flex',
-            background: "url('background-total.webp')",
-            backgroundPosition: "left top",
-            backgroundSize: "auto 100vh",
-            backgroundRepeat: "no-repeat",
-            backgroundAttachment: "fixed",
-            backgroundBlendMode: "screen",
-            backgroundColor: "#101010",
             overflow: "auto"
         }}>
             <CssBaseline />
             <AppBar position="fixed" open={open} sx={{
-                background: "url('masquerade.webp')",
-                backgroundColor: "#101010B0",
-                width: { md: `calc(100% - ${drawerWidth}px)` },
-                ml: { xs: `${drawerWidth}px` },
+                backgroundImage: 'none',
+                boxShadow: 'none',
+                zIndex: 1201
             }}>
                 <Toolbar>
                     <IconButton color="inherit"
@@ -184,8 +172,9 @@ const MainLayout = ({children}: {children: any}): GenericReactComponent => {
                                 color="inherit"
                                 sx={{
                                     flexGrow: "1",
-                                    fontFamily: 'DefaultTypewriter',
-                                    color: "primary.main"
+                                    fontFamily: 'Gothic',
+                                    color: "primary.main",
+                                    fontSize: "2.7rem"
                                 }}>
                         {title()}
                     </Typography>
@@ -196,20 +185,20 @@ const MainLayout = ({children}: {children: any}): GenericReactComponent => {
                     <LogoutControl />
                 </Toolbar>
             </AppBar>
-            <Box component="nav"
-                 sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
-                 aria-label="mailbox folders">
+            <List component="nav"
+                  sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 }, height: '100%' }}
+                  aria-label="mailbox folders">
                 <PageDrawer open={open} setOpen={setOpen}>
                     {drawerContent()}
                 </PageDrawer>
-            </Box>
+            </List>
             <Box component="main" sx={{
                 flexGrow: 1,
                 p: 3,
                 width: { lg: `calc(100% - ${drawerWidth}px)` },
                 // background: "url('pattern.webp')"
                 // backgroundColor: "linear-gradient(to right, #19191900, #191919)"
-            }} style={{height: "100vh"}}>
+            }} >
                 <Toolbar />
                 <React.Suspense fallback={<DefaultFallback />}>
                     {children}

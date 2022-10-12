@@ -7,6 +7,7 @@ import {Route, Switch} from "react-router-dom";
 export type OpenDialogDelegate = (title: string, text: string, onOk: () => void, onCancel: ?() => void) => void;
 
 export const Routes = {
+    map: "/main/map",
     splashScreen: "/",
     main: "/main",
     guideMain: "/guides",

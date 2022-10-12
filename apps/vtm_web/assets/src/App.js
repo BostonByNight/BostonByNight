@@ -55,12 +55,12 @@ const App = (): Node => {
         palette: {
             mode: paletteType,
             background: {
-                paper: "#191919"
+                default: "#202225"
             },
             primary: {
-                main: "#A0A0A0",
+                main: "#f5f5f5",
                 dark: "#505050",
-                light: "#C0C0C0"
+                light: "#fff"
             },
             secondary: {
                 main: "#580B0B",
@@ -72,6 +72,13 @@ const App = (): Node => {
             }
         },
         components: {
+            MuiDivider: {
+                styleOverrides: {
+                    root: {
+                        borderImage: 'url(/grunge_border_image.png) 40'
+                    }
+                }
+            },
             MuiSpeedDial: {
                 styleOverrides: {
                     fab: {

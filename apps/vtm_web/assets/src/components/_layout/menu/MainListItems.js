@@ -64,12 +64,6 @@ const MainListItems = ({drawerDone, reloadCount, onUpdate}: MenuProps): GenericR
 
     return (
         <>
-            <ListItem button onClick={_ => pushHistory(Routes.main)}>
-                <ListItemIcon>
-                    <HomeIcon sx={menuIconStyle} />
-                </ListItemIcon>
-                <ListItemText secondary={<MenuSecondaryText text="Home" />} />
-            </ListItem>
             <ListItem button onClick={_ => pushHistory(MainRoutes.mainMap)}>
                 <ListItemIcon>
                     <MapIcon sx={menuIconStyle} />
