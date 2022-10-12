@@ -186,9 +186,9 @@ const MainLayout = ({children}: {children: any}): GenericReactComponent => {
                 </Toolbar>
             </AppBar>
             <List component="nav"
-                 sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 }, height: '100%' }}
-                 aria-label="mailbox folders"  className='provaprovaprva' >
-                <PageDrawer  open={open} setOpen={setOpen}>
+                  sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 }, height: '100%' }}
+                  aria-label="mailbox folders">
+                <PageDrawer open={open} setOpen={setOpen}>
                     {drawerContent()}
                 </PageDrawer>
             </List>

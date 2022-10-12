@@ -6,7 +6,7 @@
 
 @font-face {
   font-family: "Gothic";
-  src: local("SF Gothican"), url("./fonts/Gothican.ttf");
+  src: local("Gothican"), url("./fonts/Gothican.ttf");
   font-display: swap;
 }
 
