@@ -10,6 +10,11 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Roboto";
+  src: local("Roboto"), url("./fonts/Roboto.ttf");
+  font-display: swap;
+}
 
 @font-face {
   font-family: "ThroughTheNight";
