@@ -74,7 +74,7 @@ const MainMapImageMapper = ({areas, onAreaSelected}: Props): GenericReactCompone
                         display: "flex"
                     }}>
                         <Typography sx={{
-                            fontFamily: "ThroughTheNight",
+                            fontFamily: "Gothic",
                             fontSize: legendFontSize(),
                             alignSelf: "center",
                         }}>

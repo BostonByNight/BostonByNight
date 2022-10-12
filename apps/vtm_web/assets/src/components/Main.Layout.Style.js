@@ -8,7 +8,7 @@ export const mainFontFamily = {
     color: "primary.main"
 };
 
-const useStyles = makeStyles((theme) => ({
+/*%const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexGrow: 1,
@@ -23,21 +23,6 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'flex-end',
         padding: '0 8px',
         ...theme.mixins.toolbar,
-    },
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-    },
-    appBarShift: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
     },
     defaultParagraph: {
         padding: theme.spacing(1)
@@ -178,6 +163,8 @@ const useStyles = makeStyles((theme) => ({
     selectEmpty: {
         marginTop: theme.spacing(2),
     }
-}));
+}));*/
+
+const useStyles  = makeStyles((theme) => ({}));
 
 export default useStyles;
