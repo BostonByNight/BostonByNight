@@ -3,7 +3,6 @@
 import React, {Suspense, useState} from "react";
 import {useHistory} from "react-router-dom";
 import ListItem from "@mui/material/ListItem";
-import {Routes} from "../../../AppRouter";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import {MainRoutes} from "../../MainRouter";

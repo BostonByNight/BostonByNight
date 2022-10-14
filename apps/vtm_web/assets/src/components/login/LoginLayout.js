@@ -8,7 +8,6 @@ import Grid from '@mui/material/Grid';
 import NoCookieBar from "../../_base/components/NoCookieBar";
 import {useTheme} from "@mui/material/styles";
 import {useMediaQuery} from "@mui/material";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import BbnLogoComponent from "../_layout/BbnLogoComponent";
 

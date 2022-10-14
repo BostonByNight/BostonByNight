@@ -9,7 +9,6 @@ import {Routes} from "../../../AppRouter";
 import type {GenericReactComponent} from "../../../_base/types";
 import {useDialog} from "../../../_base/providers/DialogProvider";
 import MenuItem from "@mui/material/MenuItem";
-import Button from "@mui/material/Button";
 
 const LogoutControl = (): GenericReactComponent => {
     const history = useHistory();
