@@ -19,7 +19,7 @@ const ForumLayout = ({title, description, controls, children}: Props): GenericRe
         if (description != null && description !== "") {
             return (
                 <Typography paragraph sx={{
-                    fontFamily: 'Disturbed',
+                    fontFamily: 'Gothic',
                 }}>
                     {description}
                 </Typography>
@@ -32,10 +32,7 @@ const ForumLayout = ({title, description, controls, children}: Props): GenericRe
     return (
         <>
             <Stack direction="row">
-                <h1 style={{
-                    fontFamily: 'Disturbed',
-                    marginRight: "20px"
-                }}>
+                <h1 >
                     {title}
                 </h1>
                 <Box sx={{display: "inline-flex"}}>

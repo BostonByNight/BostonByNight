@@ -19,10 +19,7 @@ const AdminHavenEventsInternal = ({fetchKey, component}) => {
 const AdminHavenEvents = (): any => {
     return (
         <Stack direction="column">
-            <h1 style={{
-                fontFamily: 'Disturbed',
-                marginRight: "20px"
-            }}>
+            <h1 >
                 Eventi nel Dominio
             </h1>
 

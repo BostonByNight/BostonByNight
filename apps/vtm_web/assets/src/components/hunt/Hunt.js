@@ -143,10 +143,7 @@ const HuntInternal = ({characterId}) => {
     if (isCharacterVampire && isCharacterAwake) {
         return (
             <>
-                <h1 style={{
-                    fontFamily: 'Disturbed',
-                    marginRight: "20px"
-                }}>
+                <h1 >
                     <Stack direction="row" sx={{
                         alignItems: "middle"
                     }}>

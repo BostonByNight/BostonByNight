@@ -175,10 +175,7 @@ const BookChatsInternal = (): GenericReactComponent => {
 
     return (
         <>
-            <h1 style={{
-                fontFamily: 'Disturbed',
-                marginRight: "20px"
-            }}>
+            <h1 >
                 Prenota chat privata
             </h1>
 
