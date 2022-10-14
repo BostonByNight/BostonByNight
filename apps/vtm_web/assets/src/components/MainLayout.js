@@ -27,6 +27,8 @@ import CommonListItems from "./_layout/menu/CommonListItems";
 import type {GenericReactComponent} from "../_base/types";
 import {useRecoilValue} from "recoil";
 import {isUserMasterSelector} from "../session/selectors";
+import UserMenuComponent from "./_layout/app-bar-controls/UserMenu";
+import BbnLogoComponent from "./_layout/BbnLogoComponent";
 
 const drawerWidth = 300;
 
@@ -84,8 +86,6 @@ const MainLayout = ({children}: {children: any}): GenericReactComponent => {
     const [characterFetchKey, setCharacterFetchKey] = useState(Math.round(Math.random() * 100));
 
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
-    const showCompressedTitle = useMediaQuery(theme.breakpoints.down('sm'));
-    const showPartialTitle = useMediaQuery(theme.breakpoints.down('lg'));
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -121,10 +121,6 @@ const MainLayout = ({children}: {children: any}): GenericReactComponent => {
 
         return (<></>);
     };
-
-    const title = () => {
-        return "Boston by Night";
-    }
 
     const drawerContent = () => (
         <Box sx={{
@@ -166,23 +162,15 @@ const MainLayout = ({children}: {children: any}): GenericReactComponent => {
                                 }}>
                         <MenuIcon sx={menuIconStyle} />
                     </IconButton>
-                    <Typography variant="h6"
-                                noWrap
-                                component="h1"
-                                color="inherit"
-                                sx={{
-                                    flexGrow: "1",
-                                    fontFamily: 'Gothic',
-                                    color: "primary.main",
-                                    fontSize: "2.7rem"
-                                }}>
-                        {title()}
-                    </Typography>
+                    <BbnLogoComponent
+                        primaryRem="2.7rem"
+                        secondaryRem="1.2rem"
+                    />
                     <ReturnToChatControl />
-                    <ReloadControl />
                     <MessageControl numberOfMessages={numberOfMessages} />
                     <OnlineControl />
-                    <LogoutControl />
+                    <UserMenuComponent reloadCount={characterFetchKey} />
+
                 </Toolbar>
             </AppBar>
             <List component="nav"

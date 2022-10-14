@@ -10,6 +10,7 @@ import {useTheme} from "@mui/material/styles";
 import {useMediaQuery} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import BbnLogoComponent from "../_layout/BbnLogoComponent";
 
 export type HomeLayoutProps = {
     title: string;
@@ -35,9 +36,6 @@ const LoginLayout = (props: LoginLayoutProps): Node => {
     return (
         <Grid container component="main" sx={{
             height: '100vh',
-            // backgroundImage: 'url(/login-image.webp)',
-            backgroundImage: 'url(/login-wallpaper-inverted.webp)',
-            backgroundRepeat: 'no-repeat',
             backgroundColor: "black",
             backgroundSize: {
                 xs: "cover",
@@ -58,43 +56,15 @@ const LoginLayout = (props: LoginLayoutProps): Node => {
                     width: "100%"
                 }}>
                     <Grid item xs={false} md={12} lg={7}>
-                        <Typography sx={{
-                            fontFamily: "Disturbed",
-                            fontSize: "2rem",
-                            color: "#191919",
-                            textShadow: "1px 1px black",
-                            textAlign: "center",
-                            marginLeft: {
-                                sm: "5rem",
-                                md: "7rem",
-                                lg: "9rem"
-                            }
-                        }}>
-                            Buenos Aires by Night
-                        </Typography>
-                    </Grid>
-                </Box>
-                <Box sx={{
-                    position: "absolute",
-                    zIndex: "2",
-                    bottom: "1.5rem",
-                    width: "100%"
-                }}>
-                    <Grid item xs={false} md={12} lg={7}>
-                        <Typography sx={{
-                            fontFamily: "Disturbed",
-                            fontSize: "3.5rem",
-                            color: "secondary.main",
-                            textShadow: "1px 1px #590000",
-                            textAlign: "center",
-                            marginLeft: {
-                                sm: "5rem",
-                                md: "7rem",
-                                lg: "9rem"
-                            }
-                        }}>
-                            Buenos Aires by Night
-                        </Typography>
+                        <BbnLogoComponent  primaryRem="7rem" secondaryRem="4rem" addStyle={{
+                                textShadow: "1px 1px black",
+                                textAlign: "center",
+                                marginLeft: {
+                                    sm: "5rem",
+                                    md: "7rem",
+                                    lg: "9rem"
+                                }
+                        }} />
                     </Grid>
                 </Box>
             </Grid>
