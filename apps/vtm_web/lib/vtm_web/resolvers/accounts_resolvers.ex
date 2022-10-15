@@ -169,6 +169,16 @@ defmodule VtmWeb.Resolvers.AccountsResolvers do
     {:ok, sessions}
   end
 
+  def user_online_visible(_, _, %{context: %{current_user: %{id: user_id}}}) do
+    case Accounts.get_session_by_user_id(user_id) do
+      %{visible: visible} -> 
+        {:ok, visible}
+
+      _ -> 
+        {:error, :not_found}
+    end
+  end
+
   def token(_, _, %{context: %{current_user: current_user}}) do
     {:ok, VtmWeb.Authentication.sign_subscription_key_token(current_user)}
   end
@@ -203,6 +213,12 @@ defmodule VtmWeb.Resolvers.AccountsResolvers do
         end
       false ->
         {:error, :not_found}
+    end
+  end
+
+  def toggle_session_visible(_, _, %{context: %{current_user: user}}) do
+    with {:ok, %{visible: visible}} <- Accounts.toggle_session_visible(user) do
+      {:ok, visible}
     end
   end
 
