@@ -7,18 +7,19 @@ import {HashRouter} from "react-router-dom";
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import {requestDesktopNotificationPermission} from "./_base/notification-utils";
+import { createRoot } from 'react-dom/client';
 
 // Older API
 // The project will keep the older React compatibility for now, because the new version of React still has some problems.
 // Test again with the official release, in the meantime changed the package.json to reference version 17.0.2, having that
 // nothing in the app is using the new functionalities of React
-ReactDOM.render(
+const root = createRoot(document.getElementById('root'))
+root.render(
     <React.StrictMode>
         <HashRouter>
             <App />
         </HashRouter>
-    </React.StrictMode>,
-    document.getElementById('root')
+    </React.StrictMode>
 );
 
 // Newer API
