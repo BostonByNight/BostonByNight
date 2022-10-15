@@ -11,7 +11,7 @@ const MenuForumSection = ({menuStyle}): GenericReactComponent => {
     const history = useHistory();
 
     return (
-        <MenuItem button onClick={() => history.push(MainRoutes.forumSections)}>
+        <MenuItem onClick={() => history.push(MainRoutes.forumSections)}>
             <ChatIcon sx={menuStyle} />
             Forum
         </MenuItem>
