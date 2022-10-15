@@ -1,10 +1,4 @@
 @font-face {
-  font-family: "Disturbed";
-  src: local("Punktype"), url("./fonts/punktype.ttf");
-  font-display: swap;
-}
-
-@font-face {
   font-family: "Gothic";
   src: local("Gothican"), url("./fonts/Gothican.ttf");
   font-display: swap;
@@ -32,6 +26,11 @@
   font-family: "Chat";
   src: local("Chat"), url("./fonts/chat.ttf");
   font-display: swap;
+}
+
+h1 {
+  font-family: Gothic, sans-serif;
+  margin-right: 20px;
 }
 
 body {

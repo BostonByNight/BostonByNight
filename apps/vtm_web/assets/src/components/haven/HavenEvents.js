@@ -21,10 +21,7 @@ const HavenEventsInternal = ({characterId, fetchKey, component}: HavenEventsInte
 const HavenEvents = (): any => {
     return (
         <Stack direction="column">
-            <h1 style={{
-                fontFamily: 'Disturbed',
-                marginRight: "20px"
-            }}>
+            <h1 >
                 Eventi nel Dominio del personaggio
             </h1>
 

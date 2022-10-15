@@ -34,7 +34,7 @@ const CreateNewNpc = (): GenericReactComponent => {
                     history.push(MainRoutes.defineNpc(characterId));
                 }
                 else {
-                    history.push(Routes.main);
+                    history.push(Routes.map);
                 }
             })
             .catch(e => enqueueSnackbar({ type: 'error', graphqlError: e, message: "An error happened while creating the user." }));

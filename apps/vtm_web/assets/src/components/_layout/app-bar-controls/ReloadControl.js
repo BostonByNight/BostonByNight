@@ -2,18 +2,15 @@
 
 import React from "react";
 import RefreshIcon from '@mui/icons-material/Refresh';
-import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
 import {menuIconStyle} from "../menu/menu-base-utils";
 import type {GenericReactComponent} from "../../../_base/types";
-
+import MenuItem from "@mui/material/MenuItem";
 const ReloadControl = (): GenericReactComponent => {
     return (
-        <Tooltip title="Refresh Pagina" placement="bottom">
-            <IconButton aria-label="Refresh" onClick={_ => document.location.reload(false)}>
+        <MenuItem button onClick={_ => document.location.reload(false)} >
                 <RefreshIcon sx={menuIconStyle} />
-            </IconButton>
-        </Tooltip>
+                Refresh Pagina
+        </MenuItem>
     );
 }
 

@@ -143,10 +143,7 @@ const AdminHavens = (): GenericReactComponent => {
     return (
         <Grid container>
             <Grid item xs={12}>
-                <h1 style={{
-                    fontFamily: 'Disturbed',
-                    marginRight: "20px"
-                }}>
+                <h1 >
                     Gestione rifugio
                 </h1>
             </Grid>

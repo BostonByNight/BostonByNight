@@ -86,7 +86,7 @@ const Internal = ({character}) => {
                 .then(r => {
                     enqueueSnackbar({type: "success", message: "Il tuo personaggio è stato creato con successo!"})
                     setTimeout(() => {
-                        history.push(Routes.main);
+                        history.push(Routes.map);
                         setTimeout(() => document.location.reload(false), 200);
                     }, 1000);
                 })
@@ -105,7 +105,7 @@ const Internal = ({character}) => {
             DeleteCharacterMutation(environment, characterId)
                 .then(r => {
                     enqueueSnackbar({type: "success", message: "Il tuo personaggio è stato cancellato!"});
-                    history.push(Routes.main);
+                    history.push(Routes.map);
                     document.location.reload(false);
                 })
                 .catch(e => {
