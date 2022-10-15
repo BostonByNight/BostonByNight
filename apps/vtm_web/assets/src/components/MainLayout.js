@@ -120,10 +120,7 @@ const MainLayout = ({children}: {children: any}): GenericReactComponent => {
     };
 
     const drawerContent = () => (
-        <Box sx={{
-            borderRight: '1px solid #fff',
-            borderImage: 'url(https://www.worldofdarkness.com/packs/media/misc/doily-8401e635.png) 40',
-        }}>
+        <Box >
             <Toolbar />
             <List>
                 <MainListItems drawerDone={closeOnSelected}
@@ -139,7 +136,8 @@ const MainLayout = ({children}: {children: any}): GenericReactComponent => {
     return (
         <Box sx={{
             display: 'flex',
-            overflow: "auto"
+            overflow: "auto",
+            height: "100%"
         }}>
             <CssBaseline />
             <AppBar position="fixed" open={open} sx={{
@@ -170,7 +168,9 @@ const MainLayout = ({children}: {children: any}): GenericReactComponent => {
                 </Toolbar>
             </AppBar>
             <List component="nav"
-                  sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 }, height: '100%' }}
+                  sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 }, height: '100%',
+                      borderRight: '1px solid #fff',
+                      borderImage: 'url(/grunge_border_image.png) 40' }}
                   aria-label="mailbox folders">
                 <PageDrawer open={open} setOpen={setOpen}>
                     {drawerContent()}
