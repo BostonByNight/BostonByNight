@@ -775,6 +775,7 @@ type RootMutationType {
   setResonanceZone(input: SetResonanceZoneInput!): SetResonanceZonePayload
   spendCharacterExperience(input: SpendCharacterExperienceInput!): SpendCharacterExperiencePayload
   switchCharacterAttributes(characterId: ID, firstAttribute: String, secondAttribute: String): Character
+  toggleSessionVisible: Boolean
   updateSessionCharacter(characterId: ID): Character
   updateSessionMap(mapId: ID): ID
   updateUserPassword(newPassword: String!, oldPassword: String!, repeatPassword: String!): Boolean
@@ -833,6 +834,7 @@ type RootQueryType {
   unapprovedCharactersList: [Character]
   userEmailExists(email: String!): Boolean
   userNameExists(name: String!): Boolean
+  userOnlineVisible: Boolean
 }
 
 type RootSubscriptionType {
@@ -863,6 +865,7 @@ type Session {
   character: Character
   location: ChatLocation
   user: User
+  visible: Boolean
 }
 
 input SetCharacterStatusInput {

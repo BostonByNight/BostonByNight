@@ -52,6 +52,7 @@ defmodule VtmWeb.Schema.AccountTypes do
     field :user, :user
     field :character, :character
     field :location, :chat_location
+    field :visible, :boolean
   end
 
   enum :role do
@@ -69,6 +70,12 @@ defmodule VtmWeb.Schema.AccountTypes do
 
       middleware Middlewares.Authorize, :player
       resolve &AccountsResolvers.all/3
+      middleware Middlewares.ChangesetErrors
+    end
+
+    field :user_online_visible, :boolean do
+      middleware Middlewares.Authorize, :master
+      resolve &AccountsResolvers.user_online_visible/3
       middleware Middlewares.ChangesetErrors
     end
 
@@ -144,6 +151,13 @@ defmodule VtmWeb.Schema.AccountTypes do
       middleware Middlewares.Authorize, :any
       middleware VtmWeb.Schema.Middlewares.RefreshUserSession
       resolve parsing_node_ids(&AccountsResolvers.update_session_map/2, map_id: :chat_location)
+      middleware Middlewares.ChangesetErrors
+    end
+
+    field :toggle_session_visible, :boolean do
+      middleware Middlewares.Authorize, :master
+      middleware VtmWeb.Schema.Middlewares.RefreshUserSession
+      resolve &AccountsResolvers.toggle_session_visible/3
       middleware Middlewares.ChangesetErrors
     end
 

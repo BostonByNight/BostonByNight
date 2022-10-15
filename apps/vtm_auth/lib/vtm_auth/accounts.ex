@@ -146,7 +146,9 @@ defmodule VtmAuth.Accounts do
     |> Repo.one() == 1
   end
 
-  @spec update_session(%{:id => non_neg_integer(), optional(any()) => any()}) :: {:ok, Session.t()} | {:error, Ecto.Changeset.t()}
+  @spec update_session(%{:id => non_neg_integer(), optional(any()) => any()}) :: 
+    {:ok, Session.t()} | 
+    {:error, Ecto.Changeset.t()}
   def update_session(%{id: id}, attrs \\ %{}) do
     new_attrs =
       attrs
@@ -163,6 +165,21 @@ defmodule VtmAuth.Accounts do
         |> Session.changeset(
           attrs
           |> Map.put(:last_checked, NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)))
+        |> Repo.update()
+    end
+  end
+
+  @spec toggle_session_visible(%{:id => non_neg_integer()}) :: 
+    {:ok, Session.t()} | 
+    {:error, Ecto.Changeset.t()}
+  def toggle_session_visible(%{id: user_id}) do
+    case get_session_by_user_id(user_id) do
+      nil ->
+        {:error, :not_found}
+
+      session ->
+        session
+        |> Session.changeset(%{visible: not session.visible})
         |> Repo.update()
     end
   end
@@ -227,6 +244,7 @@ defmodule VtmAuth.Accounts do
       join: u in User,
       on: s.user_id == u.id,
       where: s.last_checked > ago(^@session_offset, "minute"),
+      where: s.visible == true,
       where: not(s.completed),
       select: {u, s}
 

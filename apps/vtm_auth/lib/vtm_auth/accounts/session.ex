@@ -13,6 +13,7 @@ defmodule VtmAuth.Accounts.Session do
     ip: binary(),
     session_info: map(),
     completed: boolean(),
+    visible: boolean(),
 
     inserted_at: NaiveDateTime.t(),
     updated_at: NaiveDateTime.t()
@@ -25,6 +26,7 @@ defmodule VtmAuth.Accounts.Session do
     field :ip, :string
     field :session_info, :map
     field :completed, :boolean
+    field :visible, :boolean
 
     belongs_to :user, User
 
@@ -34,7 +36,7 @@ defmodule VtmAuth.Accounts.Session do
   @doc false
   def changeset(session, attrs) do
     session
-    |> cast(attrs, [:user_id, :last_checked, :remember, :host, :ip, :session_info, :completed])
+    |> cast(attrs, [:user_id, :last_checked, :remember, :host, :ip, :session_info, :completed, :visible])
     |> unique_constraint([:user_id], name: "session_user_unique_idx")
     |> validate_required([:last_checked, :user_id])
   end

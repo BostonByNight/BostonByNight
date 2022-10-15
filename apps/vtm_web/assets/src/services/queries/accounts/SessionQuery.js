@@ -20,6 +20,7 @@ export const listSessionQuery: Query<SessionQueryVariables, SessionQueryResponse
                 id
                 name
             }
+            visible
         }
     }
 `;
