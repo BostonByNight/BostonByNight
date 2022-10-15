@@ -23,7 +23,6 @@ type UserMenuComponentProps = {
 const UserMenuComponent = ({reloadCount}: UserMenuComponentProps): GenericReactComponent => {
     const history = useHistory();
     const forumHasNewPosts = useForumHasNewPosts();
-
     const characters = useUserCharactersQuery(reloadCount);
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -43,9 +42,13 @@ const UserMenuComponent = ({reloadCount}: UserMenuComponentProps): GenericReactC
             }
             : menuIconStyle;
 
+    const characterName = () =>
+        characters?.length > 0
+            ? characters[0]?.name
+            : "Menu";
 
     return (
-        <React.Fragment >
+        <React.Fragment>
             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                 <Tooltip title="Menù utente">
                     <Button
@@ -56,7 +59,7 @@ const UserMenuComponent = ({reloadCount}: UserMenuComponentProps): GenericReactC
                         aria-expanded={open ? 'true' : undefined}
                         startIcon={<PersonIcon />}
                     >
-                        {characters[0].name}
+                        {characterName()}
                     </Button>
                 </Tooltip>
             </Box>
