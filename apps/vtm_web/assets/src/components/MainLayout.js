@@ -167,7 +167,6 @@ const MainLayout = ({children}: {children: any}): GenericReactComponent => {
                     <MessageControl numberOfMessages={numberOfMessages} />
                     <OnlineControl />
                     <UserMenuComponent reloadCount={characterFetchKey} />
-
                 </Toolbar>
             </AppBar>
             <List component="nav"
