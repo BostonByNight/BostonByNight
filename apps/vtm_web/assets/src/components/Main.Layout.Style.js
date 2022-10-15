@@ -1,13 +1,10 @@
 import {makeStyles} from "@mui/styles";
 
-const drawerWidth = 240;
-const chatInputHeight = 100;
-
 export const mainFontFamily = {
     fontFamily: 'DefaultTypewriter',
     color: "primary.main"
 };
 
-const useStyles  = makeStyles((theme) => ({}));
+const useStyles  = makeStyles((_theme) => ({}));
 
 export default useStyles;

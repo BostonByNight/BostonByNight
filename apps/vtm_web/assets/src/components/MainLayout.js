@@ -25,7 +25,7 @@ import type {GenericReactComponent} from "../_base/types";
 import {useRecoilValue} from "recoil";
 import {isUserMasterSelector} from "../session/selectors";
 import UserMenuComponent from "./_layout/app-bar-controls/UserMenu";
-import BbnLogoComponent from "./_layout/BbnLogoComponent";
+import BbnLogoComponent from "./_layout/menu/BbnLogoComponent";
 
 const drawerWidth = 300;
 

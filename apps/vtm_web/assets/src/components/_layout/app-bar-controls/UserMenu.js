@@ -16,7 +16,11 @@ import {useUserCharactersQuery} from "../../../services/queries/accounts/UserCha
 import MenuForumSection from "../menu/sections/MenuForumSection";
 import {useForumHasNewPosts} from "../../../services/queries/forum/ForumHasNewPostQuery";
 
-const UserMenuComponent = ({reloadCount}): GenericReactComponent => {
+type UserMenuComponentProps = {
+    reloadCount: number;
+}
+
+const UserMenuComponent = ({reloadCount}: UserMenuComponentProps): GenericReactComponent => {
     const history = useHistory();
     const forumHasNewPosts = useForumHasNewPosts();
 
@@ -96,7 +100,7 @@ const UserMenuComponent = ({reloadCount}): GenericReactComponent => {
                 <MenuForumSection itemStyle={{
                     forumIconStyle
                 }} />
-                <Link href="http://guide.bostonbynight-gdr.it" target="_blank" sx={{
+                <Link href="https://guide.bostonbynight-gdr.it" target="_blank" sx={{
                     textDecoration: 'none',
                     '& :hover': {
                         color: '#fff'

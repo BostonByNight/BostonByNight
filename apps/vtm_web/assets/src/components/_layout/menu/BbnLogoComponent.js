@@ -1,9 +1,17 @@
+// @flow
+
 import Typography from "@mui/material/Typography";
 import React from 'react';
 import {useMediaQuery} from "@mui/material";
 import {useTheme} from "@mui/material/styles";
 
-const BbnLogoComponent = ({primaryRem, secondaryRem, addStyle}) => {
+type BtnLogoComponentProps = {
+    primaryRem: number;
+    secondaryRem: number;
+    addStyle?: boolean;
+}
+
+const BbnLogoComponent = ({primaryRem, secondaryRem, addStyle}: BtnLogoComponentProps) => {
     const theme = useTheme()
     const showCompressedTitle = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -19,18 +27,15 @@ const BbnLogoComponent = ({primaryRem, secondaryRem, addStyle}) => {
         margin: '0 10px'
     };
 
-    const getMainStyle = () => {
-        if(addStyle) {
-            return {
-                ...mainStyle,
-                ...addStyle
-            }
+    const getMainStyle = () =>
+        addStyle
+        ? {
+            ...mainStyle,
+            ...addStyle
         }
-        return mainStyle;
-    }
+        : mainStyle;
 
-
-    return(
+    return (
         <Typography variant="h6"
                     noWrap
                     component="h1"

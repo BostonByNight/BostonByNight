@@ -9,7 +9,7 @@ import NoCookieBar from "../../_base/components/NoCookieBar";
 import {useTheme} from "@mui/material/styles";
 import {useMediaQuery} from "@mui/material";
 import Box from "@mui/material/Box";
-import BbnLogoComponent from "../_layout/BbnLogoComponent";
+import BbnLogoComponent from "../_layout/menu/BbnLogoComponent";
 
 export type HomeLayoutProps = {
     title: string;
