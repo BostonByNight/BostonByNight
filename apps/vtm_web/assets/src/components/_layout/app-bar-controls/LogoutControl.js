@@ -20,7 +20,7 @@ const LogoutControl = (): GenericReactComponent => {
     }
 
     return (
-        <MenuItem button  onClick={logoutClick}>
+        <MenuItem onClick={logoutClick}>
                 <ExitToAppIcon sx={menuIconStyle} />
                 Logout
         </MenuItem>

@@ -95,11 +95,11 @@ const UserMenuComponent = ({reloadCount}: UserMenuComponentProps): GenericReactC
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
 
-                <MenuItem button onClick={_ => history.push(MainRoutes.settings)}>
+                <MenuItem onClick={_ => history.push(MainRoutes.settings)}>
                     <SettingsIcon sx={menuIconStyle} />
                     Impostazioni
                 </MenuItem>
-                <divider />
+                <Divider />
                 <MenuForumSection itemStyle={{
                     forumIconStyle
                 }} />
