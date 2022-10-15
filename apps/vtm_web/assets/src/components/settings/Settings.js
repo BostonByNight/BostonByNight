@@ -3,6 +3,7 @@
 import React from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import Divider from "@mui/material/Divider";
 import SetNewPassword from "./SetNewPassword";
 import ToggleVisible from "./ToggleVisible";
 import {useRecoilValue} from "recoil";
@@ -15,9 +16,12 @@ const Settings = (): GenericReactComponent => {
     const toggleVisibleControl = () =>
         isUserMaster
             ? (
-                <Grid item xs={12}>
-                    <ToggleVisible />
-                </Grid>
+                <>
+                    <Divider />
+                    <Grid item xs={12}>
+                        <ToggleVisible />
+                    </Grid>
+                </>
             )
             : (<React.Fragment />);
 

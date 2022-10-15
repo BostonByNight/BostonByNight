@@ -29,12 +29,20 @@ const ToggleVisible = (): GenericReactComponent => {
             })
     }
 
+    const visibleLabel = () =>
+        checked ? "(visibile)" : "(invisibile)"
+
+    const label = () => `Cambia visibilità online ${visibleLabel()}`
+
     return (
-        <div>
+        <div style={{
+            padding: "1rem",
+            textAlign: "center"
+        }}>
             <FormControlLabel control={
                 <Switch checked={checked}
                         onChange={toggleSession} />
-            } label="Label" />
+            } label={label()} />
         </div>
     );
 }
