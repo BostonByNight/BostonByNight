@@ -16,6 +16,7 @@ import type {
 } from "../../../../services/queries/character/__generated__/CharacterFragments_characterStats.graphql";
 import CharacterSheetStatusStatsSection from "./CharacterSheetStatusStatsSection";
 import type {GenericReactComponent} from "../../../../_base/types";
+import type {AttributeTypeNames} from "../../../../services/queries/info/AttributesQuery";
 
 export type RefreshedQueryOption = {
     fetchKey: number;
@@ -54,7 +55,7 @@ const CharacterSheetStatsSection = ({characterId, characterQuery, queryOptions,
     const showAdvantages = hideAdvantages !== true;
     const showStatus = hideStatus !== true;
 
-    const filterAttributes = (type, section) => stats?.attributes
+    const filterAttributes = (type: AttributeTypeNames, section: string) => stats?.attributes
         ?.filter(({type: t, section: s}) => t === type && s === section)
         ?.sort((a, b) => characterAttributeSorter(type)(a, b))
         ?.map(s => <AttributeStat key={s?.id} stat={s} />);

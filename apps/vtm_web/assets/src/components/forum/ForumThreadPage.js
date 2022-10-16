@@ -12,6 +12,23 @@ type Props = {
     page: number;
 }
 
+type Post = ?{|
+    +id: string,
+    +text: ?string,
+    +character: ?{|
+      +id: string,
+      +name: ?string,
+    |},
+    +user: ?{|
+      +id: string,
+      +name: ?string,
+    |},
+    +onGame: ?boolean,
+    +insertedAt: ?any,
+    +updatedAt: ?any,
+|}
+
+
 const ForumThreadPage = ({threadId, page}: Props): GenericReactComponent => {
     const [postFetchKey, setPostFetchKey] = useState(0);
 
@@ -28,7 +45,7 @@ const ForumThreadPage = ({threadId, page}: Props): GenericReactComponent => {
         fetchKey: postFetchKey
     })?.getForumThreadPosts;
 
-    const showThreadPost = post => (
+    const showThreadPost = (post: Post) => (
         <ForumPost key={post?.id}
                    post={post}
                    threadId={threadId}

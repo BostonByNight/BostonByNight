@@ -20,6 +20,13 @@ type Props = {
     sectionId: string;
 }
 
+type SubmitProps = {
+    title: string,
+    description: string,
+    highlighted: boolean,
+    characterIds: string[]
+}
+
 const CreateNewThread = ({sectionId}: Props): GenericReactComponent => {
     const history = useHistory();
     const environment = useRelayEnvironment();
@@ -31,7 +38,7 @@ const CreateNewThread = ({sectionId}: Props): GenericReactComponent => {
 
     const goBack = () => history.push(MainRoutes.forumSection(sectionId));
 
-    const onSubmit = ({title, description, highlighted, characterIds}) => {
+    const onSubmit = ({title, description, highlighted, characterIds}: SubmitProps) => {
         CreateNewThreadMutation(environment, {
             sectionId,
             creatorUserId: user?.id ?? "",

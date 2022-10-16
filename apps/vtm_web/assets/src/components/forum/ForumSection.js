@@ -53,7 +53,7 @@ const ForumSection = ({sectionId}: Props): GenericReactComponent => {
 
     const pageCount = Math.ceil((response?.threadCount ?? 0) / DefaultPageSize);
 
-    const toFormThread = id => history.push(MainRoutes.forumThread(id ?? ""));
+    const toFormThread = (id: ?string) => history.push(MainRoutes.forumThread(id ?? ""));
 
     const showForumThreads = () => response?.threads
         ?.map(s => <ForumThreadListItem key={s?.thread?.id}
@@ -67,9 +67,9 @@ const ForumSection = ({sectionId}: Props): GenericReactComponent => {
         setCurrentPage(_ => newPage);
     };
 
-    const goToForum = _ => history.push(MainRoutes.forumSections);
+    const goToForum = (_: any) => history.push(MainRoutes.forumSections);
 
-    const createNew = _ => history.push(MainRoutes.createNewForumThread(sectionId));
+    const createNew = (_: any) => history.push(MainRoutes.createNewForumThread(sectionId));
 
     const forumControls = () => {
         const createNewThreadControl = () => {

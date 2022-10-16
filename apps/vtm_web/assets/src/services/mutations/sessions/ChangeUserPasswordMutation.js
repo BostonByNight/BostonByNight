@@ -3,7 +3,7 @@
 import graphql from 'babel-plugin-relay/macro';
 import {wrapMutation} from "../../../_base/relay-utils";
 import type {IEnvironment} from "relay-runtime";
-import type {ChangeUserPasswordMutationResponse} from "./__generated__/ChangeUserPasswordMutation.graphql";
+import type {ChangeUserPasswordMutation$data} from "./__generated__/ChangeUserPasswordMutation.graphql";
 
 const mutation = graphql`
     mutation ChangeUserPasswordMutation($oldPassword: String!, $newPassword: String!, $repeatPassword: String!) {
@@ -12,7 +12,7 @@ const mutation = graphql`
 `;
 
 const mutationPromise = (environment: IEnvironment, oldPassword: string, newPassword: string, repeatPassword: string): Promise<boolean> =>
-    wrapMutation<ChangeUserPasswordMutationResponse>(environment, mutation, {
+    wrapMutation<ChangeUserPasswordMutation$data>(environment, mutation, {
         oldPassword,
         newPassword,
         repeatPassword

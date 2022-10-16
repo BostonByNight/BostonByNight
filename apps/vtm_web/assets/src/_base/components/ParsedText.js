@@ -45,19 +45,23 @@ const ParsedText = ({
         return markdownComponents;
     };
 
-    const ParagraphMapper = ({children}) => (
+    const ParagraphMapper = ({children}: {
+        children: GenericReactComponent
+    }) => (
         <Typography component="div" paragraph sx={internalDivSx}>
             {children}
         </Typography>
     );
 
-    const DivMapper = ({children}) => (
+    const DivMapper = ({children}: {
+        children: GenericReactComponent
+    }) => (
         <Box component="div" sx={internalDivSx}>
             {children}
         </Box>
     );
 
-    const applyNewLine = text => {
+    const applyNewLine = (text: string) => {
         const components = () =>
             replaceAll(replaceAll(text, "[i]", "_"), "[/i]", "_")
                 .split("\n")
@@ -81,7 +85,7 @@ const ParsedText = ({
         )
     };
 
-    const formattedText = text => {
+    const formattedText = (text: string) => {
         if (useNaturalNewLine) {
             return (
                 <ReactMarkdown components={parseComponents()}>

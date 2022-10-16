@@ -17,15 +17,42 @@ import SendMessageToCharacter from "../button-links/SendMessageToCharacter";
 import {useMediaQuery} from "@mui/material";
 import {useTheme} from "@mui/material/styles";
 import MenuLayout from "../../../_base/components/MenuLayout";
-import type {GenericReactComponent} from "../../../_base/types";
 import {emptyExactObject} from "../../../_base/utils";
 import {isUserRoleMaster} from "../../../services/base-types";
+import {useRecoilValue} from "recoil";
+import {sessionMapStateAtom} from "../../../session/atoms";
+import type {GenericReactComponent} from "../../../_base/types";
+import type {Role} from "../../../services/queries/accounts/__generated__/SessionQuery.graphql";
+
+type OnlineUserType = {|
+    +id: string,
+    +name: ?string,
+    +role: ?Role,
+|}
+
+type OnlineQueryType = {|
+    +user: ?OnlineUserType,
+    +character: ?{|
+        +id: string,
+        +name: ?string,
+    |},
+    +location: ?{|
+        +id: string,
+        +name: ?string,
+    |},
+    +visible: ?boolean,
+|}
 
 type Props = {
     closePopup: () => void;
 }
 
-const OnlineControlActionsBigScreen = ({o, closePopup}) => (
+type OnlineControlActionProps = {
+    o: ?OnlineQueryType,
+    closePopup: () => void
+}
+
+const OnlineControlActionsBigScreen = ({o, closePopup}: OnlineControlActionProps) => (
     <Stack direction="row">
         <ShowCharacterSheet characterId={o?.character?.id} onSelected={closePopup} />
         <SendMessageToUser userId={o?.user?.id} onSelected={closePopup} />
@@ -38,8 +65,8 @@ const OnlineControlActionsBigScreen = ({o, closePopup}) => (
     </Stack>
 );
 
-const OnlineControlActionsSmallScreen = ({o, closePopup}) => {
-    const onSelected = onItemSelected =>
+const OnlineControlActionsSmallScreen = ({o, closePopup}: OnlineControlActionProps) => {
+    const onSelected = (onItemSelected: () => void) =>
         () => {
             onItemSelected();
             closePopup();
@@ -72,14 +99,20 @@ const OnlineControlActionsSmallScreen = ({o, closePopup}) => {
 }
 
 const OnlineControlDialog = ({closePopup}: Props): GenericReactComponent => {
-    const theme = useTheme();
+    const theme = useTheme()
+    const currentMap = useRecoilValue(sessionMapStateAtom)
     const online = useCustomLazyLoadQuery(listSessionQuery, emptyExactObject(), {
         fetchPolicy: "network-only"
     })?.sessionsList ?? [];
 
+    const filteredOnline =
+        currentMap != null
+            ? online.filter(o => o?.location?.id === currentMap.id)
+            : online;
+
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
-    const userMasterIcon = user =>
+    const userMasterIcon = (user: ?OnlineUserType) =>
         isUserRoleMaster(user?.role)
             ? (
                 <Tooltip title="Master">
@@ -90,12 +123,12 @@ const OnlineControlDialog = ({closePopup}: Props): GenericReactComponent => {
             )
             : (<></>);
 
-    const secondaryActions = o =>
+    const secondaryActions = (o: ?OnlineQueryType) =>
         isSmallScreen
             ? (<OnlineControlActionsSmallScreen o={o} closePopup={closePopup} />)
             : (<OnlineControlActionsBigScreen o={o} closePopup={closePopup} />);
 
-    const onlineUserAndCharacterName = o => {
+    const onlineUserAndCharacterName = (o: ?OnlineQueryType) => {
         if (o?.character?.name != null) {
             return `${o.character.name} (${o.user?.name ?? ""})`;
         }
@@ -103,7 +136,7 @@ const OnlineControlDialog = ({closePopup}: Props): GenericReactComponent => {
         return `${o?.user?.name ?? ""}`;
     };
 
-    const onlineRow = o => (
+    const onlineRow = (o: ?OnlineQueryType) => (
         <ListItem key={o?.user?.id}
                   secondaryAction={secondaryActions(o)}>
             {userMasterIcon(o?.user)}
@@ -114,8 +147,10 @@ const OnlineControlDialog = ({closePopup}: Props): GenericReactComponent => {
         </ListItem>
     );
 
-    const onlineUserSorter = (a, b) => {
-        const masterRoleAsNumber = u => u?.user?.role === "MASTER" ? 0 : 1;
+    const onlineUserSorter = (a: ?OnlineQueryType, b: ?OnlineQueryType) => {
+        const masterRoleAsNumber = (onlineItem: ?OnlineQueryType) =>
+            onlineItem?.user?.role === "MASTER" ? 0 : 1;
+
         const [aRole, bRole] = [masterRoleAsNumber(a), masterRoleAsNumber(b)];
 
         if (aRole > bRole) {
@@ -136,7 +171,7 @@ const OnlineControlDialog = ({closePopup}: Props): GenericReactComponent => {
     };
 
     // Used the rest operator because the read only array doesn't have a sort method
-    const showOnline = () => [...online]
+    const showOnline = () => [...filteredOnline]
         ?.sort((a, b) => onlineUserSorter(a, b))
         ?.map(o => onlineRow(o)) ?? (<></>);
 

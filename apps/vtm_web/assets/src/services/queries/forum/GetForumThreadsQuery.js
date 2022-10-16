@@ -3,11 +3,11 @@
 import graphql from 'babel-plugin-relay/macro';
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
 import type {
-    GetForumThreadsQueryResponse,
-    GetForumThreadsQueryVariables,
+    GetForumThreadsQuery$data,
+    GetForumThreadsQuery$variables,
 } from "./__generated__/GetForumThreadsQuery.graphql";
 
-export const getForumThreadsQuery: Query<GetForumThreadsQueryVariables, GetForumThreadsQueryResponse> = graphql`
+export const getForumThreadsQuery: Query<GetForumThreadsQuery$variables, GetForumThreadsQuery$data> = graphql`
     query GetForumThreadsQuery($forumSectionId: ID!, $pageSize: Int!, $page: Int!, $characterId: ID) {
         getForumThreads(forumSectionId: $forumSectionId, pageSize: $pageSize, page: $page, characterId: $characterId) {
             threadCount

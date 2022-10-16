@@ -57,11 +57,11 @@ const ForumThread = ({threadId}: Props): GenericReactComponent => {
         setCurrentPage(_ => newPage);
     }
 
-    const goToForum = _ => history.push(MainRoutes.forumSections);
+    const goToForum = (_: any) => history.push(MainRoutes.forumSections);
 
-    const goToSection = _ => history.push(MainRoutes.forumSection(thread?.forumSection?.id ?? ""));
+    const goToSection = (_: any) => history.push(MainRoutes.forumSection(thread?.forumSection?.id ?? ""));
 
-    const createNew = _ => history.push(MainRoutes.createNewForumPost(threadId));
+    const createNew = (_: any) => history.push(MainRoutes.createNewForumPost(threadId));
 
     const forumControls = () => {
         const createNewPost = () => {

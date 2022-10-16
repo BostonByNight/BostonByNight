@@ -19,7 +19,7 @@ const NoCookieBar = (): GenericReactComponent => {
 
     const cookieHeight = isSmall ? "100px" : "61px";
 
-    const onCookieCloseClick = _ => {
+    const onCookieCloseClick = (_: any) => {
         setShowCookiePolicy(false);
     }
 

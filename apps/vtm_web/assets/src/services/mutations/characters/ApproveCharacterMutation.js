@@ -3,7 +3,7 @@
 import graphql from 'babel-plugin-relay/macro';
 import {wrapMutation} from "../../../_base/relay-utils";
 import type {IEnvironment} from "relay-runtime";
-import type {ApproveCharacterMutationResponse} from "./__generated__/ApproveCharacterMutation.graphql";
+import type {ApproveCharacterMutation$data} from "./__generated__/ApproveCharacterMutation.graphql";
 
 const mutation = graphql`
     mutation ApproveCharacterMutation($characterId: ID!, $reason: String) {
@@ -12,7 +12,7 @@ const mutation = graphql`
 `;
 
 const mutationPromise = (environment: IEnvironment, characterId: string, reason: string): Promise<boolean> => {
-    return wrapMutation<ApproveCharacterMutationResponse>(environment, mutation, {
+    return wrapMutation<ApproveCharacterMutation$data>(environment, mutation, {
         characterId,
         reason
     })?.then(r => r?.approveCharacter === true);

@@ -13,7 +13,7 @@ import {useRelayEnvironment} from "react-relay";
 import ChangeCharacterOtherStatsMutation from "../../../../services/mutations/admin/ChangeCharacterOtherStatsMutation";
 import {useCustomLazyLoadQuery} from "../../../../_base/relay-utils";
 import {predatorTypesQuery} from "../../../../services/queries/info/PredatorTypesQuery";
-import type {GenericReactComponent} from "../../../../_base/types";
+import type {GenericEvent, GenericReactComponent} from "../../../../_base/types";
 import {useDialog} from "../../../../_base/providers/DialogProvider";
 import {useCustomSnackbar} from "../../../../_base/notification-utils";
 
@@ -35,7 +35,7 @@ const ChangeCharacterOtherStatsForm = ({character, onUpdate}: Props): GenericRea
     const [bloodPotency, setBloodPotency] = useState(character?.bloodPotency ?? 0);
     const [predatorType, setPredatorType] = useState(character?.predatorType?.id ?? "");
 
-    const changeCharacterOtherStats = _ => {
+    const changeCharacterOtherStats = (_: any) => {
         showDialog(
             `Cambio di status per ${character.name ?? ""}`,
             `Sei sicuro di voler cambiare le caratteristiche di questo personaggio?`,
@@ -61,23 +61,23 @@ const ChangeCharacterOtherStatsForm = ({character, onUpdate}: Props): GenericRea
     const predatorTypeItems = () =>
         predatorTypes?.map(t => <MenuItem key={t?.id} value={t?.id}>{t?.name}</MenuItem>);
 
-    const onHumanityChanged = ({target: {value}}) => {
+    const onHumanityChanged = ({target: {value}}: GenericEvent) => {
         setHumanity(_ => value);
     };
 
-    const onWillpowerChanged = ({target: {value}}) => {
+    const onWillpowerChanged = ({target: {value}}: GenericEvent) => {
         setWillpower(_ => value);
     };
 
-    const onPredatorTypeChanged = ({target: {value}}) => {
+    const onPredatorTypeChanged = ({target: {value}}: GenericEvent) => {
         setPredatorType(_ => value);
     };
 
-    const onHealthChanged = ({target: {value}}) => {
+    const onHealthChanged = ({target: {value}}: GenericEvent) => {
         setHealth(_ => value);
     };
 
-    const onBloodPotencyChanged = ({target: {value}}) => {
+    const onBloodPotencyChanged = ({target: {value}}: GenericEvent) => {
         setBloodPotency(_ => value);
     };
 

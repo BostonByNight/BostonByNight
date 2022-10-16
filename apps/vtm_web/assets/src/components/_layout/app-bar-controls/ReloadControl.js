@@ -7,7 +7,7 @@ import type {GenericReactComponent} from "../../../_base/types";
 import MenuItem from "@mui/material/MenuItem";
 const ReloadControl = (): GenericReactComponent => {
     return (
-        <MenuItem button onClick={_ => document.location.reload(false)} >
+        <MenuItem onClick={_ => document.location.reload(false)} >
                 <RefreshIcon sx={menuIconStyle} />
                 Refresh Pagina
         </MenuItem>

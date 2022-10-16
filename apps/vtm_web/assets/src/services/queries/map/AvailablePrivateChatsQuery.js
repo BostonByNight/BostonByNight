@@ -2,14 +2,14 @@
 
 import graphql from 'babel-plugin-relay/macro';
 import type {
-    AvailablePrivateChatsQueryResponse,
-    AvailablePrivateChatsQueryVariables,
+    AvailablePrivateChatsQuery$data,
+    AvailablePrivateChatsQuery$variables,
 } from "./__generated__/AvailablePrivateChatsQuery.graphql";
 import {useCustomLazyLoadQuery} from "../../../_base/relay-utils";
 import {castNotNull, emptyExactObject} from "../../../_base/utils";
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
 
-export const availablePrivateChatsQuery: Query<AvailablePrivateChatsQueryVariables, AvailablePrivateChatsQueryResponse> = graphql`
+export const availablePrivateChatsQuery: Query<AvailablePrivateChatsQuery$variables, AvailablePrivateChatsQuery$data> = graphql`
     query AvailablePrivateChatsQuery {
         availablePrivateChats {
             id

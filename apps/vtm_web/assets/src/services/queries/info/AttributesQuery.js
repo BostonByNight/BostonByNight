@@ -2,11 +2,11 @@
 
 import graphql from 'babel-plugin-relay/macro';
 import {useCustomLazyLoadQuery} from "../../../_base/relay-utils";
-import type {AttributesQueryResponse, AttributesQueryVariables,} from "./__generated__/AttributesQuery.graphql";
+import type {AttributesQuery$data, AttributesQuery$variables,} from "./__generated__/AttributesQuery.graphql";
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
 import {emptyExactObject} from "../../../_base/utils";
 
-export const attributesQuery: Query<AttributesQueryVariables, AttributesQueryResponse> = graphql`
+export const attributesQuery: Query<AttributesQuery$variables, AttributesQuery$data> = graphql`
     query AttributesQuery {
         attributes {
             id
@@ -39,7 +39,7 @@ export type Attribute = {
     +attributeType?: AttributeType
 };
 
-const getAttributeTypeNameOrder = attributeName => {
+const getAttributeTypeNameOrder = (attributeName: string) => {
     switch(attributeName) {
         case "Attribute": return 1;
         case "Ability": return 2;
@@ -48,7 +48,7 @@ const getAttributeTypeNameOrder = attributeName => {
     }
 };
 
-const getAttributeTypeSectionOrder = attributeName => {
+const getAttributeTypeSectionOrder = (attributeName: string) => {
     switch(attributeName) {
         case "Physical": return 1;
         case "Social": return 2;

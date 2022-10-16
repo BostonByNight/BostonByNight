@@ -16,13 +16,19 @@ import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import type {HavenEvent} from "../../services/queries/haven/HavenEventFragment";
 import {castNotNull, toArray} from "../../_base/utils";
+import type {Haven} from "../../services/queries/haven/GetHavensQuery";
+import type {Character} from "../../services/queries/character/GetCharacterCompleteQuery";
 
-const getTooltipFromEvent = ({controlTriggered}) =>
+const getTooltipFromEvent = ({controlTriggered}: {controlTriggered: boolean}) =>
     controlTriggered
         ? "Intrusione"
         : "Attenzione richiamata";
 
-const getTitleFromEvent = (isMaster, {controlTriggered, character, haven}) =>
+const getTitleFromEvent = (isMaster: boolean, {controlTriggered, character, haven}: {
+    controlTriggered: boolean,
+    character: Character,
+    haven: Haven
+}) =>
     isMaster
         ? (controlTriggered
             ? `${character?.name ?? ""} è entrato nel tuo dominio di ${haven?.character?.name ?? ""} per cacciare`
@@ -31,14 +37,18 @@ const getTitleFromEvent = (isMaster, {controlTriggered, character, haven}) =>
             ? `${character?.name ?? "Qualcuno"} è entrato nel tuo dominio per cacciare`
             : `${character?.name ?? "Qualcuno"} è stato intercettato nel tuo Dominio`);
 
-const actions = ({id}, onClick) => {
+const actions = ({id}: {id: string}, onClick: string => void) => {
     return (
         <Button onClick={_ => onClick(id)}>
             Ignora / Risolto
         </Button>);
 };
 
-const EventListItem = ({isMaster, e, resolveEvent}) => {
+const EventListItem = ({isMaster, e, resolveEvent}: {
+    isMaster: boolean,
+    e: any,
+    resolveEvent: string => void
+}) => {
     const tooltipText = getTooltipFromEvent(e);
     const eventIcon = React.useMemo(() => (
         <Tooltip title={tooltipText}>

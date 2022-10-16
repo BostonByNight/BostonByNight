@@ -3,7 +3,7 @@
 import graphql from 'babel-plugin-relay/macro';
 import {wrapSubscription} from "../../_base/relay-utils";
 import {Observable} from "relay-runtime";
-import type {MessageNotificationSubscriptionResponse} from "./__generated__/MessageNotificationSubscription.graphql";
+import type {MessageNotificationSubscription$data} from "./__generated__/MessageNotificationSubscription.graphql";
 
 const subscription = graphql`
     subscription MessageNotificationSubscription($token: String!) {
@@ -19,8 +19,8 @@ const subscription = graphql`
     }
 `;
 
-const subscriptionObservable = (token: string): Observable<MessageNotificationSubscriptionResponse> =>
-    wrapSubscription<MessageNotificationSubscriptionResponse>(subscription, {
+const subscriptionObservable = (token: string): Observable<MessageNotificationSubscription$data> =>
+    wrapSubscription<MessageNotificationSubscription$data>(subscription, {
         token
     });
 

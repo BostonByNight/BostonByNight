@@ -3,7 +3,7 @@
 import graphql from 'babel-plugin-relay/macro';
 import {wrapMutation} from "../../../_base/relay-utils";
 import type {IEnvironment} from "relay-runtime";
-import type {DeleteAllSentMessagesMutationResponse} from "./__generated__/DeleteAllSentMessagesMutation.graphql";
+import type {DeleteAllSentMessagesMutation$data} from "./__generated__/DeleteAllSentMessagesMutation.graphql";
 
 const mutation = graphql`
     mutation DeleteAllSentMessagesMutation {
@@ -11,8 +11,8 @@ const mutation = graphql`
     }
 `;
 
-const mutationPromise = (environment: IEnvironment): Promise<DeleteAllSentMessagesMutationResponse> => {
-    return wrapMutation<DeleteAllSentMessagesMutationResponse>(environment, mutation, );
+const mutationPromise = (environment: IEnvironment): Promise<DeleteAllSentMessagesMutation$data> => {
+    return wrapMutation<DeleteAllSentMessagesMutation$data>(environment, mutation, );
 }
 
 export default mutationPromise;

@@ -3,11 +3,11 @@
 import graphql from 'babel-plugin-relay/macro';
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
 import type {
-    UserSentMessagesQueryResponse,
-    UserSentMessagesQueryVariables,
+    UserSentMessagesQuery$data,
+    UserSentMessagesQuery$variables,
 } from "./__generated__/UserSentMessagesQuery.graphql";
 
-export const userSentMessagesQuery: Query<UserSentMessagesQueryVariables, UserSentMessagesQueryResponse> = graphql`
+export const userSentMessagesQuery: Query<UserSentMessagesQuery$variables, UserSentMessagesQuery$data> = graphql`
     query UserSentMessagesQuery {
         me {
             sentMessages {

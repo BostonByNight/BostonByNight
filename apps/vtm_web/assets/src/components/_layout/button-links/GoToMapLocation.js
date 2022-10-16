@@ -14,11 +14,13 @@ import type {GenericReactComponent} from "../../../_base/types";
 import {useSetRecoilState} from "recoil";
 import {sessionMapStateAtom} from "../../../session/atoms";
 
+type Location = ?{
+    +id: string;
+    +name?: ?string;
+}
+
 type Props = {
-    location: ?{
-        +id: string;
-        +name?: ?string;
-    };
+    location: Location;
     onSelected?: () => void;
     asMenuItem?: boolean;
 }
@@ -27,8 +29,8 @@ const GoToMapLocation = ({location, onSelected, asMenuItem}: Props): GenericReac
     const history = useHistory()
     const setLocation = useSetRecoilState(sessionMapStateAtom)
 
-    const tryGoToLocation = location =>
-        _ => {
+    const tryGoToLocation = (location: Location) =>
+        (_: any) => {
             if (location?.id != null) {
                 goToChatAndUpdateSession(setLocation, history, location.id, location?.name);
             }

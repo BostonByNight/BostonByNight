@@ -14,7 +14,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 
 export type SelectInputProps = SelectProps & {
     formik: Formik;
-    renderValue?: ?string[] => GenericReactComponent;
+    renderValue?: ?(?string[] => GenericReactComponent);
     multiple?: boolean;
     containerSx?: any;
 };

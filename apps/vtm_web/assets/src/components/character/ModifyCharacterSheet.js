@@ -27,6 +27,9 @@ import type {GenericReactComponent} from "../../_base/types";
 import {useCustomSnackbar} from "../../_base/notification-utils";
 import {sessionStateAtom} from "../../session/atoms";
 import {useRecoilValue} from "recoil";
+import type {
+    ChangeSheetInfoRequest
+} from "../../services/mutations/characters/__generated__/ChangeCharacterSheetInfoMutation.graphql";
 
 type Props = {
     id: string;
@@ -68,8 +71,8 @@ const ModifyCharacterSheet = ({id}: Props): GenericReactComponent => {
         characterOffFragment,
         character);
 
-    const onSubmit = values => {
-        const completeValues = chatAvatar != null
+    const onSubmit = (values: ChangeSheetInfoRequest) => {
+        const completeValues: ChangeSheetInfoRequest = chatAvatar != null
             ? {
                 ...values,
                 chatAvatar
@@ -105,7 +108,7 @@ const ModifyCharacterSheet = ({id}: Props): GenericReactComponent => {
         onSubmit
     });
 
-    const avatarChanged = (_a, ca) => {
+    const avatarChanged = (_a: ?string, ca: ?string) => {
         setChatAvatar(ca);
     };
 

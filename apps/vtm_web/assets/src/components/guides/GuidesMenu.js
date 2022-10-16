@@ -39,7 +39,7 @@ const GuidesMenu = ({onSelected}: GuidesMenuProps): GenericReactComponent => {
     const [rulesOpen, setRulesOpen] = useState(false);
 
     const onMenuItemSelected = (route: string) => 
-        _ => {
+        (_: any) => {
             if (onSelected != null) {
                 onSelected();
             }
@@ -80,7 +80,7 @@ const GuidesMenu = ({onSelected}: GuidesMenuProps): GenericReactComponent => {
                     </ListItemIcon>
                     <ListItemText primary="Ruoli" />
                 </ListItem>
-                <ListItem button onClick={_ => {
+                <ListItem button onClick={(_: any) => {
                     setEnvironmentOpen(p => {
                         setRulesOpen(_ => p);
                         return !p;
@@ -119,7 +119,7 @@ const GuidesMenu = ({onSelected}: GuidesMenuProps): GenericReactComponent => {
                         </ListItem>
                     </List>
                 </Collapse>
-                <ListItem button onClick={_ => {
+                <ListItem button onClick={(_: any) => {
                     setRulesOpen(p => {
                         setEnvironmentOpen(_ => p);
                         return !p

@@ -2,7 +2,7 @@
 
 import graphql from 'babel-plugin-relay/macro';
 import {wrapMutation} from "../../../_base/relay-utils";
-import type {ChatEntryRequest, CreateChatEntryMutationResponse} from "./__generated__/CreateChatEntryMutation.graphql";
+import type {ChatEntryRequest, CreateChatEntryMutation$data} from "./__generated__/CreateChatEntryMutation.graphql";
 import type {IEnvironment} from "relay-runtime";
 
 const mutation = graphql`
@@ -22,7 +22,7 @@ const mutation = graphql`
     }
 `;
 
-const chatEntryMutationPromise = (environment: IEnvironment, request: ChatEntryRequest): Promise<CreateChatEntryMutationResponse> =>
-    wrapMutation<CreateChatEntryMutationResponse>(environment, mutation, { entry: request });
+const chatEntryMutationPromise = (environment: IEnvironment, request: ChatEntryRequest): Promise<CreateChatEntryMutation$data> =>
+    wrapMutation<CreateChatEntryMutation$data>(environment, mutation, { entry: request });
 
 export default chatEntryMutationPromise;

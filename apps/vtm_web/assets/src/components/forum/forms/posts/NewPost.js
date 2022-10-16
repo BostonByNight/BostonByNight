@@ -19,6 +19,10 @@ type NewPostProps = {
     title: ?string;
 }
 
+type SubmitProps = {
+    text: string;
+}
+
 const NewPost = ({threadId, title}: NewPostProps): GenericReactComponent => {
     const history = useHistory();
     const user = useRecoilValue(sessionStateAtom)
@@ -26,13 +30,13 @@ const NewPost = ({threadId, title}: NewPostProps): GenericReactComponent => {
     const environment = useRelayEnvironment();
     const {enqueueSnackbar} = useCustomSnackbar()
 
-    const onSubmit = ({text}) => {
+    const onSubmit = ({text}: SubmitProps) => {
         CreateNewPostMutation(environment, {
             forumThreadId: threadId,
             creatorUserId: user?.id ?? "",
             creatorCharacterId: character?.id,
             text: text
-        }).then(_ => {
+        }).then((_: any) => {
             enqueueSnackbar({type: "success", message: "Post creato!"})
         }).catch(e => {
             console.error("Error while saving the post!", e);

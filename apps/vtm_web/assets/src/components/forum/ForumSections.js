@@ -19,7 +19,7 @@ const ForumSections = (): GenericReactComponent => {
     const forumSections = useForumSections()
         ?.getForumSections;
 
-    const toSection = sectionId => {
+    const toSection = (sectionId: ?string) => {
         if (sectionId != null) {
             history.push(MainRoutes.forumSection(sectionId));
         }

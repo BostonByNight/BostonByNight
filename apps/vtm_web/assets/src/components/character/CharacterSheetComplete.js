@@ -13,6 +13,7 @@ import CharacterSheetTabs from "./sheet-sections/tabs/CharacterSheetTabs";
 import type {GenericReactComponent} from "../../_base/types";
 import {useRecoilValue} from "recoil";
 import {sessionStateAtom} from "../../session/atoms";
+import type {Character} from "../../services/queries/character/GetCharacterCompleteQuery";
 
 type Props = {
     id?: string;
@@ -26,9 +27,9 @@ const CharacterSheetComplete = (props: Props): GenericReactComponent => {
     const userCharacters = useUserCharactersQuery();
     const user = useRecoilValue(sessionStateAtom)
 
-    const canModify = character => user?.role === "MASTER" || userCharacters.some(c => c.id === character?.id);
+    const canModify = (character: Character) => user?.role === "MASTER" || userCharacters.some(c => c.id === character?.id);
 
-    const modifySheetLink = character => {
+    const modifySheetLink = (character: Character) => {
         if (!(props.contained === true) && canModify(character) && character?.id != null) {
             return (
                 <div style={{

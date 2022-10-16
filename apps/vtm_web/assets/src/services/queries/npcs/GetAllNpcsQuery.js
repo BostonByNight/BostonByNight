@@ -2,11 +2,11 @@
 
 import graphql from 'babel-plugin-relay/macro';
 import {useCustomLazyLoadQuery} from "../../../_base/relay-utils";
-import type {GetAllNpcsQueryResponse, GetAllNpcsQueryVariables,} from "./__generated__/GetAllNpcsQuery.graphql";
+import type {GetAllNpcsQuery$data, GetAllNpcsQuery$variables,} from "./__generated__/GetAllNpcsQuery.graphql";
 import {emptyArray, emptyExactObject} from "../../../_base/utils";
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
 
-export const getAllNpcsQuery: Query<GetAllNpcsQueryVariables, GetAllNpcsQueryResponse> = graphql`
+export const getAllNpcsQuery: Query<GetAllNpcsQuery$variables, GetAllNpcsQuery$data> = graphql`
     query GetAllNpcsQuery {
         allNpcs {
             id

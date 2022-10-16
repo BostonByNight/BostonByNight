@@ -9,7 +9,7 @@ export const performLogout = (onLogoutCompleted: () => void) => {
         onLogoutCompleted();
     }
 
-    const handleUnhandledExceptionAtLogout = e => {
+    const handleUnhandledExceptionAtLogout = (e: Error) => {
         console.error("Unhandled error", e);
         clearClientSession();
     };

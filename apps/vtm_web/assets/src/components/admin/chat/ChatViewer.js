@@ -21,7 +21,7 @@ import Paper from '@mui/material/Paper';
 import {getAdminChatEntriesQuery} from "../../../services/queries/chat/GetAdminChatEntriesQuery";
 import {defaultFormatDateAndTimeForControl, parseISO, yesterday} from "../../../_base/date-utils";
 import ParsedText from "../../../_base/components/ParsedText";
-import type {GenericReactComponent} from "../../../_base/types";
+import type {GenericEvent, GenericReactComponent} from "../../../_base/types";
 import {emptyExactObject} from "../../../_base/utils";
 
 type ChatViewerInternalProps = {
@@ -56,17 +56,17 @@ const ChatViewer = (): GenericReactComponent => {
         return def;
     }
 
-    const handleFromChange = ({target: {value: newValue}}) => {
+    const handleFromChange = ({target: {value: newValue}}: GenericEvent) => {
         setFrom(_ => parseISO(newValue));
         setFetchKey(k => k + 1);
     };
 
-    const handleToChange = ({target: {value: newValue}}) => {
+    const handleToChange = ({target: {value: newValue}}: GenericEvent) => {
         setTo(_ => parseISO(newValue));
         setFetchKey(k => k + 1);
     };
 
-    const handleChatRoomChange = ({target: {value}}) => {
+    const handleChatRoomChange = ({target: {value}}: GenericEvent) => {
         setSelectedChatId(_ => value);
         setFetchKey(k => k + 1);
     };

@@ -19,8 +19,8 @@ import {characterHasDisciplines, characterIsVampire,} from "../../_base/utils";
 import {MainRoutes} from "../MainRouter";
 import {GuideRoutes} from "../guides/GuidesMain";
 import type {
-    CharacterFragments_characterConcealedInfo,
-    CharacterFragments_characterConcealedInfo$key,
+    CharacterFragments_characterConcealedInfo$data,
+    CharacterFragments_characterConcealedInfo$key
 } from "../../services/queries/character/__generated__/CharacterFragments_characterConcealedInfo.graphql";
 import type {GenericReactComponent} from "../../_base/types";
 import {useCustomSnackbar} from "../../_base/notification-utils";
@@ -29,6 +29,19 @@ type InternalElementProps = {
     character: CharacterFragments_characterConcealedInfo$key;
     children: GenericReactComponent => GenericReactComponent;
 };
+
+type SubmitProps = {
+    disciplinePowers: string,
+    discipline1: string,
+    discipline2: string,
+    predatorType: string,
+    specialties: string,
+    advantages: string,
+    firstConviction: string,
+    secondConviction: string,
+    thirdConviction: string,
+    notes: string
+}
 
 const InternalElement = ({character, children}: InternalElementProps): GenericReactComponent => {
     const infoFragment = useFragment(
@@ -42,7 +55,7 @@ const InternalElement = ({character, children}: InternalElementProps): GenericRe
     );
 };
 
-const Creation4ValidationSchema = (isVampire: boolean, hasDiscplines: boolean) => {
+const Creation4ValidationSchema = (isVampire: boolean, hasDisciplines: boolean) => {
     let shape = {
         specialties: string("Inserire le specialità").required("Devi aggiungere le specialità del personaggio"),
         advantages: string("Please, write your character advantages").required("Devi aggiungere almeno 5 punti di Vantaggi per il tuo personaggio"),
@@ -59,7 +72,7 @@ const Creation4ValidationSchema = (isVampire: boolean, hasDiscplines: boolean) =
         };
     }
 
-    if (hasDiscplines) {
+    if (hasDisciplines) {
         shape = {
             ...shape,
             disciplinePowers: string("Scrivi quali poteri di Disciplina vuoi acquisire").required("Devi specificare i poteri di Disciplina del tuo personaggio"),
@@ -113,7 +126,7 @@ const Creation4 = (): GenericReactComponent => {
     const history = useHistory();
     const environment = useRelayEnvironment();
 
-    const submit = (character: CharacterFragments_characterConcealedInfo) => ({
+    const submit = (character: CharacterFragments_characterConcealedInfo$data) => ({
         disciplinePowers,
         discipline1,
         discipline2,
@@ -124,7 +137,7 @@ const Creation4 = (): GenericReactComponent => {
         secondConviction,
         thirdConviction,
         notes
-    }) => {
+    }: SubmitProps) => {
         const disciplinesOk = !characterHasDisciplines(character) ||
             (discipline1 &&
             discipline2);
@@ -193,7 +206,7 @@ const Creation4 = (): GenericReactComponent => {
         }
     }
 
-    const InnerComponent = ({classes, characterInfo}) => {
+    const InnerComponent = ({classes, characterInfo}: any) => {
         const [isVampire, hasDisciplines] = [characterIsVampire(characterInfo), characterHasDisciplines(characterInfo)];
 
         const formik = useFormik({

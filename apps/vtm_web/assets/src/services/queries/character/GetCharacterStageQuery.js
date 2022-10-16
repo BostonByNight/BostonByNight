@@ -1,14 +1,14 @@
 // @flow
 
 import type {
-    GetCharacterStageQueryResponse,
-    GetCharacterStageQueryVariables,
+    GetCharacterStageQuery$data,
+    GetCharacterStageQuery$variables,
 } from "./__generated__/GetCharacterStageQuery.graphql";
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
 
 import graphql from 'babel-plugin-relay/macro';
 
-export const getCharacterStageQuery: Query<GetCharacterStageQueryVariables, GetCharacterStageQueryResponse> = graphql`
+export const getCharacterStageQuery: Query<GetCharacterStageQuery$variables, GetCharacterStageQuery$data> = graphql`
     query GetCharacterStageQuery($id: ID!) {
         getCharacter(id: $id) {
             id

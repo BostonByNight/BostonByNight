@@ -3,7 +3,7 @@
 import graphql from 'babel-plugin-relay/macro';
 import {wrapMutation} from "../../../_base/relay-utils";
 import type {IEnvironment} from "relay-runtime";
-import type {ResetHuntMutationResponse} from "./__generated__/ResetHuntMutation.graphql";
+import type {ResetHuntMutation$data} from "./__generated__/ResetHuntMutation.graphql";
 
 const mutation = graphql`
     mutation ResetHuntMutation($characterId: ID!) {
@@ -17,8 +17,8 @@ const mutation = graphql`
     }
 `;
 
-const mutationPromise = (environment: IEnvironment, characterId: string): Promise<ResetHuntMutationResponse> => {
-    return wrapMutation<ResetHuntMutationResponse>(environment, mutation, {
+const mutationPromise = (environment: IEnvironment, characterId: string): Promise<ResetHuntMutation$data> => {
+    return wrapMutation<ResetHuntMutation$data>(environment, mutation, {
         characterId
     });
 }

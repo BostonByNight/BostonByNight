@@ -7,6 +7,9 @@ import CreationBase from "./CreationBase";
 import {propNotNullRendering} from "../../../_base/render-utils";
 import type {GenericReactComponent} from "../../../_base/types";
 import {useCharacterRecoilState} from "../../../session/hooks";
+import type {
+    CharacterAttributeRequest
+} from "../../../services/mutations/characters/__generated__/AppendAttributesMutation.graphql";
 
 export type CreationBaseProps = {
     classes: any;
@@ -28,7 +31,10 @@ const SpecialistSkillForm = ({ classes }: CreationBaseProps): GenericReactCompon
         skill13: ""
     };
 
-    const getAttributesToSave = (values, generateRequest) => [
+    const getAttributesToSave = (
+        values: typeof emptyAttributes,
+        generateRequest: (string, number) => CharacterAttributeRequest) =>
+    [
         generateRequest(values.skill4, 4),
         generateRequest(values.skill31, 3),
         generateRequest(values.skill32, 3),
@@ -41,7 +47,7 @@ const SpecialistSkillForm = ({ classes }: CreationBaseProps): GenericReactCompon
         generateRequest(values.skill13, 1)
     ];
 
-    const form = getAttributeSelector =>
+    const form = (getAttributeSelector: (string, string) => GenericReactComponent) =>
         <>
             <Grid item xs={12}>
                 <Typography>

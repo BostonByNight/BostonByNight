@@ -4,22 +4,48 @@ import React from "react";
 import MainMapImageMapper from "../map/MainMapImageMapper";
 import {drawLine, groupHavens} from "./haven-map-areas-helpers";
 import {useCustomLazyLoadQuery} from "../../_base/relay-utils";
-import type {Haven} from "../../services/queries/haven/GetHavensQuery";
 import {getHavensQuery} from "../../services/queries/haven/GetHavensQuery";
-import {emptyExactObject, getMapKeys} from "../../_base/utils";
-import type {GenericReactComponent} from "../../_base/types";
+import {emptyExactObject, getMapKeys, toNotNullArray} from "../../_base/utils";
 import Stack from "@mui/material/Stack";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import Box from "@mui/material/Box";
 import HavenMapLegend from "./HavenMapLegend";
 import {useCharacterRecoilState} from "../../session/hooks";
+import type {SessionCharacter} from "../../services/base-types";
+import type {GenericReactComponent} from "../../_base/types";
+import type {Haven} from "../../services/queries/haven/GetHavensQuery";
+
+export type QueryHaven = {|
+    +id: string,
+    +name: ?string,
+    +x: ?number,
+    +y: ?number,
+    +resonance: ?string,
+    +danger: ?number,
+    +difficulty: ?number,
+    +groundControl: ?number,
+    +ownerDifficulty: ?number,
+    +resourcesLevel: ?number,
+    +character: ?{|
+        +id: string,
+        +name: ?string,
+    |},
+|}
 
 type Props = {
-    onSectionSelected: (Haven | string) => void;
+    onSectionSelected: (QueryHaven | string) => void;
     fetchKey?: number;
     setPersonalHaven?: string => void;
 };
+
+type HavenInternalProps = {
+    havens: QueryHaven[],
+    showResonances: boolean,
+    character: ?SessionCharacter,
+    toggleResonanceView: (boolean => boolean) => void,
+    onMapSelected: (QueryHaven | string) => void
+}
 
 const rowStyle = {
     width: "100%",
@@ -28,7 +54,13 @@ const rowStyle = {
     padding: "1rem"
 };
 
-const HavenMapInternal = ({havens, showResonances, character, toggleResonanceView, onMapSelected}) => {
+const HavenMapInternal = ({
+                              havens,
+                              showResonances,
+                              character,
+                              toggleResonanceView,
+                              onMapSelected
+}: HavenInternalProps) => {
     const radius = 20.8;
 
     const groupedHavens = groupHavens(havens);
@@ -84,7 +116,13 @@ const HavenMapInternal = ({havens, showResonances, character, toggleResonanceVie
 };
 
 // The meaning of this class is to not have to cast the type
-const HavenMapHavensNotNull = ({havens, showResonances, character, toggleResonanceView, onMapSelected}) =>
+const HavenMapHavensNotNull = ({
+                                   havens,
+                                   showResonances,
+                                   character,
+                                   toggleResonanceView,
+                                   onMapSelected
+}: HavenInternalProps) =>
     React.useMemo(() => (
         <HavenMapInternal character={character}
                           havens={havens}
@@ -93,7 +131,11 @@ const HavenMapHavensNotNull = ({havens, showResonances, character, toggleResonan
                           toggleResonanceView={toggleResonanceView} />
     ), [character, havens, onMapSelected, showResonances, toggleResonanceView]);
 
-const sendPersonalHaven = (characterId, havens, setPersonalHaven) => {
+const sendPersonalHaven = (
+    characterId: ?string,
+    havens: QueryHaven[],
+    setPersonalHaven: ?(string => void)
+) => {
     if (setPersonalHaven != null) {
         const [personalHaven,] = havens?.filter(h => h?.character?.id === characterId) ?? [];
 
@@ -105,10 +147,10 @@ const sendPersonalHaven = (characterId, havens, setPersonalHaven) => {
 
 const HavenMap = ({onSectionSelected, fetchKey, setPersonalHaven}: Props): GenericReactComponent => {
     const [character,] = useCharacterRecoilState()
-    const havens = useCustomLazyLoadQuery(getHavensQuery, emptyExactObject(), {
+    const havens = toNotNullArray(useCustomLazyLoadQuery(getHavensQuery, emptyExactObject(), {
         fetchPolicy: "network-only",
         fetchKey: fetchKey
-    })?.getHavens?.result;
+    })?.getHavens?.result);
 
     const [showResonances, setShowResonances] = React.useState<boolean>(false);
 

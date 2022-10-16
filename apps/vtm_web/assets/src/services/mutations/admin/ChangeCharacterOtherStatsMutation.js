@@ -5,7 +5,7 @@ import {wrapMutation} from "../../../_base/relay-utils";
 import type {IEnvironment} from "relay-runtime";
 import type {
     ChangeCharacterOtherStatsInput,
-    ChangeCharacterOtherStatsMutationResponse
+    ChangeCharacterOtherStatsMutation$data
 } from "./__generated__/ChangeCharacterOtherStatsMutation.graphql";
 
 const mutation = graphql`
@@ -18,8 +18,8 @@ const mutation = graphql`
     }
 `;
 
-const mutationPromise = (environment: IEnvironment, request: ChangeCharacterOtherStatsInput): Promise<ChangeCharacterOtherStatsMutationResponse> => {
-    return wrapMutation<ChangeCharacterOtherStatsMutationResponse>(environment, mutation, {input: request});
+const mutationPromise = (environment: IEnvironment, request: ChangeCharacterOtherStatsInput): Promise<ChangeCharacterOtherStatsMutation$data> => {
+    return wrapMutation<ChangeCharacterOtherStatsMutation$data>(environment, mutation, {input: request});
 }
 
 export default mutationPromise;

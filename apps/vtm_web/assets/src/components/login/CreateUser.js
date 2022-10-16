@@ -27,6 +27,11 @@ import {useWait} from "../../_base/providers/BackdropProvider";
 
 type CheckerFunction = string => Promise<boolean>;
 
+type SubmitProps = {
+    email: string,
+    name: string
+}
+
 const SignUpSchema = (nameChecker: CheckerFunction, emailChecker: CheckerFunction) =>
     object().shape({
         email: string("Enter your email")
@@ -86,7 +91,7 @@ const CreateUserComponent = (): Node => {
     const onSubmit = ({
         email,
         name
-    }) => {
+    }: SubmitProps) => {
         if (!checkBoxRef.current?.firstChild?.checked === true) {
             enqueueSnackbar({
                 type: "warning",
@@ -101,7 +106,7 @@ const CreateUserComponent = (): Node => {
             email,
             name
         })
-            .then(_ => {
+            .then((_: any) => {
                 enqueueSnackbar({
                     type: "success",
                     message: "L'utente è stato creato correttamente, controlla la mail (spam incluso) per avere la tua prima password."

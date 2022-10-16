@@ -51,7 +51,7 @@ const ReceivedMessages = (): GenericReactComponent => {
                     }} />)
                     : <></>);
 
-    const onDeleteAll = _ => {
+    const onDeleteAll = (_: any) => {
         showDialog(
             "Cancella tutti i messaggi",
             "Sei sicuro di voler cancellare tutti i tuoi messaggi ricevuti?",

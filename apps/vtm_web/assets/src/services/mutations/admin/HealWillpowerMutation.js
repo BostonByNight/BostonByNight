@@ -4,8 +4,8 @@ import graphql from 'babel-plugin-relay/macro';
 import {wrapMutation} from "../../../_base/relay-utils";
 import type {IEnvironment} from "relay-runtime";
 import type {
-    HealWillpowerMutationResponse,
-    HealWillpowerMutationVariables
+    HealWillpowerMutation$data,
+    HealWillpowerMutation$variables
 } from "./__generated__/HealWillpowerMutation.graphql";
 
 const mutation = graphql`
@@ -19,8 +19,8 @@ const mutation = graphql`
     }
 `;
 
-const mutationPromise = (environment: IEnvironment, request: HealWillpowerMutationVariables): Promise<HealWillpowerMutationResponse> => {
-    return wrapMutation<HealWillpowerMutationResponse>(environment, mutation, request);
+const mutationPromise = (environment: IEnvironment, request: HealWillpowerMutation$variables): Promise<HealWillpowerMutation$data> => {
+    return wrapMutation<HealWillpowerMutation$data>(environment, mutation, request);
 }
 
 export default mutationPromise;

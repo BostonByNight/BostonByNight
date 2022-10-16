@@ -22,12 +22,13 @@ import type {AttributeTypeNames} from "../../services/queries/info/AttributesQue
 import {useWait} from "../../_base/providers/BackdropProvider";
 import {useCustomSnackbar} from "../../_base/notification-utils";
 import {useDialog} from "../../_base/providers/DialogProvider";
+import type {Character} from "../../services/queries/character/GetCharacterCompleteQuery";
 
 type Props = {
-
+    character?: ?Character
 };
 
-const Internal = ({character}) => {
+const Internal = ({character}: Props) => {
     const theme = useTheme();
     const {startWait, stopWait} = useWait()
     const {enqueueSnackbar} = useCustomSnackbar()
@@ -58,7 +59,11 @@ const Internal = ({character}) => {
         characterId: id,
         firstAttribute: first,
         secondAttribute: second
-                                       }) => {
+    }: {|
+        characterId: string;
+        firstAttribute: string;
+        secondAttribute: string;
+    |}) => {
         startWait()
 
         switchCharacterAttributeMutation(environment, {
@@ -66,7 +71,7 @@ const Internal = ({character}) => {
             firstAttribute: first,
             secondAttribute: second
         })
-            .then(r => {})
+            .then(_r => {})
             .catch(e => {
                 enqueueSnackbar({
                     type: "error",
@@ -83,7 +88,7 @@ const Internal = ({character}) => {
     const completeCharacter = (characterId: string) => {
         showDialog("Conferma personaggio", "Sei sicuro di voler confermare il personaggio?", () => {
             FinalizeCharacterMutation(environment, characterId)
-                .then(r => {
+                .then(_ => {
                     enqueueSnackbar({type: "success", message: "Il tuo personaggio è stato creato con successo!"})
                     setTimeout(() => {
                         history.push(Routes.map);
@@ -103,7 +108,7 @@ const Internal = ({character}) => {
     const deleteCharacter = (characterId: string) => {
         showDialog("Conferma cancellazione", "Sei sicuro di voler cancellare il personaggio?", () => {
             DeleteCharacterMutation(environment, characterId)
-                .then(r => {
+                .then(_ => {
                     enqueueSnackbar({type: "success", message: "Il tuo personaggio è stato cancellato!"});
                     history.push(Routes.map);
                     document.location.reload(false);

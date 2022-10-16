@@ -5,7 +5,7 @@ import {subscribe, useCustomLazyLoadQuery} from "../../_base/relay-utils";
 import {getMessageDigestQuery} from "../../services/queries/messages/GetMessageDigestQuery";
 import useSubscriptionTokenQuery from "../../services/queries/accounts/SubscriptionTokenQuery";
 import type {
-    MessageNotificationSubscriptionResponse
+    MessageNotificationSubscription$data
 } from "../../services/subscriptions/__generated__/MessageNotificationSubscription.graphql";
 import MessageNotificationSubscription from "../../services/subscriptions/MessageNotificationSubscription";
 import {emptyExactObject} from "../../_base/utils";
@@ -23,7 +23,7 @@ export const useMessageSubscription = (): number => {
     const chatToken = useSubscriptionTokenQuery();
 
     useEffect(() => {
-        const handleNotification = (notification: MessageNotificationSubscriptionResponse) => {
+        const handleNotification = (notification: MessageNotificationSubscription$data) => {
             if (notification?.newMessageNotification?.message != null) {
                 const message = notification.newMessageNotification.message;
 
@@ -38,7 +38,7 @@ export const useMessageSubscription = (): number => {
             }
         }
 
-        const handleMessageBadgeUpdate = (notification: MessageNotificationSubscriptionResponse) => {
+        const handleMessageBadgeUpdate = (notification: MessageNotificationSubscription$data) => {
             if (notification?.newMessageNotification?.numberUnread != null) {
                 setNumberOfMessages(notification.newMessageNotification.numberUnread);
             }

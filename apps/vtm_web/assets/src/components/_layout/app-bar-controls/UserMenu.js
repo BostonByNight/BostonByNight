@@ -5,7 +5,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import {useHistory} from "react-router-dom";
 import Tooltip from '@mui/material/Tooltip';
-import type {GenericReactComponent} from "../../../_base/types";
+import type {GenericEvent, GenericReactComponent} from "../../../_base/types";
 import {Menu, MenuItem, Divider, Link, Box, Button} from "@mui/material";
 import LogoutControl from "./LogoutControl";
 import ReloadControl from "./ReloadControl";
@@ -27,7 +27,7 @@ const UserMenuComponent = ({reloadCount}: UserMenuComponentProps): GenericReactC
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    const handleClick = (event: GenericEvent) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
@@ -95,12 +95,12 @@ const UserMenuComponent = ({reloadCount}: UserMenuComponentProps): GenericReactC
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
 
-                <MenuItem button onClick={_ => history.push(MainRoutes.settings)}>
+                <MenuItem onClick={_ => history.push(MainRoutes.settings)}>
                     <SettingsIcon sx={menuIconStyle} />
                     Impostazioni
                 </MenuItem>
-                <divider />
-                <MenuForumSection itemStyle={{
+                <Divider />
+                <MenuForumSection menuStyle={{
                     forumIconStyle
                 }} />
                 <Link href="https://guide.bostonbynight-gdr.it" target="_blank" sx={{

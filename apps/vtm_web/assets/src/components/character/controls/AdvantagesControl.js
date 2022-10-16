@@ -20,7 +20,7 @@ const AdvantagesControl = (): GenericReactComponent => {
             .filter(a => a.attributeType?.name === "Advantage")
             .flatMap(a => [1, 2, 3, 4, 5].map(i => [String(a.id), a.name, String(i)]));
 
-    const handleChange = e => {
+    const handleChange = (e: any) => {
         console.info("event", e);
     }
 

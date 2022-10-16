@@ -40,12 +40,12 @@ const ChatControls = ({openMapModal, openCharacterStatusPopup, mapId, onChatLogR
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const onMapClicked = _ => {
+    const onMapClicked = (_: any) => {
         openMapModal();
         handleClose();
     };
 
-    const onChatLogRequestedHandler = _ => {
+    const onChatLogRequestedHandler = (_: any) => {
         onChatLogRequested();
         handleClose();
     };
@@ -77,7 +77,7 @@ const ChatControls = ({openMapModal, openCharacterStatusPopup, mapId, onChatLogR
         ];
     }
 
-    const requestRouseCheck = _ => {
+    const requestRouseCheck = (_: any) => {
         if (character?.id != null) {
             showDialog("Vitae", "Sei sicuro di voler spendere vitae?",
                 () => {
@@ -95,7 +95,7 @@ const ChatControls = ({openMapModal, openCharacterStatusPopup, mapId, onChatLogR
         handleClose();
     }
 
-    const requestWillpowerUse = _ => {
+    const requestWillpowerUse = (_: any) => {
         showDialog("Forza di Volontà", "Sei sicuro di voler spendere Forza di Volontà?",
             () => {
                 if (character?.id != null) {
@@ -113,7 +113,7 @@ const ChatControls = ({openMapModal, openCharacterStatusPopup, mapId, onChatLogR
         handleClose();
     }
 
-    const requestHeal = _ => {
+    const requestHeal = (_: any) => {
         showDialog(
             "Guarire",
             "Sei sicuro di voler spendere vitae per guarire il personaggio?\nRicorda che puoi farlo solo una volta per turno, e il tentativo apparirà in chat.",

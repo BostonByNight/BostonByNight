@@ -7,6 +7,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import AdminHavensFormSelector from "./forms/AdminHavensFormSelector";
 import type {Haven} from "../../../services/queries/haven/GetHavensQuery";
 import type {GenericReactComponent} from "../../../_base/types";
 import type {SetHavenInfoRequest} from "../../../services/mutations/havens/__generated__/SetHavenInfoMutation.graphql";
@@ -16,7 +17,9 @@ import type {
 import type {
     SetDangerZoneRequest
 } from "../../../services/mutations/havens/__generated__/SetDangerZoneMutation.graphql";
-import AdminHavensFormSelector from "./forms/AdminHavensFormSelector";
+import type {FormSubmitProps} from "./forms/AdminHavensForm";
+import type {ResonancesFormSubmitProps} from "./forms/AdminHavensResonanceForm";
+import type {DangerFormSubmitProps} from "./forms/AdminHavensDangerForm";
 
 type Props = {
     haven: ?Haven;
@@ -31,9 +34,9 @@ type Props = {
 const AdminHavensModal = ({haven, open, handleClose, onSelected, onMarkResonance, onSetDanger, havenCharacterId}: Props): GenericReactComponent => {
     const triggerButton = useRef();
 
-    const triggerSubmit = _ => triggerButton.current?.click();
+    const triggerSubmit = (_: any) => triggerButton.current?.click();
 
-    const onSetHavenSubmitted = formInfo => {
+    const onSetHavenSubmitted = (formInfo: FormSubmitProps) => {
         onSelected(haven, formInfo.havenCharacterId, {
             resonance: String(formInfo.resonance),
             danger: Number(formInfo.danger),
@@ -46,7 +49,7 @@ const AdminHavensModal = ({haven, open, handleClose, onSelected, onMarkResonance
         handleClose();
     };
 
-    const onMarkResonanceSubmitted = formInfo => {
+    const onMarkResonanceSubmitted = (formInfo: ResonancesFormSubmitProps) => {
         onMarkResonance(haven, {
             resonance: String(formInfo.resonance),
             power: Number(formInfo.power)
@@ -55,7 +58,7 @@ const AdminHavensModal = ({haven, open, handleClose, onSelected, onMarkResonance
         handleClose();
     };
 
-    const onDangerUpdateSubmitted = formInfo => {
+    const onDangerUpdateSubmitted = (formInfo: DangerFormSubmitProps) => {
         onSetDanger(haven, {
             danger: Number(formInfo.danger),
             range: Number(formInfo.range)

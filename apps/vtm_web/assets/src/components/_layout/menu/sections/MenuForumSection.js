@@ -7,11 +7,11 @@ import type {GenericReactComponent} from "../../../../_base/types";
 import MenuItem from "@mui/material/MenuItem";
 import {useHistory} from "react-router-dom";
 
-const MenuForumSection = ({menuStyle}): GenericReactComponent => {
+const MenuForumSection = ({menuStyle}: {menuStyle: any}): GenericReactComponent => {
     const history = useHistory();
 
     return (
-        <MenuItem button onClick={() => history.push(MainRoutes.forumSections)}>
+        <MenuItem onClick={() => history.push(MainRoutes.forumSections)}>
             <ChatIcon sx={menuStyle} />
             Forum
         </MenuItem>

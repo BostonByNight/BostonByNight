@@ -3,7 +3,7 @@
 import React, {useState} from "react";
 import HavenMap from "../_base/HavenMap";
 import HuntMutation from "../../services/mutations/characters/HuntMutation";
-import type {HuntMutationResponse} from "../../services/mutations/characters/__generated__/HuntMutation.graphql";
+import type {HuntMutation$data} from "../../services/mutations/characters/__generated__/HuntMutation.graphql";
 import {useRelayEnvironment} from "react-relay";
 import {characterIsVampire, tryCastToOneType} from "../../_base/utils";
 import HelpTwoToneIcon from '@mui/icons-material/HelpTwoTone';
@@ -18,8 +18,9 @@ import type {GenericReactComponent} from "../../_base/types";
 import {useDialog} from "../../_base/providers/DialogProvider";
 import {useCustomSnackbar} from "../../_base/notification-utils";
 import {useCharacterRecoilState} from "../../session/hooks";
+import type {QueryHaven} from "../_base/HavenMap";
 
-const HuntInternal = ({characterId}) => {
+const HuntInternal = ({characterId}: {characterId: string}) => {
     const environment = useRelayEnvironment();
     const {showDialog} = useDialog()
     const {enqueueSnackbar} = useCustomSnackbar();
@@ -32,12 +33,12 @@ const HuntInternal = ({characterId}) => {
 
     const isCharacterAwake = useIsCharacterAwake(characterId, awakeFetchKey);
 
-    const showHuntHelp = _ => {
+    const showHuntHelp = (_: any) => {
         const newTab = window.open(`#${GuideRoutes.hunt}`, "_blank");
         newTab.focus();
     }
 
-    const onSectionSelected = h => {
+    const onSectionSelected = (h: QueryHaven | string) => {
         const haven = tryCastToOneType<Haven, string>(h);
         
         if (haven?.id != null) {
@@ -85,7 +86,7 @@ const HuntInternal = ({characterId}) => {
     //     return (<></>);
     // };
 
-    const huntRequest = havenId => {
+    const huntRequest = (havenId: ?string) => {
         if (character?.id != null) {
             showDialog(
                 "Caccia",
@@ -96,7 +97,7 @@ const HuntInternal = ({characterId}) => {
                             characterId: character.id,
                             havenId
                         })
-                            .then((result: HuntMutationResponse) => {
+                            .then((result: HuntMutation$data) => {
                                 setAwakeFetchKey(p => p + 1);
                                 if (result?.hunt?.result != null) {
                                     const huntResult = result.hunt.result;

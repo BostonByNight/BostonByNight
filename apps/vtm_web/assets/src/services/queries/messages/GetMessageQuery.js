@@ -2,9 +2,9 @@
 
 import graphql from 'babel-plugin-relay/macro';
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
-import type {GetMessageQueryResponse, GetMessageQueryVariables,} from "./__generated__/GetMessageQuery.graphql";
+import type {GetMessageQuery$data, GetMessageQuery$variables,} from "./__generated__/GetMessageQuery.graphql";
 
-export const getMessageQuery: Query<GetMessageQueryVariables, GetMessageQueryResponse> = graphql`
+export const getMessageQuery: Query<GetMessageQuery$variables, GetMessageQuery$data> = graphql`
     query GetMessageQuery($messageId: ID!) {
         getMessage(messageId: $messageId) {
             id

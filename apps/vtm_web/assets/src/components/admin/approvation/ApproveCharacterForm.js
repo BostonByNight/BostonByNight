@@ -13,7 +13,7 @@ import Box from "@mui/material/Box";
 import type {Character} from "../../../services/queries/character/GetCharacterCompleteQuery";
 import {MainRoutes} from "../../MainRouter";
 import RejectCharacterMutation from "../../../services/mutations/characters/RejectCharacterMutation";
-import type {GenericReactComponent} from "../../../_base/types";
+import type {GenericEvent, GenericReactComponent} from "../../../_base/types";
 import {useDialog} from "../../../_base/providers/DialogProvider";
 import {useCustomSnackbar} from "../../../_base/notification-utils";
 
@@ -28,7 +28,7 @@ const ApproveCharacterForm = ({character}: Props): GenericReactComponent => {
     const environment = useRelayEnvironment();
     const [reason, setReason] = useState<?string>(null);
 
-    const approveCharacter = _ => {
+    const approveCharacter = (_: any) => {
         showDialog(`Accetta ${character.name ?? ""}`, "Sei sicuro di voler accettare questo personaggio?", () => {
             const promise: Promise<boolean> = ApproveCharacterMutation(environment, character.id, reason ?? "");
             handleMutation(() => promise, enqueueSnackbar, {
@@ -39,7 +39,7 @@ const ApproveCharacterForm = ({character}: Props): GenericReactComponent => {
         });
     };
 
-    const rejectCharacter = _ => {
+    const rejectCharacter = (_: any) => {
         if (reason != null && reason !== "") {
             showDialog(`Rifiuta ${character.name ?? ""}`, "Sei sicuro di voler rifiutare questo personaggio?", () => {
                 const promise: Promise<boolean> = RejectCharacterMutation(environment, character.id, reason);
@@ -84,7 +84,7 @@ const ApproveCharacterForm = ({character}: Props): GenericReactComponent => {
                                     <TextField id="filled-basic" 
                                             label="Ragione" 
                                             variant="filled" 
-                                            onChange={({target: {value}}) => setReason(_ => value)}
+                                            onChange={({target: {value}}: GenericEvent) => setReason(_ => value)}
                                             fullWidth />
                                 </Grid>
                             </Grid>

@@ -3,7 +3,7 @@
 import graphql from 'babel-plugin-relay/macro';
 import {wrapMutation} from "../../../_base/relay-utils";
 import type {IEnvironment} from "relay-runtime";
-import type {ModifyForumPostInput, ModifyPostMutationResponse} from "./__generated__/ModifyPostMutation.graphql";
+import type {ModifyForumPostInput, ModifyPostMutation$data} from "./__generated__/ModifyPostMutation.graphql";
 
 const mutation = graphql`
     mutation ModifyPostMutation($request: ModifyForumPostInput!) {
@@ -15,8 +15,8 @@ const mutation = graphql`
     }
 `;
 
-const mutationPromise = (environment: IEnvironment, request: ModifyForumPostInput): Promise<ModifyPostMutationResponse> => {
-    return wrapMutation<ModifyPostMutationResponse>(environment, mutation, {
+const mutationPromise = (environment: IEnvironment, request: ModifyForumPostInput): Promise<ModifyPostMutation$data> => {
+    return wrapMutation<ModifyPostMutation$data>(environment, mutation, {
         request
     });
 };

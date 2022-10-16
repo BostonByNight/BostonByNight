@@ -21,6 +21,10 @@ type ModifyPostProps = {
     title: ?string;
 }
 
+type SubmitProps = {
+    text: string;
+}
+
 const ModifyPost = ({threadId, postId, title}: ModifyPostProps): GenericReactComponent => {
     const history = useHistory();
     const user = useRecoilValue(sessionStateAtom)
@@ -30,11 +34,11 @@ const ModifyPost = ({threadId, postId, title}: ModifyPostProps): GenericReactCom
         id: postId
     })?.getForumPost;
 
-    const onSubmit = ({text}) => {
+    const onSubmit = ({text}: SubmitProps) => {
         ModifyPostMutation(environment, {
             postId: postId,
             text: text
-        }).then(_ => {
+        }).then((_: any) => {
             enqueueSnackbar({type: "success", message: "Post creato!"})
         }).catch(e => {
             console.error("Error while saving the post!", e);
