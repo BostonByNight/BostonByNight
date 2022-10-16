@@ -12,6 +12,12 @@ import type {GenericReactComponent} from "../../_base/types";
 import {useCustomSnackbar} from "../../_base/notification-utils";
 import {useWait} from "../../_base/providers/BackdropProvider";
 
+type SubmitProps = {
+    oldPassword: string;
+    newPassword: string;
+    repeatPassword: string;
+}
+
 const SignUpSchema = object().shape({
     oldPassword: string("La tua vecchia passwod").required("Required"),
     newPassword: string("Enter your password")
@@ -45,7 +51,7 @@ const SetNewPassword = (): GenericReactComponent => {
                           oldPassword,
                           newPassword,
                           repeatPassword
-                      }) => {
+                      }: SubmitProps) => {
         startWait()
 
         ChangeUserPasswordMutation(environment,

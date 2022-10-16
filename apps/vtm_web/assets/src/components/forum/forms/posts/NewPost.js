@@ -19,6 +19,10 @@ type NewPostProps = {
     title: ?string;
 }
 
+type SubmitProps = {
+    text: string;
+}
+
 const NewPost = ({threadId, title}: NewPostProps): GenericReactComponent => {
     const history = useHistory();
     const user = useRecoilValue(sessionStateAtom)
@@ -26,7 +30,7 @@ const NewPost = ({threadId, title}: NewPostProps): GenericReactComponent => {
     const environment = useRelayEnvironment();
     const {enqueueSnackbar} = useCustomSnackbar()
 
-    const onSubmit = ({text}) => {
+    const onSubmit = ({text}: SubmitProps) => {
         CreateNewPostMutation(environment, {
             forumThreadId: threadId,
             creatorUserId: user?.id ?? "",

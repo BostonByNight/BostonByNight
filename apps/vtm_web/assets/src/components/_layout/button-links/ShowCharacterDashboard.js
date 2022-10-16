@@ -24,7 +24,7 @@ const ShowCharacterDashboard = ({characterId, onSelected, asMenuItem}: Props): G
     const isUserMaster = useRecoilValue(isUserMasterSelector)
     const history = useHistory();
 
-    const tryVisualizeCharacterDashboard = characterId =>
+    const tryVisualizeCharacterDashboard = (characterId: string) =>
         (_: any) => {
             history.push(MainRoutes.characterDashboard(characterId));
 

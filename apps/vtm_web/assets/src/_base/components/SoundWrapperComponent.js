@@ -12,7 +12,7 @@ import VolumeDown from '@mui/icons-material/VolumeDown';
 import VolumeUp from '@mui/icons-material/VolumeUp';
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import type {GenericReactComponent} from "../types";
+import type {GenericEvent, GenericReactComponent} from "../types";
 import {useCustomSnackbar} from "../notification-utils";
 
 type Props = {
@@ -39,7 +39,7 @@ const SoundWrapperComponent = ({id, soundSourceUrl}: Props): GenericReactCompone
 
     useEffect(() => {
         const handleRejection =
-            error => {
+            (error: Error) => {
                 console.error("Error while reproducing track", error);
                 utilities.current?.enqueueSnackbar({
                     type: "warning",
@@ -57,11 +57,13 @@ const SoundWrapperComponent = ({id, soundSourceUrl}: Props): GenericReactCompone
 
     useEffect(() => {
 
+        // $FlowFixMe
         audioRef.current?.addEventListener("canplay", function() {
             this.volume = 0.3;
             setTrackDuration(_ => this.duration);
         });
 
+        // $FlowFixMe
         audioRef.current?.addEventListener("timeupdate", function() {
             setTrackCurrent(_ => this.currentTime);
         });
@@ -85,7 +87,7 @@ const SoundWrapperComponent = ({id, soundSourceUrl}: Props): GenericReactCompone
     };
 
     const getTrackCurrentFormatted = () => {
-        const padding = s => String(s).padStart(2, "0");
+        const padding = (s: any) => String(s).padStart(2, "0");
         const totalSeconds = Math.round(trackCurrent);
         const minutes = Math.floor(totalSeconds / 60);
         const seconds = totalSeconds - minutes * 60;

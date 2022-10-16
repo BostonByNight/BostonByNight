@@ -7,25 +7,27 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Grid from "@mui/material/Grid";
 import {predatorTypesQuery} from "../../../services/queries/info/PredatorTypesQuery";
-import type {PredatorTypesQueryResponse} from "../../../services/queries/info/__generated__/PredatorTypesQuery.graphql";
+import type {
+    PredatorTypesQuery$data
+} from "../../../services/queries/info/__generated__/PredatorTypesQuery.graphql";
 import {useCustomLazyLoadQuery} from "../../../_base/relay-utils";
 import {characterIsVampire} from "../../../_base/utils";
 import Typography from "@mui/material/Typography";
 import {Link} from "react-router-dom";
 import {GuideRoutes} from "../../guides/GuidesMain";
 import type {
-    CharacterFragments_characterConcealedInfo
+    CharacterFragments_characterConcealedInfo$data
 } from "../../../services/queries/character/__generated__/CharacterFragments_characterConcealedInfo.graphql";
 import type {GenericReactComponent} from "../../../_base/types";
 
 type Props = {
-    characterInfo: CharacterFragments_characterConcealedInfo;
+    characterInfo: CharacterFragments_characterConcealedInfo$data;
     classes: any;
     formik: any;
 }
 
 const PredatorTypeControl = ({characterInfo, classes, formik}: Props): GenericReactComponent => {
-    const {predatorTypes}: PredatorTypesQueryResponse = useCustomLazyLoadQuery(predatorTypesQuery, {});
+    const {predatorTypes}: PredatorTypesQuery$data = useCustomLazyLoadQuery(predatorTypesQuery, {});
 
     const showPredatorTypes = () => {
         const options = [<MenuItem key="None" value="">None</MenuItem>];

@@ -6,7 +6,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import {useTheme} from "@mui/material/styles";
-import type {GenericReactComponent} from "../types";
+import type {GenericEvent, GenericReactComponent} from "../types";
 import type {SelectProps} from "../component-helpers";
 import {getSelectItems} from "../component-helpers";
 

@@ -19,7 +19,7 @@ export const mapsQuery: Query<SectionMapsQuery$variables, SectionMapsQuery$data>
     }
 `;
 
-const convert = result =>
+const convert = (result: SectionMapsQuery$data) =>
     convertToJavascriptArray(result?.sectionMaps).map(convertToMap) ?? emptyArray();
 
 export default function useSectionMaps(id: string): Array<Map> {

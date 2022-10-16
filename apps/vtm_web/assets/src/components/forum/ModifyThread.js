@@ -18,7 +18,14 @@ import {isUserMasterSelector} from "../../session/selectors";
 type Props = {
     sectionId: string;
     threadId: string;
-};
+}
+
+type SubmitProps = {
+    title: string,
+    description: string,
+    highlighted: boolean,
+    characterIds: string[]
+}
 
 const ModifyThread = ({sectionId, threadId}: Props): GenericReactComponent => {
     const history = useHistory()
@@ -31,7 +38,7 @@ const ModifyThread = ({sectionId, threadId}: Props): GenericReactComponent => {
 
     const goBack = () => history.push(MainRoutes.forumSection(sectionId))
 
-    const onSubmit = ({title, description, highlighted, characterIds}) => {
+    const onSubmit = ({title, description, highlighted, characterIds}: SubmitProps) => {
         handleMutation(() => 
             ModifyThreadMutation(environment, {
                 threadId,

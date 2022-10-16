@@ -88,7 +88,6 @@ export const filterNulls = <T>(arr: Array<?T>): Array<T> =>
 
 export const readonlyFilterNulls = <T>(arr: ?$ReadOnlyArray<?T>): $ReadOnlyArray<T> =>
     arr?.filter(x => x != null)?.map(castNotNull) ?? [];
-    
 
 export const toNotNullArray = <T>(readOnlyArray: ?$ReadOnlyArray<?T>): Array<T> =>
     filterNulls(toArray(readOnlyArray));

@@ -21,7 +21,7 @@ type Props = {
 const ShowCharacterSheet = ({characterId, onSelected, asMenuItem}: Props): GenericReactComponent => {
     const history = useHistory();
 
-    const tryVisualizeCharacterSheet = characterId =>
+    const tryVisualizeCharacterSheet = (characterId: string) =>
         (_: any) => {
             history.push(MainRoutes.sheet(characterId));
 

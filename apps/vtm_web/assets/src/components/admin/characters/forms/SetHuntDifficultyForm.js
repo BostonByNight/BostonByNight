@@ -12,7 +12,7 @@ import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import ChangeCharacterHuntDifficultyMutation
     from "../../../../services/mutations/admin/ChangeCharacterHuntDifficultyMutation";
-import type {GenericReactComponent} from "../../../../_base/types";
+import type {GenericEvent, GenericReactComponent} from "../../../../_base/types";
 import {useDialog} from "../../../../_base/providers/DialogProvider";
 import {useCustomSnackbar} from "../../../../_base/notification-utils";
 

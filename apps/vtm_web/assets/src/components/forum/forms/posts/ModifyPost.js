@@ -21,6 +21,10 @@ type ModifyPostProps = {
     title: ?string;
 }
 
+type SubmitProps = {
+    text: string;
+}
+
 const ModifyPost = ({threadId, postId, title}: ModifyPostProps): GenericReactComponent => {
     const history = useHistory();
     const user = useRecoilValue(sessionStateAtom)

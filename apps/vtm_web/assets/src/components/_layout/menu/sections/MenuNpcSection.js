@@ -34,7 +34,7 @@ const MenuNpcSection = ({pushHistory, reloadCount, onUpdate}: Props): GenericRea
     }
     
     const handleSheetSelection = (info: UserCharacter) =>
-        _ => pushHistory(MainRoutes.sheet(info.id));
+        (_: any) => pushHistory(MainRoutes.sheet(info.id));
 
     const handleCharacterSelection = (info: UserCharacter) =>
         (_: any) => {
