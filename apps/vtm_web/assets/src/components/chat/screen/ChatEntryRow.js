@@ -15,6 +15,7 @@ import {defaultFormatTime} from "../../../_base/date-utils";
 import type {GenericReactComponent} from "../../../_base/types";
 import ChatEntryContextMenu from "./ChatEntryContextMenu";
 import {useCustomSnackbar} from "../../../_base/notification-utils";
+import DiceComponent from "../dice/DiceComponent";
 
 type ChatEntryComponentProps = {
     entry: ChatEntry;
@@ -155,9 +156,7 @@ const ChatEntryRow = ({entry, isLast, showCharacterDescription, canDelete, delet
             }}>
                 {characterNameWithTime()}:&nbsp;
             </Typography>
-            <ReactMarkdown components={markdownComponents} className="no-padding-paragraph">
-                {entry.result}
-            </ReactMarkdown>
+            <DiceComponent result={entry.result} components={markdownComponents}/>
         </Typography>;
 
     const parseChatEntryMasterText = () =>
