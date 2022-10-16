@@ -19,6 +19,8 @@ import {useTheme} from "@mui/material/styles";
 import MenuLayout from "../../../_base/components/MenuLayout";
 import {emptyExactObject} from "../../../_base/utils";
 import {isUserRoleMaster} from "../../../services/base-types";
+import {useRecoilValue} from "recoil";
+import {sessionMapStateAtom} from "../../../session/atoms";
 import type {GenericReactComponent} from "../../../_base/types";
 import type {Role} from "../../../services/queries/accounts/__generated__/SessionQuery.graphql";
 
@@ -97,10 +99,16 @@ const OnlineControlActionsSmallScreen = ({o, closePopup}: OnlineControlActionPro
 }
 
 const OnlineControlDialog = ({closePopup}: Props): GenericReactComponent => {
-    const theme = useTheme();
+    const theme = useTheme()
+    const currentMap = useRecoilValue(sessionMapStateAtom)
     const online = useCustomLazyLoadQuery(listSessionQuery, emptyExactObject(), {
         fetchPolicy: "network-only"
     })?.sessionsList ?? [];
+
+    const filteredOnline =
+        currentMap != null
+            ? online.filter(o => o?.location?.id === currentMap.id)
+            : online;
 
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -163,7 +171,7 @@ const OnlineControlDialog = ({closePopup}: Props): GenericReactComponent => {
     };
 
     // Used the rest operator because the read only array doesn't have a sort method
-    const showOnline = () => [...online]
+    const showOnline = () => [...filteredOnline]
         ?.sort((a, b) => onlineUserSorter(a, b))
         ?.map(o => onlineRow(o)) ?? (<></>);
 
