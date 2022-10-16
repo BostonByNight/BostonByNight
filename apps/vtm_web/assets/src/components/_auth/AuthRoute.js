@@ -15,12 +15,12 @@ type Props = {
 const AuthRoute = ({ children, component, ...rest }: Props): GenericReactComponent => {
     const user = useRecoilValue(sessionStateAtom)
 
-    const loginRedirection = location => ({
+    const loginRedirection = (location: string) => ({
         pathname: Routes.sessionExpired,
         state: { from: location }
     });
 
-    const render = historyData => {
+    const render = (historyData: any) => {
         const {location} = historyData;
 
         return user?.id != null

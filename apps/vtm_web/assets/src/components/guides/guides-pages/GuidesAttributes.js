@@ -13,9 +13,21 @@ import GuidesAttributesAttributes from "./guide-attributes/GuidesAttributesAttri
 import GuidesAttributesDisciplines from "./guide-attributes/GuidesAttributesDisciplines";
 import GuidesAttributesAdvantages from "./guide-attributes/GuidesAttributesAdvantages";
 import ParsedText from "../../../_base/components/ParsedText";
-import type {GenericReactComponent} from "../../../_base/types";
+import type {GenericEvent, GenericReactComponent} from "../../../_base/types";
 
-const a11yProps = index => {
+type AttributeFromQuery = {|
+    +id: string,
+    +name: ?string,
+    +order: ?number,
+    +description: ?string,
+    +attributeType: ?{|
+        +id: string,
+        +name: ?string,
+        +section: ?string,
+    |},
+|}
+
+const a11yProps = (index: number) => {
     return {
         id: `simple-tab-${index}`,
         'aria-controls': `simple-tabpanel-${index}`,
@@ -25,7 +37,7 @@ const a11yProps = index => {
 const GuidesAttributes = (): GenericReactComponent => {
     const [value, setValue] = React.useState(0);
 
-    const handleChange = (event, newValue) => {
+    const handleChange = (_event: GenericEvent, newValue: number) => {
         setValue(newValue);
     };
 
@@ -33,8 +45,8 @@ const GuidesAttributes = (): GenericReactComponent => {
         fetchPolicy: "store-or-network"
     })?.attributes ?? [];
 
-    const sortAttributes = name =>
-        (a, b) => {
+    const sortAttributes = (name: string) =>
+        (a: ?AttributeFromQuery, b: ?AttributeFromQuery) => {
             if (name !== "Attribute") {
                 if (a?.name != null && b?.name != null) {
                     if (a.name > b.name) return 1;
@@ -49,7 +61,10 @@ const GuidesAttributes = (): GenericReactComponent => {
             }
         };
 
-    const ShowAttribute = ({name, description}) => (
+    const ShowAttribute = ({name, description}: {
+        name: ?string,
+        description: ?string
+    }) => (
         <>
             <h3 style={titleStyle}>{name}</h3>
             <ParsedText text={description} internalDivSx={{fontSize: "0.9rem"}} />

@@ -14,7 +14,7 @@ export const cache: any = new RelayQueryResponseCache({
     ttl: 60 * 5 * 1000
 });
 
-const fetchGraphQL = history => {
+const fetchGraphQL = (history: any) => {
     return async ({text}: RequestParameters, variables: Variables) => {
         try {
             const response = await post("/api", {

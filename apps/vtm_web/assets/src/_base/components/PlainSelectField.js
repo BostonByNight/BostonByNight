@@ -6,7 +6,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import {useTheme} from "@mui/material/styles";
-import type {GenericReactComponent} from "../types";
+import type {GenericEvent, GenericReactComponent} from "../types";
 import type {SelectProps} from "../component-helpers";
 import {getSelectItems} from "../component-helpers";
 
@@ -24,7 +24,7 @@ const PlainSelectField = (props: Props): GenericReactComponent => {
 
     const items = () => getSelectItems(props, emptyMenuItem);
 
-    const onChange = ({target: {value}}) => props.onChange(value);
+    const onChange = ({target: {value}}: GenericEvent) => props.onChange(value);
 
     return (
         <FormControl sx={{

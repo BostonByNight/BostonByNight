@@ -5,7 +5,7 @@ import {wrapMutation} from "../../../_base/relay-utils";
 import type {IEnvironment} from "relay-runtime";
 import type {
     CharacterCreationRequest,
-    CreateNewNpcMutationResponse
+    CreateNewNpcMutation$data
 } from "./__generated__/CreateNewNpcMutation.graphql";
 
 const mutation = graphql`
@@ -23,8 +23,8 @@ const mutation = graphql`
     }
 `;
 
-const mutationPromise = (environment: IEnvironment, request: CharacterCreationRequest): Promise<CreateNewNpcMutationResponse> => {
-    return wrapMutation<CreateNewNpcMutationResponse>(environment, mutation, {
+const mutationPromise = (environment: IEnvironment, request: CharacterCreationRequest): Promise<CreateNewNpcMutation$data> => {
+    return wrapMutation<CreateNewNpcMutation$data>(environment, mutation, {
         request: {
             ...request,
             clanId: request.clanId

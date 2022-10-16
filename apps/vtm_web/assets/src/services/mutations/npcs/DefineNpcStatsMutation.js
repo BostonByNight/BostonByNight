@@ -3,7 +3,7 @@
 import graphql from 'babel-plugin-relay/macro';
 import {wrapMutation} from "../../../_base/relay-utils";
 import type {IEnvironment} from "relay-runtime";
-import type {DefineNpcStatsMutationResponse, NpcStatsRequest} from "./__generated__/DefineNpcStatsMutation.graphql";
+import type {DefineNpcStatsMutation$data, NpcStatsRequest} from "./__generated__/DefineNpcStatsMutation.graphql";
 
 const mutation = graphql`
     mutation DefineNpcStatsMutation($characterId: ID!, $request: NpcStatsRequest!) {
@@ -18,8 +18,8 @@ const mutation = graphql`
     }
 `;
 
-const mutationPromise = (environment: IEnvironment, characterId: string, request: NpcStatsRequest): Promise<DefineNpcStatsMutationResponse> => {
-    return wrapMutation<DefineNpcStatsMutationResponse>(environment, mutation, {
+const mutationPromise = (environment: IEnvironment, characterId: string, request: NpcStatsRequest): Promise<DefineNpcStatsMutation$data> => {
+    return wrapMutation<DefineNpcStatsMutation$data>(environment, mutation, {
         characterId,
         request
     });

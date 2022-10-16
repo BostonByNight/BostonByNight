@@ -25,6 +25,7 @@ const Creation1 = (): GenericReactComponent => {
                         id: response.createCharacter?.id,
                         name: response.createCharacter?.name ?? "No name available",
                         clan: {
+                            // $FlowFixMe
                             ...response.createCharacter?.clan?.name
                         } 
                     })

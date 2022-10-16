@@ -5,7 +5,8 @@ import {useFragment} from "react-relay";
 import {characterStateFragment} from "../../../../services/queries/character/CharacterFragments";
 import Typography from "@mui/material/Typography";
 import type {
-    CharacterFragments_characterState$key
+    CharacterFragments_characterState$key,
+    CharacterFragments_characterState$data
 } from "../../../../services/queries/character/__generated__/CharacterFragments_characterState.graphql";
 import ParsedText from "../../../../_base/components/ParsedText";
 import {mainFontFamily} from "../../../Main.Layout.Style";
@@ -13,7 +14,11 @@ import type {GenericReactComponent} from "../../../../_base/types";
 
 type Props = {
     characterQuery: CharacterFragments_characterState$key
-};
+}
+
+type SheetElementProps = {
+    sheet: CharacterFragments_characterState$data;
+}
 
 const CharacterSheetOthersSection = ({characterQuery}: Props): GenericReactComponent => {
     const sheet = useFragment(
@@ -42,7 +47,7 @@ const sectionTitleStyle = {
     fontSize: "24px",
 };
 
-const PredatorType = ({sheet}) => (
+const PredatorType = ({sheet}: SheetElementProps) => (
     <>
         <Typography sx={sectionTitleStyle}>
             Tipo di Predatore
@@ -63,7 +68,7 @@ const PredatorType = ({sheet}) => (
     </>
 );
 
-const Clan = ({sheet}) => (
+const Clan = ({sheet}: SheetElementProps) => (
     <>
         <Typography sx={sectionTitleStyle}>
             Clan
@@ -78,7 +83,7 @@ const Clan = ({sheet}) => (
     </>
 );
 
-const Experience = ({sheet}) => (
+const Experience = ({sheet}: SheetElementProps) => (
     <>
         <Typography sx={sectionTitleStyle}>
             Esperienza
@@ -114,44 +119,44 @@ const InfoElement = ({title, text, titleSx, textSx}: InfoElementProps) => (
     </>
 );
 
-const Biography = ({sheet}) => (
+const Biography = ({sheet}: SheetElementProps) => (
     <InfoElement title="Biografia" text={sheet?.biography} titleSx={{
         fontSize: "2rem",
         marginTop: "1rem"
     }} />
 );
 
-const DisciplinePowers = ({sheet}) => (
+const DisciplinePowers = ({sheet}: SheetElementProps) => (
     <InfoElement title="Poteri" text={sheet?.disciplinePowers} textSx={{
         marginBottom: "10px"
     }} />
 );
 
-const Specialties = ({sheet}) => (
+const Specialties = ({sheet}: SheetElementProps) => (
     <InfoElement title="Specialità" text={sheet?.specialties} textSx={{
         marginBottom: "10px"
     }} />
 );
 
-const Advantages = ({sheet}) => (
+const Advantages = ({sheet}: SheetElementProps) => (
     <InfoElement title="Vantaggi" text={sheet?.advantages} textSx={{
         marginBottom: "10px"
     }} />
 );
 
-const Convictions = ({sheet}) => (
+const Convictions = ({sheet}: SheetElementProps) => (
     <InfoElement title="Convinzioni" text={sheet?.convictions} textSx={{
         marginBottom: "10px"
     }} />
 );
 
-const Objects = ({sheet}) => (
+const Objects = ({sheet}: SheetElementProps) => (
     <InfoElement title="Oggetti posseduti" text={sheet?.objects} textSx={{
         marginBottom: "10px"
     }} />
 );
 
-const Notes = ({sheet}) => (
+const Notes = ({sheet}: SheetElementProps) => (
     <InfoElement title="Note" text={sheet?.notes} textSx={{
         marginBottom: "10px"
     }} />

@@ -5,7 +5,7 @@ import {wrapMutation} from "../../../_base/relay-utils";
 import type {IEnvironment} from "relay-runtime";
 import type {
     ChatDiceEntryRequest,
-    CreateChatDiceEntryMutationResponse
+    CreateChatDiceEntryMutation$data
 } from "./__generated__/CreateChatDiceEntryMutation.graphql";
 
 const mutation = graphql`
@@ -25,8 +25,8 @@ const mutation = graphql`
     }
 `;
 
-const chatDiceEntryMutationPromise = (environment: IEnvironment, request: ChatDiceEntryRequest): Promise<CreateChatDiceEntryMutationResponse> => {
-    return wrapMutation<CreateChatDiceEntryMutationResponse>(environment, mutation, {entry: request});
+const chatDiceEntryMutationPromise = (environment: IEnvironment, request: ChatDiceEntryRequest): Promise<CreateChatDiceEntryMutation$data> => {
+    return wrapMutation<CreateChatDiceEntryMutation$data>(environment, mutation, {entry: request});
 }
 
 export default chatDiceEntryMutationPromise;

@@ -12,7 +12,7 @@ import {handleMutation, range} from "../../../../_base/utils";
 import {useRelayEnvironment} from "react-relay";
 import ChangeCharacterAttributeMutation from "../../../../services/mutations/admin/ChangeCharacterAttributeMutation";
 import {UseAttributeSelectOptions} from "./hooks";
-import type {GenericReactComponent} from "../../../../_base/types";
+import type {GenericEvent, GenericReactComponent} from "../../../../_base/types";
 import {useDialog} from "../../../../_base/providers/DialogProvider";
 import {useCustomSnackbar} from "../../../../_base/notification-utils";
 
@@ -30,7 +30,7 @@ const ChangeCharacterAttributeForm = ({character, onUpdate}: Props): GenericReac
     const [attributeId, setAttributeId] = useState<?string>(null);
     const [newValue, setNewValue] = useState(0);
 
-    const changeCharacterAttribute = _ => {
+    const changeCharacterAttribute = (_: any) => {
         if (attributeId == null) {
             enqueueSnackbar({
                 type: "error",
@@ -72,9 +72,9 @@ const ChangeCharacterAttributeForm = ({character, onUpdate}: Props): GenericReac
         textAlign: "center"
     };
 
-    const attributeSelected = ({target: {value}}) => setAttributeId(_ => value);
+    const attributeSelected = ({target: {value}}: GenericEvent) => setAttributeId(_ => value);
 
-    const valueSelected = ({target: {value}}) => setNewValue(_ => value);
+    const valueSelected = ({target: {value}}: GenericEvent) => setNewValue(_ => value);
 
     return (
         <Grid item xs={12}>

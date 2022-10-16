@@ -6,8 +6,14 @@ import {getHavenUnresolvedEventsQuery} from "../../../services/queries/haven/Get
 import {HavenEventsListWrapper} from "../../haven/HavenEventsListWrapper";
 import Stack from "@mui/material/Stack";
 import {emptyExactObject} from "../../../_base/utils";
+import type {GenericReactComponent} from "../../../_base/types";
 
-const AdminHavenEventsInternal = ({fetchKey, component}) => {
+type AdminHavenEventsInternalProps = {
+    fetchKey: number,
+    component: GenericReactComponent
+}
+
+const AdminHavenEventsInternal = ({fetchKey, component}: AdminHavenEventsInternalProps): GenericReactComponent => {
     const events = useCustomLazyLoadQuery(getHavenUnresolvedEventsQuery, emptyExactObject(), {
         fetchPolicy: "network-only",
         fetchKey: fetchKey

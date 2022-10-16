@@ -27,7 +27,7 @@ export const goToChatAndUpdateSession = (setLocation: SessionLocation => void,
  * @return The chat entries
  */
 export const getFileTextFromChatEntries = (entries: Array<ChatEntry>): string => {
-    const parseText = e =>
+    const parseText = (e: string) =>
         replaceAll(
             replaceAll(
                 replaceAll(e, "![Image]", ""),

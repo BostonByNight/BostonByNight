@@ -25,7 +25,13 @@ type Props = {
     closePopup: () => void;
 }
 
-const OnlineControlActionsBigScreen = ({o, closePopup}) => (
+type OnlineControlActionProps = {
+    // TODO - Add the online typing
+    o: any,
+    closePopup: () => void
+}
+
+const OnlineControlActionsBigScreen = ({o, closePopup}: OnlineControlActionProps) => (
     <Stack direction="row">
         <ShowCharacterSheet characterId={o?.character?.id} onSelected={closePopup} />
         <SendMessageToUser userId={o?.user?.id} onSelected={closePopup} />
@@ -38,8 +44,8 @@ const OnlineControlActionsBigScreen = ({o, closePopup}) => (
     </Stack>
 );
 
-const OnlineControlActionsSmallScreen = ({o, closePopup}) => {
-    const onSelected = onItemSelected =>
+const OnlineControlActionsSmallScreen = ({o, closePopup}: OnlineControlActionProps) => {
+    const onSelected = (onItemSelected: () => void) =>
         () => {
             onItemSelected();
             closePopup();
@@ -79,7 +85,8 @@ const OnlineControlDialog = ({closePopup}: Props): GenericReactComponent => {
 
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
-    const userMasterIcon = user =>
+    // TODO - Add Online typings
+    const userMasterIcon = (user: any) =>
         isUserRoleMaster(user?.role)
             ? (
                 <Tooltip title="Master">
@@ -90,12 +97,14 @@ const OnlineControlDialog = ({closePopup}: Props): GenericReactComponent => {
             )
             : (<></>);
 
-    const secondaryActions = o =>
+    // TODO - Add online typings
+    const secondaryActions = (o: any) =>
         isSmallScreen
             ? (<OnlineControlActionsSmallScreen o={o} closePopup={closePopup} />)
             : (<OnlineControlActionsBigScreen o={o} closePopup={closePopup} />);
 
-    const onlineUserAndCharacterName = o => {
+    // TODO - Add Online typings
+    const onlineUserAndCharacterName = (o: any) => {
         if (o?.character?.name != null) {
             return `${o.character.name} (${o.user?.name ?? ""})`;
         }
@@ -103,7 +112,8 @@ const OnlineControlDialog = ({closePopup}: Props): GenericReactComponent => {
         return `${o?.user?.name ?? ""}`;
     };
 
-    const onlineRow = o => (
+    // TODO - Add Online typings
+    const onlineRow = (o: any) => (
         <ListItem key={o?.user?.id}
                   secondaryAction={secondaryActions(o)}>
             {userMasterIcon(o?.user)}
@@ -114,7 +124,10 @@ const OnlineControlDialog = ({closePopup}: Props): GenericReactComponent => {
         </ListItem>
     );
 
+    // TODO - Add online typings
+    // $FlowFixMe
     const onlineUserSorter = (a, b) => {
+        // $FlowFixMe
         const masterRoleAsNumber = u => u?.user?.role === "MASTER" ? 0 : 1;
         const [aRole, bRole] = [masterRoleAsNumber(a), masterRoleAsNumber(b)];
 

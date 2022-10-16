@@ -1,6 +1,9 @@
 // @flow
 
-import type {HavenEventFragment_fragment$fragmentType} from "./__generated__/HavenEventFragment_fragment.graphql";
+import type {
+    HavenEventFragment_fragment$fragmentType,
+    HavenEventFragment_fragment$data
+} from "./__generated__/HavenEventFragment_fragment.graphql";
 import type {Fragment} from "relay-runtime/util/RelayRuntimeTypes";
 
 import graphql from "babel-plugin-relay/macro";
@@ -28,7 +31,7 @@ export type HavenEvent = {|
     +updatedAt: ?any,
 |};
 
-export const havenEventFragment: Fragment<HavenEventFragment_fragment$fragmentType> = graphql`
+export const havenEventFragment: Fragment<HavenEventFragment_fragment$fragmentType, HavenEventFragment_fragment$data> = graphql`
     fragment HavenEventFragment_fragment on HavenEvent {
         id
         character {

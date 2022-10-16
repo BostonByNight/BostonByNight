@@ -19,7 +19,7 @@ const Map = ({ id }: MapProps): GenericReactComponent => {
 
     const maps = useSectionMaps(id);
 
-    const getImageUrlName = name => {
+    const getImageUrlName = (name: string) => {
         const fileName = stripAccents(replaceAll(name.toLowerCase(), " ", "-"));
         return `/${fileName}.webp`;
     };

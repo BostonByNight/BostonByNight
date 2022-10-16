@@ -20,7 +20,7 @@ const MenuCharacterSectionForMaster = ({pushHistory, characters, onUpdate}: Prop
     const [,setCurrentCharacter] = useCharacterRecoilState();
     
     const handleSheetSelection = (info: UserCharacter) =>
-        _ => {
+        (_: any) => {
             if (!info.approved && !info.isComplete) {
                 pushHistory(`${MainRoutes.creationBase}${info.stage + 1}`);
             }
@@ -30,7 +30,7 @@ const MenuCharacterSectionForMaster = ({pushHistory, characters, onUpdate}: Prop
         };
 
     const handleCharacterSelection = (info: UserCharacter) =>
-        _ => {
+        (_: any) => {
             setCurrentCharacter({
                 id: info.id,
                 name: info.name,

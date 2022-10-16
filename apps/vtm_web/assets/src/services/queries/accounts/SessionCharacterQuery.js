@@ -3,14 +3,14 @@
 import graphql from 'babel-plugin-relay/macro';
 import {wrapQuery} from "../../../_base/relay-utils";
 import type {
-    SessionCharacterQueryResponse,
-    SessionCharacterQueryVariables,
+    SessionCharacterQuery$data,
+    SessionCharacterQuery$variables,
 } from "./__generated__/SessionCharacterQuery.graphql";
 import type {IEnvironment} from "relay-runtime";
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
 import {emptyExactObject} from "../../../_base/utils";
 
-const sessionCharacterQuery: Query<SessionCharacterQueryVariables, SessionCharacterQueryResponse> = graphql`
+const sessionCharacterQuery: Query<SessionCharacterQuery$variables, SessionCharacterQuery$data> = graphql`
     query SessionCharacterQuery {
         getSessionCharacter {
             id
@@ -24,10 +24,10 @@ const sessionCharacterQuery: Query<SessionCharacterQueryVariables, SessionCharac
     }
 `;
 
-// export const useSessionCharacter = (): SessionCharacterQueryResponse =>
+// export const useSessionCharacter = (): SessionCharacterQuery$data =>
 //     useCustomLazyLoadQuery(sessionCharacterQuery, emptyExactObject());
 
-export const getSessionCharacter = (environment: IEnvironment): Promise<?SessionCharacterQueryResponse> =>
+export const getSessionCharacter = (environment: IEnvironment): Promise<?SessionCharacterQuery$data> =>
     wrapQuery(environment, sessionCharacterQuery, emptyExactObject());
 
 

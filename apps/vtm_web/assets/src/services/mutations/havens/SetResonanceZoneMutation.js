@@ -4,7 +4,7 @@ import graphql from 'babel-plugin-relay/macro';
 import {wrapMutation} from "../../../_base/relay-utils";
 import type {IEnvironment} from "relay-runtime";
 import type {
-    SetResonanceZoneMutationResponse,
+    SetResonanceZoneMutation$data,
     SetResonanceZoneRequest
 } from "./__generated__/SetResonanceZoneMutation.graphql";
 
@@ -19,8 +19,8 @@ const mutation = graphql`
     }
 `;
 
-const mutationPromise = (environment: IEnvironment, havenId: string, request: SetResonanceZoneRequest): Promise<SetResonanceZoneMutationResponse> => {
-    return wrapMutation<SetResonanceZoneMutationResponse>(environment, mutation, {
+const mutationPromise = (environment: IEnvironment, havenId: string, request: SetResonanceZoneRequest): Promise<SetResonanceZoneMutation$data> => {
+    return wrapMutation<SetResonanceZoneMutation$data>(environment, mutation, {
         havenId,
         request
     });

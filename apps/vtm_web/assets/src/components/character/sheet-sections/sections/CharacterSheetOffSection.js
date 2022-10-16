@@ -18,7 +18,7 @@ type Props = {
 };
 
 const offComponents = {
-    img: ({node, ...props}) => (
+    img: ({node, ...props}: any) => (
         <Box sx={{textAlign: "center"}}>
             <img {...props} style={{margin: "0 auto"}} alt={props?.alt ?? "img"} />
         </Box>

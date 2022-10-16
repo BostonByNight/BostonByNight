@@ -3,11 +3,11 @@
 import graphql from 'babel-plugin-relay/macro';
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
 import type {
-    GetCharacterPublicQueryResponse,
-    GetCharacterPublicQueryVariables,
+    GetCharacterPublicQuery$data,
+    GetCharacterPublicQuery$variables,
 } from "./__generated__/GetCharacterPublicQuery.graphql";
 
-export const getCharacterPublicQuery: Query<GetCharacterPublicQueryVariables, GetCharacterPublicQueryResponse> = graphql`
+export const getCharacterPublicQuery: Query<GetCharacterPublicQuery$variables, GetCharacterPublicQuery$data> = graphql`
     query GetCharacterPublicQuery($id: ID!) {
         getCharacterPublicInfo(id: $id) {
             id,

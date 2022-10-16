@@ -18,7 +18,7 @@ import ResetHuntForm from "./forms/ResetHuntForm";
 import SpendCharacterExperienceForm from "./forms/SpendCharacterExperienceForm";
 import SendMessageToUserOrCharacter from "./forms/SendMessageToUserOrCharacter";
 import SetHuntDifficultyForm from "./forms/SetHuntDifficultyForm";
-import type {GenericReactComponent} from "../../../_base/types";
+import type {GenericEvent, GenericReactComponent} from "../../../_base/types";
 
 type Props = {
     characterId: string;
@@ -30,7 +30,7 @@ const CharacterDashboard = ({characterId}: Props): GenericReactComponent => {
     const [showSheet, setShowSheet] = useState(true);
     const [reloadCount, setReloadCount] = useState(0);
 
-    const changeSheetVisible = ({target: {checked}}) => {
+    const changeSheetVisible = ({target: {checked}}: GenericEvent) => {
         setShowSheet(_ => checked);
     };
 

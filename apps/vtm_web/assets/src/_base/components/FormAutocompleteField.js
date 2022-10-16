@@ -6,7 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import {useTheme} from "@mui/material/styles";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import type {GenericReactComponent} from "../types";
+import type {GenericEvent, GenericReactComponent} from "../types";
 
 type Props = {
     formik: Formik;
@@ -18,7 +18,7 @@ type Props = {
 const FormAutocompleteField = (props: Props): GenericReactComponent => {
     const theme = useTheme();
 
-    const onChanged = (e) => {
+    const onChanged = (e: GenericEvent) => {
         const {target: {textContent}} = e;
         const values = props.values.filter(([_, text]) => text === textContent);
 

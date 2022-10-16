@@ -5,11 +5,11 @@ import {wrapQuery} from "../../../_base/relay-utils";
 import type {IEnvironment} from "relay-runtime";
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
 import type {
-    UserNameExistsQueryResponse,
-    UserNameExistsQueryVariables,
+    UserNameExistsQuery$data,
+    UserNameExistsQuery$variables,
 } from "./__generated__/UserNameExistsQuery.graphql";
 
-export const userNameExistsQuery: Query<UserNameExistsQueryVariables, UserNameExistsQueryResponse> = graphql`
+export const userNameExistsQuery: Query<UserNameExistsQuery$variables, UserNameExistsQuery$data> = graphql`
     query UserNameExistsQuery($name: String!) {
         userNameExists(name: $name)
     }

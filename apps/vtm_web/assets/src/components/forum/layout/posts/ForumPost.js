@@ -22,7 +22,10 @@ const ForumPost = ({threadId, onGame, post, onReload}: Props): GenericReactCompo
     );
 };
 
-const ForumPostInternal = ({post, onGame}) => {
+const ForumPostInternal = ({post, onGame}: {
+    post: ?Post,
+    onGame: boolean
+}) => {
     if (post?.onGame) {
         return (
             <ForumPostOnGame post={post}

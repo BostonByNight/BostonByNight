@@ -14,7 +14,7 @@ import ApplyTemplateToCharacterMutation from "../../../services/mutations/charac
 import {useRelayEnvironment} from "react-relay";
 import {useHistory} from "react-router-dom";
 import {MainRoutes} from "../../MainRouter";
-import type {GenericReactComponent} from "../../../_base/types";
+import type {GenericEvent, GenericReactComponent} from "../../../_base/types";
 import {useWait} from "../../../_base/providers/BackdropProvider";
 import {useCustomSnackbar} from "../../../_base/notification-utils";
 import {useDialog} from "../../../_base/providers/DialogProvider";
@@ -42,7 +42,7 @@ const TemplateSelectionControl = ({characterId}: Props): GenericReactComponent =
                 <MenuItem key={t?.id} value={t?.id}>{t?.name}</MenuItem>
             )));
 
-    const onTemplateSelectionChange = ({target: {value}}) => {
+    const onTemplateSelectionChange = ({target: {value}}: GenericEvent) => {
         setTemplate(value);
     };
 

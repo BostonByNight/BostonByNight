@@ -26,7 +26,10 @@ type InternalProps = Props & {
 
 const Internal = ({pushHistory, character: {id: characterId, name: characterName}}: InternalProps) => {
     const theme = useTheme();
-    const [characterWithAvatar,] = useMenuCharactersAvatar([{id: characterId}]);
+    const [characterWithAvatar,] = useMenuCharactersAvatar([{
+        id: characterId,
+        chatAvatar: null
+    }]);
 
     const onSheetSelected = () => pushHistory(MainRoutes.sheet(characterId));
 
@@ -44,7 +47,7 @@ const Internal = ({pushHistory, character: {id: characterId, name: characterName
                   button
                   onClick={onSheetSelected}>
             <ListItemIcon>
-                <Avatar src={characterWithAvatar.chatAvatar} sx={{
+                <Avatar src={characterWithAvatar.chatAvatar ?? ""} sx={{
                     width: theme.spacing(5),
                     height: theme.spacing(5)
                 }} />

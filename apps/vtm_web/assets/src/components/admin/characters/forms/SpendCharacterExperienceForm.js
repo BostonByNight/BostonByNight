@@ -12,7 +12,7 @@ import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import {UseAttributeSelectOptions} from "./hooks";
 import SpendCharacterExperienceMutation from "../../../../services/mutations/admin/SpendCharacterExperienceMutation";
-import type {GenericReactComponent} from "../../../../_base/types";
+import type {GenericEvent, GenericReactComponent} from "../../../../_base/types";
 import {useDialog} from "../../../../_base/providers/DialogProvider";
 import {useCustomSnackbar} from "../../../../_base/notification-utils";
 
@@ -30,9 +30,9 @@ const SpendCharacterExperienceForm = ({character, onUpdate}: Props): GenericReac
     const [attributeId, setAttributeId] = useState<?string>(null);
     const [customCost, setCustomCost] = useState(0);
 
-    const attributeSelected = ({target: {value}}) => setAttributeId(_ => value);
+    const attributeSelected = ({target: {value}}: GenericEvent) => setAttributeId(_ => value);
 
-    const onExperienceCostChanged = ({target: {value}}) => setCustomCost(_ => value);
+    const onExperienceCostChanged = ({target: {value}}: GenericEvent) => setCustomCost(_ => value);
 
     const possibleValuesOptions = () => {
         const options = [];
@@ -44,7 +44,7 @@ const SpendCharacterExperienceForm = ({character, onUpdate}: Props): GenericReac
         return options;
     };
 
-    const changeCharacterAttribute = _ => {
+    const changeCharacterAttribute = (_: any) => {
         if (attributeId == null && customCost === 0) {
             enqueueSnackbar({
                 type: "warning",

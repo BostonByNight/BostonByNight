@@ -20,9 +20,18 @@ type Props = {
     sx?: any;
     containerSx?: any;
     multiple?: boolean;
-};
+}
 
-const CharactersSelectControl = ({label, fieldName, formik, onChange, value, sx, containerSx, multiple}: Props): GenericReactComponent => {
+type CharactersSelectControlInternalProps = {
+    label: string,
+    characterValues: [string, string][],
+    onChange?: string => void;
+    defaultValue?: string;
+}
+
+const CharactersSelectControl = (
+    {label, fieldName, formik, onChange, value, sx, containerSx, multiple}: Props
+): GenericReactComponent => {
     const allCharacters = useCustomLazyLoadQuery(allCharactersQuery, emptyExactObject())?.charactersList;
 
     const characterValues = useMemo((): Array<[string, string]> => {
@@ -33,16 +42,16 @@ const CharactersSelectControl = ({label, fieldName, formik, onChange, value, sx,
         return [["", "None"]].concat(values);
     }, [allCharacters]);
 
-    const getCharacterValue = characterId => {
+    const getCharacterValue = (characterId: string) => {
         const [[,name],] = characterValues.filter(([id,]) => characterId === id);
         return name;
     };
 
-    const renderValuesDelegate = () =>
+    const renderValuesDelegate = (): ?(?string[] => GenericReactComponent) =>
         multiple
-            ? selected => (
+            ? (selected: ?string[]) => (
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                    {selected?.map((value) => (
+                    {selected?.map(value => (
                         <Chip key={value} label={getCharacterValue(value)} />
                     ))}
                 </Box>
@@ -70,10 +79,12 @@ const CharactersSelectControl = ({label, fieldName, formik, onChange, value, sx,
     );
 };
 
-const CharactersSelectControlInternal = ({label, characterValues, onChange, defaultValue}): GenericReactComponent => {
+const CharactersSelectControlInternal = (
+    {label, characterValues, onChange, defaultValue}: CharactersSelectControlInternalProps
+): GenericReactComponent => {
     const [value, setValue] = React.useState<string>(defaultValue ?? "");
 
-    const onChangeInternal = v => {
+    const onChangeInternal = (v: string) => {
         setValue(_ => v);
 
         if (onChange != null) {

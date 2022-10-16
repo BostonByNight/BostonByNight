@@ -12,7 +12,7 @@ import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import ChangeCharacterHuntDifficultyMutation
     from "../../../../services/mutations/admin/ChangeCharacterHuntDifficultyMutation";
-import type {GenericReactComponent} from "../../../../_base/types";
+import type {GenericEvent, GenericReactComponent} from "../../../../_base/types";
 import {useDialog} from "../../../../_base/providers/DialogProvider";
 import {useCustomSnackbar} from "../../../../_base/notification-utils";
 
@@ -28,7 +28,7 @@ const SetHuntDifficultyForm = ({character, onUpdate}: Props): GenericReactCompon
 
     const [huntDifficulty, setHuntDifficulty] = useState(character?.huntDifficulty);
 
-    const onHuntDifficultyChanged = ({target: {value}}) => {
+    const onHuntDifficultyChanged = ({target: {value}}: GenericEvent) => {
         setHuntDifficulty(_ => value);
     };
 
@@ -42,7 +42,7 @@ const SetHuntDifficultyForm = ({character, onUpdate}: Props): GenericReactCompon
         return options;
     };
 
-    const changeCharacterHuntDifficulty = _ => {
+    const changeCharacterHuntDifficulty = (_: any) => {
         if (huntDifficulty != null) {
             showDialog(
                 `Cambio della difficoltà di caccia`,

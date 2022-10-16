@@ -51,7 +51,7 @@ export const CharacterSheetStatsTabSuspenseFallback = (): GenericReactComponent 
         return rows;
     };
 
-    const ListGroup = ({rowCount}) => (
+    const ListGroup = ({rowCount}: {rowCount: number}) => (
         <Grid container>
             <Grid item xs={12} sm={6} md={4}>
                 {listRows(rowCount)}

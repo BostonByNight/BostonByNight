@@ -10,7 +10,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import SetCharacterStatusMutation from "../../../../services/mutations/admin/SetCharacterStatusMutation";
-import type {GenericReactComponent} from "../../../../_base/types";
+import type {GenericEvent, GenericReactComponent} from "../../../../_base/types";
 import {useDialog} from "../../../../_base/providers/DialogProvider";
 import {useCustomSnackbar} from "../../../../_base/notification-utils";
 
@@ -30,7 +30,7 @@ const ChangeCharacterStatusForm = ({character, onUpdate}: Props): GenericReactCo
     const [willpowerDamage, setWillpowerDamage] = useState(character?.willpowerDamage);
     const [stains, setStains] = useState(character?.stains);
 
-    const changeCharacterOtherStats = _ => {
+    const changeCharacterOtherStats = (_: any) => {
         showDialog(
             `Cambio di status per ${character.name ?? ""}`,
             `Sei sicuro di voler cambiare i valori di status del personaggio?`,
@@ -54,23 +54,23 @@ const ChangeCharacterStatusForm = ({character, onUpdate}: Props): GenericReactCo
 
     const stainsItems = () => baseMenuItems(0, 10 - (character?.humanity ?? 0));
 
-    const onHungerChanged = ({target: {value}}) => {
+    const onHungerChanged = ({target: {value}}: GenericEvent) => {
         setHunger(_ => value);
     };
 
-    const onDamageChanged = ({target: {value}}) => {
+    const onDamageChanged = ({target: {value}}: GenericEvent) => {
         setDamage(_ => value);
     };
 
-    const onAggravatedDamageChanged = ({target: {value}}) => {
+    const onAggravatedDamageChanged = ({target: {value}}: GenericEvent) => {
         setAggravatedDamage(_ => value);
     };
 
-    const onWillpowerDamageChanged = ({target: {value}}) => {
+    const onWillpowerDamageChanged = ({target: {value}}: GenericEvent) => {
         setWillpowerDamage(_ => value);
     };
 
-    const onStainsChanged = ({target: {value}}) => {
+    const onStainsChanged = ({target: {value}}: GenericEvent) => {
         setStains(_ => value);
     };
 

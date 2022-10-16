@@ -19,6 +19,10 @@ import type {GenericReactComponent} from "../../_base/types";
 import {useWait} from "../../_base/providers/BackdropProvider";
 import {useCustomSnackbar} from "../../_base/notification-utils";
 
+type SubmitProps = {
+    email: string;
+}
+
 const RecoverPasswordSchema = object().shape({
     email: string("Enter your email")
         .email("Invalid name")
@@ -39,7 +43,7 @@ const RecoverPassword = (): GenericReactComponent => {
         onSubmit: v => onSubmit(v)
     });
 
-    const onSubmit = ({email}) => {
+    const onSubmit = ({email}: SubmitProps) => {
         startWait()
 
         requestNewPassword(email)

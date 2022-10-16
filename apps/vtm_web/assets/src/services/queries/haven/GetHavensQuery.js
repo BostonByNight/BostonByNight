@@ -2,7 +2,7 @@
 
 import graphql from 'babel-plugin-relay/macro';
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
-import type {GetHavensQueryResponse, GetHavensQueryVariables,} from "./__generated__/GetHavensQuery.graphql";
+import type {GetHavensQuery$data, GetHavensQuery$variables,} from "./__generated__/GetHavensQuery.graphql";
 
 export type Haven = {|
     +id: string,
@@ -21,7 +21,7 @@ export type Haven = {|
     |},
 |};
 
-export const getHavensQuery: Query<GetHavensQueryVariables, GetHavensQueryResponse> = graphql`
+export const getHavensQuery: Query<GetHavensQuery$variables, GetHavensQuery$data> = graphql`
     query GetHavensQuery {
         getHavens {
             result {

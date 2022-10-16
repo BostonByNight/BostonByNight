@@ -11,6 +11,9 @@ import {Link} from "react-router-dom";
 import {GuideRoutes} from "../guides/GuidesMain";
 import type {GenericReactComponent} from "../../_base/types";
 import {useCharacterRecoilState} from "../../session/hooks";
+import type {
+    CharacterAttributeRequest
+} from "../../services/mutations/characters/__generated__/AppendAttributesMutation.graphql";
 
 const Creation2Explanation = () => (
     <Grid item xs={12}>
@@ -54,7 +57,10 @@ const Creation2 = (): GenericReactComponent => {
         attribute1: ""
     };
 
-    const getAttributesToSave = (values, generateRequest) => [
+    const getAttributesToSave = (
+        values: typeof emptyAttributes,
+        generateRequest: (string, number) => Array<CharacterAttributeRequest>
+    ) => [
         generateRequest(values.attribute4, 4),
         generateRequest(values.attribute31, 3),
         generateRequest(values.attribute32, 3),
@@ -66,7 +72,7 @@ const Creation2 = (): GenericReactComponent => {
         generateRequest(values.attribute1, 1)
     ];
 
-    const form = getAttributeSelector =>
+    const form = (getAttributeSelector: (string, string) => GenericReactComponent) =>
         <>
             <Grid item xs={12}>
                 <Typography paragraph>
@@ -142,6 +148,7 @@ const Creation2 = (): GenericReactComponent => {
                                           currentStage={2}
                                           attributeTypeName="Attribute"
                                           emptyAttributes={emptyAttributes}
+                                          // $FlowFixMe
                                           getAttributesToSave={getAttributesToSave}>
                                 {form}
                             </CreationBase>

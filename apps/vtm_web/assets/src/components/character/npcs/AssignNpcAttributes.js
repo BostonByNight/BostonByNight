@@ -44,7 +44,7 @@ const AssignNpcAttributes = ({characterId}: Props): GenericReactComponent => {
         margin: "10px"
     });
 
-    const onAttributeChanged = a =>
+    const onAttributeChanged = (a: Attribute) =>
         setSavedStats(p => p?.reduce((acc, current) =>
             current.id === a.id
                 ? [...acc, a]

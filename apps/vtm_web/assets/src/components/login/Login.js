@@ -21,6 +21,11 @@ import {useWait} from "../../_base/providers/BackdropProvider";
 import {useSetRecoilState} from "recoil";
 import {sessionStateAtom} from "../../session/atoms";
 
+type SubmitProps = {
+    email: string,
+    password: string
+}
+
 const SignInSchema = object().shape({
     email: string("Enter your email")
         .email("Invalid name")
@@ -50,10 +55,10 @@ const LoginComponent = (): Node => {
         email,
         password,
         // remember
-    }) => {
+    }: SubmitProps) => {
         startWait()
 
-        const handleUnhandledExceptionAtLogin = e => {
+        const handleUnhandledExceptionAtLogin = (e: Error) => {
             stopWait()
             console.error("Unhandled error", e);
             enqueueSnackbar({type: 'error', message: "Username or password invalid."});

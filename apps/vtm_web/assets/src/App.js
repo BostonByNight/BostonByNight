@@ -24,7 +24,7 @@ const Internal = ({env}: { env: IEnvironment}) => {
     const {enqueueSnackbar} = useCustomSnackbar()
     const history = useHistory()
 
-    const fallback = (error, _retry): GenericReactComponent => {
+    const fallback = (error: any, _retry: () => void): GenericReactComponent => {
         console.error("An unhandled error happened in the app", error)
 
         enqueueSnackbar({
@@ -38,6 +38,7 @@ const Internal = ({env}: { env: IEnvironment}) => {
     };
 
     return (
+        // $FlowFixMe
         <ErrorBoundaryWithRetry fallback={fallback}
                                 onUnauthorized={() => performLogout(() => history.push(Routes.sessionExpired))}>
             <RelayEnvironmentProvider environment={env}>
@@ -96,7 +97,7 @@ const App = (): Node => {
 
     const snackbarsRef = createRef();
 
-    const onSnackbarDismissClick = key =>
+    const onSnackbarDismissClick = (key: any) =>
         () => (snackbarsRef.current: any).closeSnackbar(key);
 
     // const handleThemeChange = () => {

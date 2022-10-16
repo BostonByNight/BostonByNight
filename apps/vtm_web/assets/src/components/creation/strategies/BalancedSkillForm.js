@@ -7,6 +7,7 @@ import CreationBase from "./CreationBase";
 import {propNotNullRendering} from "../../../_base/render-utils";
 import type {GenericReactComponent} from "../../../_base/types";
 import {useCharacterRecoilState} from "../../../session/hooks";
+import type {AttributeSelectorGetter, RequestGenerator} from "./CreationBase";
 
 export type CreationBaseProps = {
     classes: any;
@@ -33,7 +34,7 @@ const BalancedSkillForm = ({ classes }: CreationBaseProps): GenericReactComponen
         skill17: ""
     };
 
-    const getAttributesToSave = (values, generateRequest) => [
+    const getAttributesToSave = (values: typeof emptyAttributes, generateRequest: RequestGenerator) => [
         generateRequest(values.skill31, 3),
         generateRequest(values.skill32, 3),
         generateRequest(values.skill33, 3),
@@ -51,7 +52,7 @@ const BalancedSkillForm = ({ classes }: CreationBaseProps): GenericReactComponen
         generateRequest(values.skill17, 1)
     ];
 
-    const form = getAttributeSelector =>
+    const form = (getAttributeSelector: AttributeSelectorGetter) =>
         <>
             <Grid item xs={12}>
                 <Typography>

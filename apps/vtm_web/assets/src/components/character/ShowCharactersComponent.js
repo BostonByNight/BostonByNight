@@ -16,19 +16,21 @@ import {useTheme} from "@mui/material/styles";
 import {useMediaQuery} from "@mui/material";
 import MenuLayout from "../../_base/components/MenuLayout";
 import { matchNames, readonlyFilterNulls } from "../../_base/utils";
-import type {GenericReactComponent} from "../../_base/types";
+import type {GenericEvent, GenericReactComponent} from "../../_base/types";
 import type {AllCharactersQuery$data} from "../../services/queries/character/__generated__/AllCharactersQuery.graphql";
 import type {AllUnapprovedCharactersQuery$data} from "../../services/queries/character/__generated__/AllUnapprovedCharactersQuery.graphql";
 
 type Props = {
-    characters: AllCharactersQuery$data['charactersList'] | AllUnapprovedCharactersQuery$data['unapprovedCharactersList'];
+    characters: AllCharactersQuery$data['charactersList'] |
+        AllUnapprovedCharactersQuery$data['unapprovedCharactersList'];
 };
 
 const ShowCharactersComponent = ({characters}: Props): GenericReactComponent => {
+    // $FlowFixMe
     const notNullCharacters = readonlyFilterNulls(characters)
     const [filteredCharacter, setFilteredCharacter] = useState(notNullCharacters)
 
-    const primaryTextProps = (approved, isComplete) => {
+    const primaryTextProps = (approved: ?boolean, isComplete: ?boolean) => {
         if (isComplete !== true || approved !== true) {
             return {
                 color: "secondary.light"
@@ -38,7 +40,13 @@ const ShowCharactersComponent = ({characters}: Props): GenericReactComponent => 
         return {};
     }
 
-    const characterLine = ({id, name, approved, isComplete}) => {
+    const characterLine = ({id, name, approved, isComplete}: {
+        id: string,
+        name: ?string,
+        approved: boolean,
+        isComplete: boolean
+    }
+    ) => {
         return (
             <Box component="div" key={id}>
                 <Divider />
@@ -54,7 +62,7 @@ const ShowCharactersComponent = ({characters}: Props): GenericReactComponent => 
     const showCharacters = () =>
         filteredCharacter.map(characterLine);
 
-    const filter = ({target: {value}}) => {
+    const filter = ({target: {value}}: GenericEvent) => {
         const filtered = notNullCharacters.filter(c => matchNames(c.name, value));
         setFilteredCharacter(_ => filtered);
     };
@@ -84,7 +92,7 @@ const ShowCharactersComponent = ({characters}: Props): GenericReactComponent => 
     );
 }
 
-const CharacterActions = ({characterId}) => {
+const CharacterActions = ({characterId}: {characterId: string}) => {
     const theme = useTheme();
 
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
