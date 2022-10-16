@@ -17,17 +17,36 @@ import SendMessageToCharacter from "../button-links/SendMessageToCharacter";
 import {useMediaQuery} from "@mui/material";
 import {useTheme} from "@mui/material/styles";
 import MenuLayout from "../../../_base/components/MenuLayout";
-import type {GenericReactComponent} from "../../../_base/types";
 import {emptyExactObject} from "../../../_base/utils";
 import {isUserRoleMaster} from "../../../services/base-types";
+import type {GenericReactComponent} from "../../../_base/types";
+import type {Role} from "../../../services/queries/accounts/__generated__/SessionQuery.graphql";
+
+type OnlineUserType = {|
+    +id: string,
+    +name: ?string,
+    +role: ?Role,
+|}
+
+type OnlineQueryType = {|
+    +user: ?OnlineUserType,
+    +character: ?{|
+        +id: string,
+        +name: ?string,
+    |},
+    +location: ?{|
+        +id: string,
+        +name: ?string,
+    |},
+    +visible: ?boolean,
+|}
 
 type Props = {
     closePopup: () => void;
 }
 
 type OnlineControlActionProps = {
-    // TODO - Add the online typing
-    o: any,
+    o: ?OnlineQueryType,
     closePopup: () => void
 }
 
@@ -85,8 +104,7 @@ const OnlineControlDialog = ({closePopup}: Props): GenericReactComponent => {
 
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
-    // TODO - Add Online typings
-    const userMasterIcon = (user: any) =>
+    const userMasterIcon = (user: ?OnlineUserType) =>
         isUserRoleMaster(user?.role)
             ? (
                 <Tooltip title="Master">
@@ -97,14 +115,12 @@ const OnlineControlDialog = ({closePopup}: Props): GenericReactComponent => {
             )
             : (<></>);
 
-    // TODO - Add online typings
-    const secondaryActions = (o: any) =>
+    const secondaryActions = (o: ?OnlineQueryType) =>
         isSmallScreen
             ? (<OnlineControlActionsSmallScreen o={o} closePopup={closePopup} />)
             : (<OnlineControlActionsBigScreen o={o} closePopup={closePopup} />);
 
-    // TODO - Add Online typings
-    const onlineUserAndCharacterName = (o: any) => {
+    const onlineUserAndCharacterName = (o: ?OnlineQueryType) => {
         if (o?.character?.name != null) {
             return `${o.character.name} (${o.user?.name ?? ""})`;
         }
@@ -112,8 +128,7 @@ const OnlineControlDialog = ({closePopup}: Props): GenericReactComponent => {
         return `${o?.user?.name ?? ""}`;
     };
 
-    // TODO - Add Online typings
-    const onlineRow = (o: any) => (
+    const onlineRow = (o: ?OnlineQueryType) => (
         <ListItem key={o?.user?.id}
                   secondaryAction={secondaryActions(o)}>
             {userMasterIcon(o?.user)}
@@ -124,11 +139,10 @@ const OnlineControlDialog = ({closePopup}: Props): GenericReactComponent => {
         </ListItem>
     );
 
-    // TODO - Add online typings
-    // $FlowFixMe
-    const onlineUserSorter = (a, b) => {
-        // $FlowFixMe
-        const masterRoleAsNumber = u => u?.user?.role === "MASTER" ? 0 : 1;
+    const onlineUserSorter = (a: ?OnlineQueryType, b: ?OnlineQueryType) => {
+        const masterRoleAsNumber = (onlineItem: ?OnlineQueryType) =>
+            onlineItem?.user?.role === "MASTER" ? 0 : 1;
+
         const [aRole, bRole] = [masterRoleAsNumber(a), masterRoleAsNumber(b)];
 
         if (aRole > bRole) {
