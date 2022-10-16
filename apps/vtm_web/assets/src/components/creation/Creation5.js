@@ -25,7 +25,7 @@ import {useDialog} from "../../_base/providers/DialogProvider";
 import type {Character} from "../../services/queries/character/GetCharacterCompleteQuery";
 
 type Props = {
-    character: ?Character
+    character?: ?Character
 };
 
 const Internal = ({character}: Props) => {

@@ -100,7 +100,7 @@ const UserMenuComponent = ({reloadCount}: UserMenuComponentProps): GenericReactC
                     Impostazioni
                 </MenuItem>
                 <Divider />
-                <MenuForumSection itemStyle={{
+                <MenuForumSection menuStyle={{
                     forumIconStyle
                 }} />
                 <Link href="https://guide.bostonbynight-gdr.it" target="_blank" sx={{

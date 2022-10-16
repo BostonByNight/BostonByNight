@@ -55,7 +55,7 @@ const LoginLayout = (props: LoginLayoutProps): Node => {
                     width: "100%"
                 }}>
                     <Grid item xs={false} md={12} lg={7}>
-                        <BbnLogoComponent  primaryRem="7rem" secondaryRem="4rem" addStyle={{
+                        <BbnLogoComponent primaryRem="7rem" secondaryRem="4rem" addStyle={{
                                 textShadow: "1px 1px black",
                                 textAlign: "center",
                                 marginLeft: {

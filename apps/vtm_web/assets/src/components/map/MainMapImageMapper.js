@@ -42,7 +42,7 @@ const MainMapImageMapper = ({areas, onAreaSelected}: Props): GenericReactCompone
         areas: areas
     };
 
-    const onMouseEnter = ({title}) => {
+    const onMouseEnter = ({title}: {title: string}) => {
         setLegend(_ => title);
     };
 

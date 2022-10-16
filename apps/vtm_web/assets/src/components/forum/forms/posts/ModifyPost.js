@@ -34,7 +34,7 @@ const ModifyPost = ({threadId, postId, title}: ModifyPostProps): GenericReactCom
         id: postId
     })?.getForumPost;
 
-    const onSubmit = ({text}) => {
+    const onSubmit = ({text}: SubmitProps) => {
         ModifyPostMutation(environment, {
             postId: postId,
             text: text

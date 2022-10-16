@@ -5,7 +5,7 @@ import {useCharactersChatAvatar} from "../../../../services/queries/character/Ge
 
 export type MenuCharacter = {
     +id: string;
-    chatAvatar?: ?string;
+    +chatAvatar: ?string;
 }
 
 export const useMenuCharactersAvatar = <T: MenuCharacter>(characters: Array<T>): Array<T> => {

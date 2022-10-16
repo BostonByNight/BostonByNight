@@ -20,7 +20,7 @@ const MainMap = (): GenericReactComponent => {
     const maps = convert(ret);
     const showResponsive = useMediaQuery(theme.breakpoints.down('sm'));
 
-    const onMapSelected = id => history.push(MainRoutes.subMap(id));
+    const onMapSelected = (id: string) => history.push(MainRoutes.subMap(id));
 
     useEffect(() => {
         ResetSessionMapMutation(environment)

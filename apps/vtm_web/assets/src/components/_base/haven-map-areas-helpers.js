@@ -146,7 +146,7 @@ export const computeHexagonCoords = (center: [number, number], radius: number): 
     const [x, y] = center;
     const r = radius;
 
-    const positiveOrZero = x => x >= 0 ? x : 0;
+    const positiveOrZero = (x: number) => x >= 0 ? x : 0;
 
     return [
         [x, positiveOrZero(y - r)],

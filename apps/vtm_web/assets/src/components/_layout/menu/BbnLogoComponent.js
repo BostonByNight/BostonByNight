@@ -7,9 +7,9 @@ import {useTheme} from "@mui/material/styles";
 import type {GenericReactComponent} from "../../../_base/types";
 
 type BtnLogoComponentProps = {
-    primaryRem: number;
-    secondaryRem: number;
-    addStyle?: boolean;
+    primaryRem: string;
+    secondaryRem: string;
+    addStyle?: any;
 }
 
 const BbnLogoComponent = ({primaryRem, secondaryRem, addStyle}: BtnLogoComponentProps): GenericReactComponent => {

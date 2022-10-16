@@ -27,11 +27,17 @@ import {isUserMasterSelector} from "../session/selectors";
 import UserMenuComponent from "./_layout/app-bar-controls/UserMenu";
 import BbnLogoComponent from "./_layout/menu/BbnLogoComponent";
 
+type DrawerProps = {
+    open: boolean,
+    setOpen: (boolean => boolean) => void;
+    children: GenericReactComponent
+}
+
 const drawerWidth = 300;
 
 const SwipeableDrawer = React.lazy(() => import("@mui/material/SwipeableDrawer"));
 
-const PageDrawer = ({open, setOpen, children}) => {
+const PageDrawer = ({open, setOpen, children}: DrawerProps) => {
     const theme = useTheme();
     const container = window !== undefined ? () => window.document.body : undefined;
     const fullScreen = useMediaQuery(theme.breakpoints.up('md'));

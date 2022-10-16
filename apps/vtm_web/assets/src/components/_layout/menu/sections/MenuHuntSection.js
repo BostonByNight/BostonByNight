@@ -12,7 +12,7 @@ import {menuIconStyle, MenuSecondaryText} from "../menu-base-utils";
 import {useIsCharacterAwake} from "../../../../services/queries/character/IsCharacterAwakeQuery";
 import AwakeCharacterMutation from "../../../../services/mutations/characters/AwakeCharacterMutation";
 import type {
-    AwakeCharacterMutationResponse
+    AwakeCharacterMutation$data
 } from "../../../../services/mutations/characters/__generated__/AwakeCharacterMutation.graphql";
 import {useHistory} from "react-router-dom";
 import {MainRoutes} from "../../../MainRouter";
@@ -21,7 +21,11 @@ import {useDialog} from "../../../../_base/providers/DialogProvider";
 import {useCustomSnackbar} from "../../../../_base/notification-utils";
 import {useCharacterRecoilState} from "../../../../session/hooks";
 
-const MenuHuntControl = ({huntRequest}) => (
+type CharacterStatusRequestProps = {
+    request: any => void
+}
+
+const MenuHuntControl = ({request: huntRequest}: CharacterStatusRequestProps) => (
     <ListItem button onClick={huntRequest}>
         <ListItemIcon>
             <InvertColorsIcon sx={menuIconStyle} />
@@ -30,7 +34,7 @@ const MenuHuntControl = ({huntRequest}) => (
     </ListItem>
 );
 
-const MenuAwakeControl = ({awakeRequest}) => (
+const MenuAwakeControl = ({request: awakeRequest}: CharacterStatusRequestProps) => (
     <ListItem button onClick={awakeRequest}>
         <ListItemIcon>
             <RemoveRedEyeTwoToneIcon sx={menuIconStyle} />
@@ -55,8 +59,8 @@ const MenuHuntSectionInternal = ({
     const isCharacterAwake = useIsCharacterAwake(characterId, awakeFetchKey);
 
     return isCharacterAwake
-        ? (<MenuHuntControl huntRequest={huntRequest} />)
-        : (<MenuAwakeControl awakeRequest={awakeRequest} />);
+        ? (<MenuHuntControl request={huntRequest} />)
+        : (<MenuAwakeControl request={awakeRequest} />);
 };
 
 const MenuHuntSection = (): GenericReactComponent => {
@@ -76,7 +80,7 @@ const MenuHuntSection = (): GenericReactComponent => {
                 () => {
                     if (character?.id != null) {
                         AwakeCharacterMutation(environment, character.id)
-                            .then((result: AwakeCharacterMutationResponse) => {
+                            .then((result: AwakeCharacterMutation$data) => {
                                 setAwakeFetchKey(p => p + 1);
                                 if (result?.awake?.result != null) {
                                     const awakeResult = result.awake.result;

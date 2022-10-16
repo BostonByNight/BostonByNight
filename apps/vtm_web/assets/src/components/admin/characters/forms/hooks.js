@@ -9,10 +9,10 @@ import type {Attribute} from "../../../../services/queries/info/AttributesQuery"
 export const UseAttributeSelectOptions = (addEmptyOption?: boolean): [?Array<Attribute>, () => ?Array<any>] => {
     const attributes = useAttributesSlimQuery() ?? [];
 
-    const newAttributeSection = sectionName =>
+    const newAttributeSection = (sectionName: string) =>
         (<ListSubheader key={sectionName}>{sectionName}</ListSubheader>);
 
-    const attributeSelector = (id, name) =>
+    const attributeSelector = (id: ?string, name: string) =>
         (<MenuItem key={id} value={id}>{name}</MenuItem>);
 
     const getAdminDashboardAttributesValues = () => attributes

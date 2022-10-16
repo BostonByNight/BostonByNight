@@ -7,7 +7,11 @@ import Skeleton from "@mui/material/Skeleton";
 import Typography from "@mui/material/Typography";
 import {rangeArray} from "../../../_base/utils";
 
-const MenuItemSuspenseFallbackLine = ({hideSelection}) => (
+type MenuItemSuspenseFallbackLineProps = {
+    hideSelection?: boolean
+}
+
+const MenuItemSuspenseFallbackLine = ({hideSelection}: MenuItemSuspenseFallbackLineProps) => (
     <Stack direction="row" sx={{
         paddingLeft: "0.5rem",
         paddingRight: "0.5rem",
