@@ -5,11 +5,11 @@ import {useCustomLazyLoadQuery} from "../../../_base/relay-utils";
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
 import type {
     UserCharactersQuery$data,
-    UserCharactersQueryVariables,
+    UserCharactersQuery$variables,
 } from "./__generated__/UserCharactersQuery.graphql";
 import {castNotNull, emptyExactObject, toArray} from "../../../_base/utils";
 
-export const userCharactersQuery: Query<UserCharactersQueryVariables, UserCharactersQuery$data> = graphql`
+export const userCharactersQuery: Query<UserCharactersQuery$variables, UserCharactersQuery$data> = graphql`
     query UserCharactersQuery {
         me {
             userCharacters {

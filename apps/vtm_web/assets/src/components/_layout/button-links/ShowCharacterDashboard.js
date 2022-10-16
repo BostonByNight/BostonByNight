@@ -25,7 +25,7 @@ const ShowCharacterDashboard = ({characterId, onSelected, asMenuItem}: Props): G
     const history = useHistory();
 
     const tryVisualizeCharacterDashboard = characterId =>
-        _ => {
+        (_: any) => {
             history.push(MainRoutes.characterDashboard(characterId));
 
             if (onSelected != null) {

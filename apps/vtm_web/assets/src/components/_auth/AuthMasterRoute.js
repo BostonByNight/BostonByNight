@@ -6,6 +6,7 @@ import {Routes} from "../../AppRouter";
 import type {GenericReactComponent} from "../../_base/types";
 import {useRecoilValue} from "recoil";
 import {sessionStateAtom} from "../../session/atoms";
+import {RouteComponentProps} from "react-router-dom";
 
 type Props = {
     component?: (...any) => any;
@@ -15,12 +16,12 @@ type Props = {
 const AuthMasterRoute = ({ children, component, ...rest }: Props): GenericReactComponent => {
     const user = useRecoilValue(sessionStateAtom);
 
-    const loginRedirection = location => ({
+    const loginRedirection = (location: string) => ({
         pathname: Routes.map,
         state: { from: location }
     });
 
-    const render = historyData => {
+    const render = (historyData: any) => {
         const {location} = historyData;
         return user?.id != null && user?.role === "MASTER"
             ? children || component?.(historyData)

@@ -10,10 +10,15 @@ import type {GenericReactComponent} from "../../_base/types";
 
 type Props = CharacterProviderBaseProps & {
     showWarningWhenNoCharacterSelected: boolean,
-    children: ?Character => any,
+    children: ?Character => any
 }
 
-const CharacterProviderQuery = ({characterId, children}) => {
+type CharacterProviderQueryProps = {
+    characterId: string;
+    children: ?Character => any
+}
+
+const CharacterProviderQuery = ({characterId, children}: CharacterProviderQueryProps) => {
     const character = useCharacterCompleteQuery(characterId);
 
     if (character?.id != null) {

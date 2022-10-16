@@ -2,9 +2,9 @@
 
 import graphql from 'babel-plugin-relay/macro';
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
-import type {AllPlayersQueryResponse, AllPlayersQueryVariables} from "./__generated__/AllPlayersQuery.graphql";
+import type {AllPlayersQuery$data, AllPlayersQuery$variables} from "./__generated__/AllPlayersQuery.graphql";
 
-export const allPlayersQuery: Query<AllPlayersQueryVariables, AllPlayersQueryResponse> = graphql`
+export const allPlayersQuery: Query<AllPlayersQuery$variables, AllPlayersQuery$data> = graphql`
     query AllPlayersQuery {
         playersCharactersList {
             id

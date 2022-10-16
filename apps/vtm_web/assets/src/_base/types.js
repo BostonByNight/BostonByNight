@@ -4,6 +4,8 @@ import type {GraphqlErrorMessage} from "./relay-utils";
 
 export type GenericReactComponent = any;
 
+export type GenericEvent = any;
+
 export type History = {
     push: string => void;
 };

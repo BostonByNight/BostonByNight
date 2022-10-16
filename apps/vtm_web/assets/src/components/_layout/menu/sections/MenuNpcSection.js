@@ -28,7 +28,7 @@ const MenuNpcSection = ({pushHistory, reloadCount, onUpdate}: Props): GenericRea
     const [hasBeenExpanded, setHasBeenExpanded] = useState(false);
     const [,setCurrentCharacter] = useCharacterRecoilState()
 
-    const toggleNpcsSelectionMenuExpansion = _ => {
+    const toggleNpcsSelectionMenuExpansion = (_: any) => {
         setHasBeenExpanded(_ => true);
         setExpand(p => !p);
     }
@@ -37,7 +37,7 @@ const MenuNpcSection = ({pushHistory, reloadCount, onUpdate}: Props): GenericRea
         _ => pushHistory(MainRoutes.sheet(info.id));
 
     const handleCharacterSelection = (info: UserCharacter) =>
-        _ => {
+        (_: any) => {
             setCurrentCharacter({
                 id: info.id,
                 name: info.name,

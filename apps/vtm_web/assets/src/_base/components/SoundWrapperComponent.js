@@ -68,7 +68,7 @@ const SoundWrapperComponent = ({id, soundSourceUrl}: Props): GenericReactCompone
 
     }, []);
 
-    const onVolumeChanged = ({target: {value}}) => {
+    const onVolumeChanged = ({target: {value}}: GenericEvent) => {
         if (audioRef.current?.volume != null) {
             audioRef.current.volume = value / 100;
         }
@@ -76,7 +76,7 @@ const SoundWrapperComponent = ({id, soundSourceUrl}: Props): GenericReactCompone
         setVolume(_ => value);
     };
 
-    const onTrackChanged = ({target: {value}}) => {
+    const onTrackChanged = ({target: {value}}: GenericEvent) => {
         if (audioRef.current?.currentTime != null) {
             audioRef.current.currentTime = value;
         }

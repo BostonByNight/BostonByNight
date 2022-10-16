@@ -116,13 +116,13 @@ const ChatThrowDiceInput = (props: ChatThrowDiceInputProps): GenericReactCompone
         setOpen(_ => props.isOpen);
     }, [props.isOpen]);
 
-    const onAttributeChanged = ({target: {value}}) => setAttribute(value);
+    const onAttributeChanged = ({target: {value}}: GenericEvent) => setAttribute(value);
 
-    const onSkillChanged = ({target: {value}}) => setSkill(value);
+    const onSkillChanged = ({target: {value}}: GenericEvent) => setSkill(value);
 
-    const onFreeThrowChanged = ({target: {value}}) => setFreeThrow(value);
+    const onFreeThrowChanged = ({target: {value}}: GenericEvent) => setFreeThrow(value);
 
-    const onDifficultyChanged = ({target: {value}}) => setDifficulty(value);
+    const onDifficultyChanged = ({target: {value}}: GenericEvent) => setDifficulty(value);
 
     const handleClose = () => {
         setOpen(false);

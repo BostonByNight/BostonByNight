@@ -16,7 +16,7 @@ const ReturnToChatControl = (): GenericReactComponent => {
     const location = useRecoilValue(sessionMapStateAtom)
 
     const tryGoToChat = locationId =>
-        _ => {
+        (_: any) => {
             if (locationId != null) {
                 history.push(MainRoutes.chat(locationId));
             }

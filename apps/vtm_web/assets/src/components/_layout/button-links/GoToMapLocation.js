@@ -28,7 +28,7 @@ const GoToMapLocation = ({location, onSelected, asMenuItem}: Props): GenericReac
     const setLocation = useSetRecoilState(sessionMapStateAtom)
 
     const tryGoToLocation = location =>
-        _ => {
+        (_: any) => {
             if (location?.id != null) {
                 goToChatAndUpdateSession(setLocation, history, location.id, location?.name);
             }

@@ -6,9 +6,9 @@ import type {Map} from "../../base-types";
 import {convertToMap} from "../../base-types";
 import {emptyArray} from "../../../_base/utils";
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
-import type {SectionMapsQueryResponse, SectionMapsQueryVariables,} from "./__generated__/SectionMapsQuery.graphql";
+import type {SectionMapsQuery$data, SectionMapsQuery$variables,} from "./__generated__/SectionMapsQuery.graphql";
 
-export const mapsQuery: Query<SectionMapsQueryVariables, SectionMapsQueryResponse> = graphql`
+export const mapsQuery: Query<SectionMapsQuery$variables, SectionMapsQuery$data> = graphql`
     query SectionMapsQuery($parentId: ID!) {
         sectionMaps(parentId: $parentId) {
             id

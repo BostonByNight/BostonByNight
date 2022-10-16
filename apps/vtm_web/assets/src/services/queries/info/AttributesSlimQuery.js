@@ -6,12 +6,12 @@ import type {Attribute, AttributeSections, AttributeTypeNames,} from "./Attribut
 import {attributesDefaultSortFunction} from "./AttributesQuery";
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
 import type {
-    AttributesSlimQueryResponse,
-    AttributesSlimQueryVariables,
+    AttributesSlimQuery$data,
+    AttributesSlimQuery$variables,
 } from "./__generated__/AttributesSlimQuery.graphql";
 import {emptyExactObject, toNotNullArray} from "../../../_base/utils";
 
-export const attributesSlimQuery: Query<AttributesSlimQueryVariables, AttributesSlimQueryResponse> = graphql`
+export const attributesSlimQuery: Query<AttributesSlimQuery$variables, AttributesSlimQuery$data> = graphql`
     query AttributesSlimQuery {
         attributes {
             id @required(action: LOG)

@@ -42,7 +42,7 @@ const TemplateSelectionControl = ({characterId}: Props): GenericReactComponent =
                 <MenuItem key={t?.id} value={t?.id}>{t?.name}</MenuItem>
             )));
 
-    const onTemplateSelectionChange = ({target: {value}}) => {
+    const onTemplateSelectionChange = ({target: {value}}: GenericEvent) => {
         setTemplate(value);
     };
 

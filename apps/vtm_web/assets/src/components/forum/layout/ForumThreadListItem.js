@@ -75,7 +75,7 @@ const ForumThreadListItem = ({item, hasNewPosts, onClick, onUpdate}: ForumItemPr
 
     const isUserThreadCreator = () => user?.id != null && item?.creatorUser?.id != null && user.id === item.creatorUser.id;
 
-    const accessThreadEventHandler = _ => {
+    const accessThreadEventHandler = (_: any) => {
         if (!holdAction) {
             onClick(item?.id);
         }

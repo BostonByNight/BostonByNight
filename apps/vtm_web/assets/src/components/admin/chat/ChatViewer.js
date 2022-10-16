@@ -66,7 +66,7 @@ const ChatViewer = (): GenericReactComponent => {
         setFetchKey(k => k + 1);
     };
 
-    const handleChatRoomChange = ({target: {value}}) => {
+    const handleChatRoomChange = ({target: {value}}: GenericEvent) => {
         setSelectedChatId(_ => value);
         setFetchKey(k => k + 1);
     };

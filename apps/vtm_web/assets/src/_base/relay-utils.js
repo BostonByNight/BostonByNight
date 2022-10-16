@@ -78,7 +78,7 @@ export const wrapQuery = <TVariables: Variables, TData, TResult>(
             next: response => {
                 parseResponse(res, rej, extractor)(response);
             },
-            error: _ => {
+            error: (_: any) => {
                 rej([ `There was an error while contacting the server.\r\nPlease check your connection.` ]);
             }
         })

@@ -39,7 +39,7 @@ const AssignNpcGenericStats = ({characterId}: Props): GenericReactComponent => {
     const predatorTypes = usePredatorTypes()?.predatorTypes;
     const theme = useTheme();
 
-    const onSubmit = values =>
+    const onSubmit = (values: any) =>
         handleMutation(
             () => DefineNpcStatsMutation(environment, characterId, values),
             enqueueSnackbar,

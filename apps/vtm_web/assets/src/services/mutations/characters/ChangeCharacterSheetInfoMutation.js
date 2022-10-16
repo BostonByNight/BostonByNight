@@ -4,8 +4,8 @@ import graphql from 'babel-plugin-relay/macro';
 import {wrapMutation} from "../../../_base/relay-utils";
 import type {IEnvironment} from "relay-runtime";
 import type {
-    ChangeCharacterSheetInfoMutationResponse,
-    ChangeCharacterSheetInfoMutationVariables
+    ChangeCharacterSheetInfoMutation$data,
+    ChangeCharacterSheetInfoMutation$variables
 } from "./__generated__/ChangeCharacterSheetInfoMutation.graphql";
 
 const mutation = graphql`
@@ -24,8 +24,8 @@ const mutation = graphql`
 const mutationPromise = (
     environment: IEnvironment,
     characterId: string,
-    request: ChangeCharacterSheetInfoMutationVariables): Promise<?string> => {
-    return wrapMutation<ChangeCharacterSheetInfoMutationResponse>(environment, mutation, {
+    request: ChangeCharacterSheetInfoMutation$variables): Promise<?string> => {
+    return wrapMutation<ChangeCharacterSheetInfoMutation$data>(environment, mutation, {
         characterId,
         request
     })?.then(m => m?.changeSheetInfo?.result?.id);

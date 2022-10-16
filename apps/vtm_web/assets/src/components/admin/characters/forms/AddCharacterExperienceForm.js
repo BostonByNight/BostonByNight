@@ -27,7 +27,7 @@ const AddCharacterExperienceForm = ({character, onUpdate}: Props): GenericReactC
 
     const [experience, setExperience] = useState(1);
 
-    const onExperienceChanged = ({target: {value}}) => {
+    const onExperienceChanged = ({target: {value}}: any) => {
         setExperience(_ => value);
     };
 
@@ -41,7 +41,7 @@ const AddCharacterExperienceForm = ({character, onUpdate}: Props): GenericReactC
         return options;
     };
 
-    const changeCharacterExperience = _ => {
+    const changeCharacterExperience = (_: any) => {
         const changeTypeLabel = experience < 0 ? "sottrarre" : "aggiungere";
 
         showDialog(

@@ -3,7 +3,7 @@
 import graphql from 'babel-plugin-relay/macro';
 import {wrapMutation} from "../../../_base/relay-utils";
 import type {IEnvironment} from "relay-runtime";
-import type {AddUserToChatMutationResponse} from "./__generated__/AddUserToChatMutation.graphql";
+import type {AddUserToChatMutation$data} from "./__generated__/AddUserToChatMutation.graphql";
 
 const mutation = graphql`
     mutation AddUserToChatMutation($chatId: ID!, $userId: ID!) {
@@ -17,7 +17,7 @@ const mutation = graphql`
 `;
 
 const mutationPromise = (environment: IEnvironment, chatId: string, userId: string): Promise<boolean> =>
-    wrapMutation<AddUserToChatMutationResponse>(environment, mutation, {
+    wrapMutation<AddUserToChatMutation$data>(environment, mutation, {
         chatId,
         userId
     })?.then(x => x?.addUserToChat?.id != null);

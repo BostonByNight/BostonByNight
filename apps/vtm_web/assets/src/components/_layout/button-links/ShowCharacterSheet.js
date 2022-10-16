@@ -22,7 +22,7 @@ const ShowCharacterSheet = ({characterId, onSelected, asMenuItem}: Props): Gener
     const history = useHistory();
 
     const tryVisualizeCharacterSheet = characterId =>
-        _ => {
+        (_: any) => {
             history.push(MainRoutes.sheet(characterId));
 
             if (onSelected != null) {

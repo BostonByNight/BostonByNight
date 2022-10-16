@@ -21,7 +21,7 @@ type Props = {
 const SendMessageToCharacter = ({characterId, onSelected, asMenuItem}: Props): GenericReactComponent => {
     const history = useHistory();
 
-    const trySendMessageToCharacter = _ => {
+    const trySendMessageToCharacter = (_: any) => {
         if (characterId != null) {
             history.push(MainRoutes.newMessageToCharacter(characterId));
         }

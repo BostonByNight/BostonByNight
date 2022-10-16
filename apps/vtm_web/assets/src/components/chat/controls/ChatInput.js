@@ -59,11 +59,11 @@ const ChatInput = ({newChatEntry, newDiceEntry}: ChatInputProps): GenericReactCo
         }
     };
 
-    const handleControlKeyUp = ({target: {value}}) => {
+    const handleControlKeyUp = ({target: {value}}: GenericEvent) => {
         setCharactersCount(_ => (value: string).length);
     };
 
-    const openPopup = _ => {
+    const openPopup = (_: any) => {
         setIsModalOpen(_ => true);
     };
 

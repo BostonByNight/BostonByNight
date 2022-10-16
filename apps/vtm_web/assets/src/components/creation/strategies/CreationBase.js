@@ -19,6 +19,13 @@ import {sortAttributes} from "../../../_base/info-helpers";
 import {translateAttributeSection} from "../../../_base/dictionary-utils";
 import type {GenericReactComponent} from "../../../_base/types";
 import {useCustomSnackbar} from "../../../_base/notification-utils";
+import type {SetControlError, SetControlValue} from "../controls/AttributeSelectionField";
+
+export type RequestGenerator =
+    (string, number) => CharacterAttributeRequest;
+
+export type AttributeSelectorGetter =
+    ((string, string) => any);
 
 export type CreationBaseProps<TFormAttributes> = {|
     classes: any;
@@ -26,8 +33,8 @@ export type CreationBaseProps<TFormAttributes> = {|
     currentStage: number;
     attributeTypeName: AttributeTypeNames;
     emptyAttributes: TFormAttributes;
-    getAttributesToSave: (TFormAttributes, (string, number) => CharacterAttributeRequest) => Array<CharacterAttributeRequest>;
-    children: ((string, string) => any) => any;
+    getAttributesToSave: (TFormAttributes, RequestGenerator) => Array<CharacterAttributeRequest>;
+    children: AttributeSelectorGetter => any;
 |}
 
 const CreationBase = <TFormAttributes>(props: CreationBaseProps<TFormAttributes>): GenericReactComponent => {
@@ -59,7 +66,12 @@ const CreationBase = <TFormAttributes>(props: CreationBaseProps<TFormAttributes>
         return [["", "", "None"]].concat(attrs);
     };
 
-    const checkAttributes = (propertyName, propertyValue, setControlValue, setControlError) => {
+    const checkAttributes = (
+        propertyName: string,
+        propertyValue: string,
+        setControlValue: SetControlValue,
+        setControlError: SetControlError) => {
+
         if (Object.values(values).some(x => x === propertyValue)) {
             setControlValue("");
             setControlError("Attribute already taken");
@@ -96,7 +108,7 @@ const CreationBase = <TFormAttributes>(props: CreationBaseProps<TFormAttributes>
                                  values={selectFields}
                                  onChange={checkAttributes} />;
 
-    const onSubmit = _ => {
+    const onSubmit = (_: any) => {
         if (errors && Object.keys(errors).length > 0) {
             return;
         }

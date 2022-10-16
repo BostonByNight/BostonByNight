@@ -32,7 +32,7 @@ const NewPost = ({threadId, title}: NewPostProps): GenericReactComponent => {
             creatorUserId: user?.id ?? "",
             creatorCharacterId: character?.id,
             text: text
-        }).then(_ => {
+        }).then((_: any) => {
             enqueueSnackbar({type: "success", message: "Post creato!"})
         }).catch(e => {
             console.error("Error while saving the post!", e);

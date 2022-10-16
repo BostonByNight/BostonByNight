@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {handleMutation} from "../../../../_base/utils";
 import ChangeCharacterNotesMutation from "../../../../services/mutations/admin/ChangeCharacterNotesMutation";
-import type {GenericReactComponent} from "../../../../_base/types";
+import type {GenericEvent, GenericReactComponent} from "../../../../_base/types";
 import {useDialog} from "../../../../_base/providers/DialogProvider";
 import {useCustomSnackbar} from "../../../../_base/notification-utils";
 
@@ -28,27 +28,27 @@ const ChangeCharacterNotesForm = ({character, onUpdate}: Props): GenericReactCom
     const [specialties, setSpecialties] = useState(character?.specialties ?? "");
     const [convictions, setConvictions] = useState(character?.convictions ?? "");
 
-    const onAdvantagesChanged = ({target: {value}}) => {
+    const onAdvantagesChanged = ({target: {value}}: GenericEvent) => {
         setAdvantages(_ => value);
     };
 
-    const onNotesChanged = ({target: {value}}) => {
+    const onNotesChanged = ({target: {value}}: GenericEvent) => {
         setNotes(_ => value);
     };
 
-    const onDisciplinePowersChanged = ({target: {value}}) => {
+    const onDisciplinePowersChanged = ({target: {value}}: GenericEvent) => {
         setDisciplinePowers(_ => value);
     };
 
-    const onSpecialtiesChanged = ({target: {value}}) => {
+    const onSpecialtiesChanged = ({target: {value}}: GenericEvent) => {
         setSpecialties(_ => value);
     }
 
-    const onConvictionsChanged = ({target: {value}}) => {
+    const onConvictionsChanged = ({target: {value}}: GenericEvent) => {
         setConvictions(_ => value);
     };
 
-    const changeCharacterNotes = _ => {
+    const changeCharacterNotes = (_: any) => {
         showDialog(
             `Cambio di status per ${character.name ?? ""}`,
             `Sei sicuro di voler cambiare le note del personaggio?`,

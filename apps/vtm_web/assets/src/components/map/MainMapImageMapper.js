@@ -46,7 +46,7 @@ const MainMapImageMapper = ({areas, onAreaSelected}: Props): GenericReactCompone
         setLegend(_ => title);
     };
 
-    const onMouseLeave = _ => {
+    const onMouseLeave = (_: any) => {
         setLegend(_ => "");
     };
 

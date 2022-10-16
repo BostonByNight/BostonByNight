@@ -30,9 +30,9 @@ const SpendCharacterExperienceForm = ({character, onUpdate}: Props): GenericReac
     const [attributeId, setAttributeId] = useState<?string>(null);
     const [customCost, setCustomCost] = useState(0);
 
-    const attributeSelected = ({target: {value}}) => setAttributeId(_ => value);
+    const attributeSelected = ({target: {value}}: GenericEvent) => setAttributeId(_ => value);
 
-    const onExperienceCostChanged = ({target: {value}}) => setCustomCost(_ => value);
+    const onExperienceCostChanged = ({target: {value}}: GenericEvent) => setCustomCost(_ => value);
 
     const possibleValuesOptions = () => {
         const options = [];
@@ -44,7 +44,7 @@ const SpendCharacterExperienceForm = ({character, onUpdate}: Props): GenericReac
         return options;
     };
 
-    const changeCharacterAttribute = _ => {
+    const changeCharacterAttribute = (_: any) => {
         if (attributeId == null && customCost === 0) {
             enqueueSnackbar({
                 type: "warning",

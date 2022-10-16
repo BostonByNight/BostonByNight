@@ -3,11 +3,11 @@
 import graphql from 'babel-plugin-relay/macro';
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
 import type {
-    AttributesCompleteQueryResponse,
-    AttributesCompleteQueryVariables,
+    AttributesCompleteQuery$data,
+    AttributesCompleteQuery$variables,
 } from "./__generated__/AttributesCompleteQuery.graphql";
 
-export const attributesCompleteQuery: Query<AttributesCompleteQueryVariables, AttributesCompleteQueryResponse> = graphql`
+export const attributesCompleteQuery: Query<AttributesCompleteQuery$variables, AttributesCompleteQuery$data> = graphql`
     query AttributesCompleteQuery {
         attributes {
             id

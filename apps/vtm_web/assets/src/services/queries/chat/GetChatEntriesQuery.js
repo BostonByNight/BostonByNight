@@ -3,11 +3,11 @@
 import graphql from 'babel-plugin-relay/macro';
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
 import type {
-    GetChatEntriesQueryResponse,
-    GetChatEntriesQueryVariables,
+    GetChatEntriesQuery$data,
+    GetChatEntriesQuery$variables,
 } from "./__generated__/GetChatEntriesQuery.graphql";
 
-export const chatEntriesQuery: Query<GetChatEntriesQueryVariables, GetChatEntriesQueryResponse> = graphql`
+export const chatEntriesQuery: Query<GetChatEntriesQuery$variables, GetChatEntriesQuery$data> = graphql`
     query GetChatEntriesQuery($mapId: ID!) {
         mapChatEntries(mapId: $mapId) {
             id

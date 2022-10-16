@@ -7,7 +7,7 @@ import FiberManualRecordOutlinedIcon from "@mui/icons-material/FiberManualRecord
 import type {Attribute} from "../../../services/queries/character/GetCharacterStatsQuery";
 import Grid from "@mui/material/Grid";
 import {menuIconStyle} from "../../_layout/menu/menu-base-utils";
-import type {GenericReactComponent} from "../../../_base/types";
+import type {GenericEvent, GenericReactComponent} from "../../../_base/types";
 
 type Props = {
     attribute: Attribute;
@@ -16,7 +16,7 @@ type Props = {
 }
 
 const AttributeFormControl = ({attribute, maxValue, onChange}: Props): GenericReactComponent => {
-    const onChangeInternal = ({target: {value}}) =>
+    const onChangeInternal = ({target: {value}}: GenericEvent) =>
         // $FlowFixMe
         onChange({
             ...attribute,

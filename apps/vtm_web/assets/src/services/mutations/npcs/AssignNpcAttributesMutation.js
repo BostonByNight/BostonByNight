@@ -4,7 +4,7 @@ import graphql from 'babel-plugin-relay/macro';
 import {wrapMutation} from "../../../_base/relay-utils";
 import type {IEnvironment} from "relay-runtime";
 import type {
-    AssignNpcAttributesMutationResponse,
+    AssignNpcAttributesMutation$data,
     NpcAttributesRequest,
 } from "./__generated__/AssignNpcAttributesMutation.graphql";
 
@@ -21,8 +21,8 @@ const mutation = graphql`
     }
 `;
 
-const mutationPromise = (environment: IEnvironment, characterId: string, request: NpcAttributesRequest): Promise<AssignNpcAttributesMutationResponse> => {
-    return wrapMutation<AssignNpcAttributesMutationResponse>(environment, mutation, {
+const mutationPromise = (environment: IEnvironment, characterId: string, request: NpcAttributesRequest): Promise<AssignNpcAttributesMutation$data> => {
+    return wrapMutation<AssignNpcAttributesMutation$data>(environment, mutation, {
         characterId,
         request
     });

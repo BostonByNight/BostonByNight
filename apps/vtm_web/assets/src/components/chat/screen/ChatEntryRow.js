@@ -34,7 +34,7 @@ const ChatEntryRow = ({entry, isLast, showCharacterDescription, canDelete, delet
 
         if (phrase != null) {
             navigator.clipboard.writeText(phrase)
-                .then(_ => {
+                .then((_: any) => {
                     enqueueSnackbar({
                         type: "success",
                         message: "Il testo dell'intervento è stato correttamente copiato"

@@ -54,7 +54,7 @@ const ShowCharactersComponent = ({characters}: Props): GenericReactComponent => 
     const showCharacters = () =>
         filteredCharacter.map(characterLine);
 
-    const filter = ({target: {value}}) => {
+    const filter = ({target: {value}}: GenericEvent) => {
         const filtered = notNullCharacters.filter(c => matchNames(c.name, value));
         setFilteredCharacter(_ => filtered);
     };

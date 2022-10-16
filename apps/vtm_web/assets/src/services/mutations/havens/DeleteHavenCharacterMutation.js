@@ -5,7 +5,7 @@ import {wrapMutation} from "../../../_base/relay-utils";
 import type {IEnvironment} from "relay-runtime";
 import type {
     DeleteHavenCharacterInput,
-    DeleteHavenCharacterMutationResponse
+    DeleteHavenCharacterMutation$data
 } from "./__generated__/DeleteHavenCharacterMutation.graphql";
 
 const mutation = graphql`
@@ -19,8 +19,8 @@ const mutation = graphql`
     }
 `;
 
-const mutationPromise = (environment: IEnvironment, input: DeleteHavenCharacterInput): Promise<DeleteHavenCharacterMutationResponse> => {
-    return wrapMutation<DeleteHavenCharacterMutationResponse>(environment, mutation, {input});
+const mutationPromise = (environment: IEnvironment, input: DeleteHavenCharacterInput): Promise<DeleteHavenCharacterMutation$data> => {
+    return wrapMutation<DeleteHavenCharacterMutation$data>(environment, mutation, {input});
 }
 
 export default mutationPromise;

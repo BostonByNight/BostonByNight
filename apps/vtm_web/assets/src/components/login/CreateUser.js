@@ -101,7 +101,7 @@ const CreateUserComponent = (): Node => {
             email,
             name
         })
-            .then(_ => {
+            .then((_: any) => {
                 enqueueSnackbar({
                     type: "success",
                     message: "L'utente è stato creato correttamente, controlla la mail (spam incluso) per avere la tua prima password."

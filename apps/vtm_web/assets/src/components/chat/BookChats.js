@@ -29,6 +29,15 @@ import {sessionStateAtom} from "../../session/atoms";
 
 const numberOfPossibleUsers = 5;
 
+type RoomRequest = {
+    chatMapId: string,
+    guest1: string,
+    guest2: string,
+    guest3: string,
+    guest4: string,
+    guest5: string
+}
+
 const getShape = () => {
     let shape = {
         chatMapId: string("La chat privata selezionata").required("Richiesto"),
@@ -36,6 +45,7 @@ const getShape = () => {
     };
 
     for (let i = 2; i <= numberOfPossibleUsers; i++) {
+        // $FlowFixMe
         shape[`guest${i}`] = string("Ospite").nullable().notRequired()
     }
 
@@ -51,6 +61,7 @@ const getInitialObject = () => {
     };
 
     for (let i = 2; i <= numberOfPossibleUsers; i++) {
+        // $FlowFixMe
         initialObject[`guest${i}`] = "";
     }
 
@@ -99,8 +110,8 @@ const BookChatsInternal = (): GenericReactComponent => {
         ?.filter(x => x?.user?.id !== user?.id && x?.user?.id && allowedUsersMap.has(x?.user?.id))
         ?.map(c => [c?.user?.id != null ? `${c?.user?.id}${divider}${c?.id}` : "", c?.name ?? ""]) ?? [];
 
-    const manageError = characterName =>
-        e => {
+    const manageError = (characterName: string) =>
+        (e: Error) => {
             console.error("There was an error while trying to add user to chat", e);
             enqueueSnackbar({
                 type: "error",
@@ -118,7 +129,7 @@ const BookChatsInternal = (): GenericReactComponent => {
         return Promise.all(tasks);
     };
     
-    const onSubmit = ({chatMapId, guest1, guest2, guest3, guest4, guest5}) => {
+    const onSubmit = ({chatMapId, guest1, guest2, guest3, guest4, guest5}: RoomRequest) => {
         const guests = [guest1, guest2, guest3, guest4, guest5]
             .filter(isNotNullNorEmpty)
             .map(x => {
@@ -137,7 +148,7 @@ const BookChatsInternal = (): GenericReactComponent => {
                 BookChatMapMutation(environment, chatMapId)
                     .then(_ => AddUserToChatMutation(environment, chatMapId, firstUserId).catch(manageError(firstCharacterName)))
                     .then(_ => getGuestsTask(chatMapId, guests.slice(1)))
-                    .then(_ => {
+                    .then((_: any) => {
                         enqueueSnackbar({
                             type: "success",
                             message: "La chat è stata prenotata con successo"

@@ -34,7 +34,7 @@ const ModifyPost = ({threadId, postId, title}: ModifyPostProps): GenericReactCom
         ModifyPostMutation(environment, {
             postId: postId,
             text: text
-        }).then(_ => {
+        }).then((_: any) => {
             enqueueSnackbar({type: "success", message: "Post creato!"})
         }).catch(e => {
             console.error("Error while saving the post!", e);

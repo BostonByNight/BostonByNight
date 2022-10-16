@@ -85,7 +85,7 @@ const SubMap = ({maps, imageUrl}: SubMapProps): GenericReactComponent => {
             Locations
         </ListSubheader>
 
-    const openMap = (id: string, name: string, isChat: boolean) => _ => {
+    const openMap = (id: string, name: string, isChat: boolean) => (_: any) => {
         if (isChat) {
             goToChatAndUpdateSession(setLocation, history, id, name);
         }

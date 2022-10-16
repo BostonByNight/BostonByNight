@@ -28,7 +28,7 @@ const SetHuntDifficultyForm = ({character, onUpdate}: Props): GenericReactCompon
 
     const [huntDifficulty, setHuntDifficulty] = useState(character?.huntDifficulty);
 
-    const onHuntDifficultyChanged = ({target: {value}}) => {
+    const onHuntDifficultyChanged = ({target: {value}}: GenericEvent) => {
         setHuntDifficulty(_ => value);
     };
 
@@ -42,7 +42,7 @@ const SetHuntDifficultyForm = ({character, onUpdate}: Props): GenericReactCompon
         return options;
     };
 
-    const changeCharacterHuntDifficulty = _ => {
+    const changeCharacterHuntDifficulty = (_: any) => {
         if (huntDifficulty != null) {
             showDialog(
                 `Cambio della difficoltà di caccia`,

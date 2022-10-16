@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import React from 'react';
 import {useMediaQuery} from "@mui/material";
 import {useTheme} from "@mui/material/styles";
+import type {GenericReactComponent} from "../../../_base/types";
 
 type BtnLogoComponentProps = {
     primaryRem: number;
@@ -11,7 +12,7 @@ type BtnLogoComponentProps = {
     addStyle?: boolean;
 }
 
-const BbnLogoComponent = ({primaryRem, secondaryRem, addStyle}: BtnLogoComponentProps) => {
+const BbnLogoComponent = ({primaryRem, secondaryRem, addStyle}: BtnLogoComponentProps): GenericReactComponent => {
     const theme = useTheme()
     const showCompressedTitle = useMediaQuery(theme.breakpoints.down('sm'));
 

@@ -32,7 +32,7 @@ const HuntInternal = ({characterId}) => {
 
     const isCharacterAwake = useIsCharacterAwake(characterId, awakeFetchKey);
 
-    const showHuntHelp = _ => {
+    const showHuntHelp = (_: any) => {
         const newTab = window.open(`#${GuideRoutes.hunt}`, "_blank");
         newTab.focus();
     }

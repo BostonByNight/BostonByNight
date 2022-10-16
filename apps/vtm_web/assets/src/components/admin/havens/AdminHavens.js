@@ -19,6 +19,15 @@ import Grid from "@mui/material/Grid";
 import ResetDangerMutation from "../../../services/mutations/havens/ResetDangerMutation";
 import {useDialog} from "../../../_base/providers/DialogProvider";
 import {useCustomSnackbar} from "../../../_base/notification-utils";
+import type {
+    SetHavenInfoRequest,
+} from "../../../services/mutations/havens/__generated__/SetHavenInfoMutation.graphql";
+import type {
+    SetResonanceZoneRequest
+} from "../../../services/mutations/havens/__generated__/SetResonanceZoneMutation.graphql";
+import type {
+    SetDangerZoneRequest
+} from "../../../services/mutations/havens/__generated__/SetDangerZoneMutation.graphql";
 
 const AdminHavens = (): GenericReactComponent => {
     const environment = useRelayEnvironment();
@@ -29,7 +38,7 @@ const AdminHavens = (): GenericReactComponent => {
     const [fetchKey, setFetchKey] = React.useState(0);
     const [open, setOpen] = React.useState<boolean>(false);
 
-    const onHavenSelected = h => {
+    const onHavenSelected = (h: Haven | string) => {
         const haven = tryCastToOneType<Haven, string>(h);
 
         if (haven != null) {
@@ -38,7 +47,7 @@ const AdminHavens = (): GenericReactComponent => {
         }
     };
 
-    const onCharacterSubmitted = (h, cId, request) => {
+    const onCharacterSubmitted = (h: ?Haven, cId: string, request: SetHavenInfoRequest) => {
         if (h?.id != null) {
             const hId = h.id;
 
@@ -74,7 +83,7 @@ const AdminHavens = (): GenericReactComponent => {
         }
     };
     
-    const onMarkResonance = (h, {resonance, power}) => {
+    const onMarkResonance = (h: ?Haven, {resonance, power}: SetResonanceZoneRequest) => {
         if (h?.id != null && resonance != null) {
             const hId = h.id;
 
@@ -94,7 +103,7 @@ const AdminHavens = (): GenericReactComponent => {
         }
     };
 
-    const onResetResonances = _ => {
+    const onResetResonances = (_: any) => {
         showDialog("Resetta Risonanze", `Sei sicuro di voler resettare tutte le risonanze nel Dominio? Questo cancellerà completamente lo stato attuale.`,
             () => {
                 handleMutation(
@@ -107,7 +116,7 @@ const AdminHavens = (): GenericReactComponent => {
             });
     };
 
-    const onResetDanger = _ => {
+    const onResetDanger = (_: any) => {
         showDialog("Resetta Pericolosità", `Sei sicuro di voler resettare tutte le pericolosità nel Dominio? Questo cancellerà completamente lo stato attuale.`,
             () => {
                 handleMutation(
@@ -120,7 +129,7 @@ const AdminHavens = (): GenericReactComponent => {
             });
     };
 
-    const onSetDanger = (h, {danger, range}) => {
+    const onSetDanger = (h: ?Haven, {danger, range}: SetDangerZoneRequest) => {
         if (h?.id != null) {
             const hId = h.id;
 

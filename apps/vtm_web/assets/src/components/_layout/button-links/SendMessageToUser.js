@@ -21,7 +21,7 @@ type Props = {
 const SendMessageToUser = ({userId, onSelected, asMenuItem}: Props): GenericReactComponent => {
     const history = useHistory();
 
-    const trySendMessageToUser = _ => {
+    const trySendMessageToUser = (_: any) => {
         if (userId != null) {
             history.push(MainRoutes.newMessageTo(userId));
         }

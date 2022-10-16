@@ -2,14 +2,14 @@
 
 import graphql from 'babel-plugin-relay/macro';
 import type {
-    PredatorTypesQueryResponse,
-    PredatorTypesQueryVariables,
+    PredatorTypesQuery$data,
+    PredatorTypesQuery$variables,
 } from "./__generated__/PredatorTypesQuery.graphql";
 import {useCustomLazyLoadQuery} from "../../../_base/relay-utils";
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
 import {emptyExactObject} from "../../../_base/utils";
 
-export const predatorTypesQuery: Query<PredatorTypesQueryVariables, PredatorTypesQueryResponse> = graphql`
+export const predatorTypesQuery: Query<PredatorTypesQuery$variables, PredatorTypesQuery$data> = graphql`
     query PredatorTypesQuery {
         predatorTypes {
             id
@@ -19,6 +19,6 @@ export const predatorTypesQuery: Query<PredatorTypesQueryVariables, PredatorType
     }
 `;
 
-export function usePredatorTypes(): ?PredatorTypesQueryResponse {
+export function usePredatorTypes(): ?PredatorTypesQuery$data {
     return useCustomLazyLoadQuery(predatorTypesQuery, emptyExactObject());
 }

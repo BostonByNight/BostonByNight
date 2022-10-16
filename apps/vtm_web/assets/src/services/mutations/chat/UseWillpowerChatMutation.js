@@ -4,7 +4,7 @@ import graphql from 'babel-plugin-relay/macro';
 import {wrapMutation} from "../../../_base/relay-utils";
 import type {IEnvironment} from "relay-runtime";
 import type {
-    UseWillpowerChatMutationResponse,
+    UseWillpowerChatMutation$data,
     UseWillpowerInput
 } from "./__generated__/UseWillpowerChatMutation.graphql";
 
@@ -25,8 +25,8 @@ const mutation = graphql`
     }
 `;
 
-const mutationPromise = (environment: IEnvironment, request: UseWillpowerInput): Promise<UseWillpowerChatMutationResponse> => {
-    return wrapMutation<UseWillpowerChatMutationResponse>(environment, mutation, {input: request});
+const mutationPromise = (environment: IEnvironment, request: UseWillpowerInput): Promise<UseWillpowerChatMutation$data> => {
+    return wrapMutation<UseWillpowerChatMutation$data>(environment, mutation, {input: request});
 }
 
 export default mutationPromise;

@@ -2,9 +2,9 @@
 
 import graphql from 'babel-plugin-relay/macro';
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
-import type {GetForumPostQueryResponse, GetForumPostQueryVariables,} from "./__generated__/GetForumPostQuery.graphql";
+import type {GetForumPostQuery$data, GetForumPostQuery$variables,} from "./__generated__/GetForumPostQuery.graphql";
 
-export const getForumPostQuery: Query<GetForumPostQueryVariables, GetForumPostQueryResponse> = graphql`
+export const getForumPostQuery: Query<GetForumPostQuery$variables, GetForumPostQuery$data> = graphql`
     query GetForumPostQuery($id: ID!) {
         getForumPost(id: $id) {
             id

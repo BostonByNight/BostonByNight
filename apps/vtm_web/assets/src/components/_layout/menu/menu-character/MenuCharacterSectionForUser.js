@@ -24,7 +24,7 @@ const MenuCharacterSectionForUser = ({pushHistory, reloadCount, onUpdate}: Props
     const [,setCurrentCharacter] = useCharacterRecoilState()
     
     const handleSheetSelection = (info: any) =>
-        _ => {
+        (_: any) => {
             setCurrentCharacter(info);
 
             if (!info.approved && !info.isComplete) {

@@ -1,7 +1,6 @@
 // @flow
 
 import React from "react";
-import type {CharacterProviderBaseProps} from "./character-providers-types";
 import {useCharacterProviderId} from "./character-providers-types";
 import RemoteCharacterProvider from "./RemoteCharacterProvider";
 import {getCharacterQuery} from "../../services/queries/character/GetCharacterQuery";
@@ -9,14 +8,22 @@ import {useCustomLazyLoadQuery} from "../../_base/relay-utils";
 import {randomFetchKey} from "../../_base/utils";
 import type {GenericReactComponent} from "../../_base/types";
 
-type Props = CharacterProviderBaseProps & {
+type Props = {
+    characterId?: string;
     showWarningWhenNoCharacterSelected: boolean;
     children: any => any;
     reload?: boolean;
     fetchKey?: number;
 };
 
-const CharacterFragmentProviderQuery = ({characterId, children, reload, fetchKey}) => {
+type CharacterFragmentProviderQueryProps = {
+    characterId: string;
+    children: any => any;
+    reload?: boolean;
+    fetchKey?: number;
+}
+
+const CharacterFragmentProviderQuery = ({characterId, children, reload, fetchKey}: CharacterFragmentProviderQueryProps) => {
     const parsedFetchKey = fetchKey ?? (reload ? randomFetchKey() : 0);
 
     const policy = {
@@ -51,7 +58,7 @@ const CharacterFragmentProvider = (props: Props): GenericReactComponent => {
     }
 
     return (
-        <RemoteCharacterProvider showWarningWhenNoCharacterSelected={props.showWarningWhenNoCharacterSelected}>
+        <RemoteCharacterProvider showWarningWhenNoCharacterSelected={props.showWarningWhenNoCharacterSelected ?? false}>
             { characterId =>
                 <CharacterFragmentProviderQuery characterId={characterId}
                                                 reload={props.reload}

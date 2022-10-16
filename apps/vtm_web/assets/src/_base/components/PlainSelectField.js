@@ -24,7 +24,7 @@ const PlainSelectField = (props: Props): GenericReactComponent => {
 
     const items = () => getSelectItems(props, emptyMenuItem);
 
-    const onChange = ({target: {value}}) => props.onChange(value);
+    const onChange = ({target: {value}}: GenericEvent) => props.onChange(value);
 
     return (
         <FormControl sx={{

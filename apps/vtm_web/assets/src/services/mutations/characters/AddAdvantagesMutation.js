@@ -3,7 +3,7 @@
 import graphql from 'babel-plugin-relay/macro';
 import {wrapMutation} from "../../../_base/relay-utils";
 import type {IEnvironment} from "relay-runtime";
-import type {AddAdvantagesInput, AddAdvantagesMutationResponse} from "./__generated__/AddAdvantagesMutation.graphql";
+import type {AddAdvantagesInput, AddAdvantagesMutation$data} from "./__generated__/AddAdvantagesMutation.graphql";
 
 const mutation = graphql`
     mutation AddAdvantagesMutation($input: AddAdvantagesInput!) {
@@ -15,8 +15,8 @@ const mutation = graphql`
     }
 `;
 
-const mutationPromise = (environment: IEnvironment, request: AddAdvantagesInput): Promise<AddAdvantagesMutationResponse> =>
-    wrapMutation<AddAdvantagesMutationResponse>(environment, mutation, {
+const mutationPromise = (environment: IEnvironment, request: AddAdvantagesInput): Promise<AddAdvantagesMutation$data> =>
+    wrapMutation<AddAdvantagesMutation$data>(environment, mutation, {
         input: request
     });
 

@@ -16,7 +16,7 @@ import type {
 import {creationClansQuery} from "../../../services/queries/info/CreationClansQuery";
 import {Link} from "react-router-dom";
 import {GuideRoutes} from "../../guides/GuidesMain";
-import {getUrlValidationMatchString} from "../../../_base/utils";
+import {getUrlValidationMatchString, toNotNullArray} from "../../../_base/utils";
 import {avatarHeight, avatarWidth} from "../../character/sheet-sections/sections/CharacterSheetAvatarSection";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
@@ -36,18 +36,28 @@ const normalClanNames = ["Brujah", "Toreador", "Gangrel"];
 
 const notHardClanNames = easyClanNames.concat(normalClanNames);
 
-const ClanSelect = ({formik, clans}) => {
+type Clan = {
+    id: string;
+    name: ?string;
+}
+
+type ClanSelectProps = {
+    formik: any;
+    clans: Clan[];
+}
+
+const ClanSelect = ({formik, clans}: ClanSelectProps) => {
     const theme = useTheme();
     
-    const easyClans = cs => cs.filter(c => easyClanNames.some(n => c?.name === n));
+    const easyClans = (cs: Clan[]) => cs.filter(c => easyClanNames.some(n => c?.name === n));
 
-    const normalClans = cs => cs.filter(c => normalClanNames.some(n => c?.name === n));
+    const normalClans = (cs: Clan[]) => cs.filter(c => normalClanNames.some(n => c?.name === n));
 
-    const expertClans = cs => cs.filter(c => notHardClanNames.every(n => c?.name !== n));
+    const expertClans = (cs: Clan[]) => cs.filter(c => notHardClanNames.every(n => c?.name !== n));
 
-    const clanMapper = c => (<MenuItem key={c?.id ?? "is-null"} value={c?.id}>{c?.name}</MenuItem>);
+    const clanMapper = (c: Clan) => (<MenuItem key={c?.id ?? "is-null"} value={c?.id}>{c?.name}</MenuItem>);
 
-    const items = cs => {
+    const items = (cs: Clan[]) => {
         const easy = easyClans(cs);
         const normal = normalClans(cs);
         const expert = expertClans(cs);
@@ -96,7 +106,11 @@ const CharacterInfoFormValidationSchema = object().shape({
 
 const CharacterInfoForm = ({onSubmit}: Props): GenericReactComponent => {
     const classes = useStyles();
-    const clans = useCustomLazyLoadQuery(creationClansQuery, {})?.creationClans;
+    const clans: Clan[] = toNotNullArray(useCustomLazyLoadQuery(creationClansQuery, {})?.creationClans)
+        ?.map(c => ({
+            id: c.id,
+            name: c?.name
+        })) ?? [];
 
     const [chatAvatar, setChatAvatar] = useState<?string>(null);
 
@@ -114,11 +128,11 @@ const CharacterInfoForm = ({onSubmit}: Props): GenericReactComponent => {
         onSubmit: v => onSubmitInternal(v)
     });
 
-    const avatarChanged = (_a, ca) => {
+    const avatarChanged = (_a: ?string, ca: ?string) => {
         setChatAvatar(ca);
     }
 
-    const onSubmitInternal = data => {
+    const onSubmitInternal = (data: any) => {
         onSubmit({
             ...data,
             chatAvatar,

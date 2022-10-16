@@ -2,9 +2,9 @@
 
 import graphql from 'babel-plugin-relay/macro';
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
-import type {SessionQueryResponse, SessionQueryVariables,} from "./__generated__/SessionQuery.graphql";
+import type {SessionQuery$data, SessionQuery$variables,} from "./__generated__/SessionQuery.graphql";
 
-export const listSessionQuery: Query<SessionQueryVariables, SessionQueryResponse> = graphql`
+export const listSessionQuery: Query<SessionQuery$variables, SessionQuery$data> = graphql`
     query SessionQuery {
         sessionsList {
             user {

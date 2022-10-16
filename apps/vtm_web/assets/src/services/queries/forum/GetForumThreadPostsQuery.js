@@ -3,8 +3,8 @@
 import graphql from 'babel-plugin-relay/macro';
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
 import type {
-    GetForumThreadPostsQueryResponse,
-    GetForumThreadPostsQueryVariables,
+    GetForumThreadPostsQuery$data,
+    GetForumThreadPostsQuery$variables,
 } from "./__generated__/GetForumThreadPostsQuery.graphql";
 
 // This redundant type definition is due to the fact that the auto-generated query doesn't extract the type of the post,
@@ -25,7 +25,7 @@ export type Post = {|
     +updatedAt: ?any,
 |};
 
-export const getForumThreadPostsQuery: Query<GetForumThreadPostsQueryVariables, GetForumThreadPostsQueryResponse> = graphql`
+export const getForumThreadPostsQuery: Query<GetForumThreadPostsQuery$variables, GetForumThreadPostsQuery$data> = graphql`
     query GetForumThreadPostsQuery($forumThreadId: ID!, $pageSize: Int!, $page: Int!) {
         getForumThreadPosts(id: $forumThreadId, pageSize: $pageSize, page: $page) {
             id
