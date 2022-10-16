@@ -15,7 +15,7 @@ type Props = {
     characterQuery: {id: string}
 }
 
-const a11yProps = index => ({
+const a11yProps = (index: number) => ({
     id: `scrollable-force-tab-${index - 1}`,
     'aria-controls': `scrollable-force-tabpanel-${index - 1}`,
 });
@@ -23,7 +23,7 @@ const a11yProps = index => ({
 const CharacterSheetTabs = ({characterQuery}: Props): GenericReactComponent => {
     const [value, setValue] = useState(1);
 
-    const handleChange = (_, newValue) => {
+    const handleChange = (_: any, newValue: number) => {
         setValue(newValue);
     }
 

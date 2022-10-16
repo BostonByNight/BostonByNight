@@ -19,9 +19,10 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import {sortAttributes} from "../../../_base/info-helpers";
-import type {GenericReactComponent} from "../../../_base/types";
+import type {GenericEvent, GenericReactComponent} from "../../../_base/types";
 import {useRecoilValue} from "recoil";
 import {isUserMasterSelector} from "../../../session/selectors";
+import type {Attribute, AttributeTypeNames} from "../../../services/queries/info/AttributesQuery";
 
 export type ChatDiceRequest = {
     attributeId: string;
@@ -64,15 +65,16 @@ const ChatThrowDiceInput = (props: ChatThrowDiceInputProps): GenericReactCompone
             ? -10
             : 0
 
-    const filterAttribute = (name, section) =>
+    const filterAttribute = (name: AttributeTypeNames, section: string) =>
         attributes.filter(a =>
             a?.attributeType?.name === name &&
             a?.attributeType?.section === section)
             .sort((a, b) => sortAttributes(name)(a, b));
 
-    const mapAttributeToMenuItem = a => (<MenuItem key={a?.id} value={a?.id}>{a?.name}</MenuItem>);
+    const mapAttributeToMenuItem = (a: Attribute) =>
+        (<MenuItem key={a?.id} value={a?.id}>{a?.name}</MenuItem>);
 
-    const buildSelectItems = name => {
+    const buildSelectItems = (name: AttributeTypeNames) => {
         const physicals = filterAttribute(name, "Physical")?.map(mapAttributeToMenuItem)
         const socials = filterAttribute(name, "Social")?.map(mapAttributeToMenuItem);
         const mentals = filterAttribute(name, "Mental")?.map(mapAttributeToMenuItem);
@@ -88,7 +90,8 @@ const ChatThrowDiceInput = (props: ChatThrowDiceInputProps): GenericReactCompone
     const buildSelectItemsForDiscipline = () =>
         filterAttribute("Discipline", "")?.map(mapAttributeToMenuItem);
 
-    const getSelectItemsForDropdown = items => [(<MenuItem key={0} value="">None</MenuItem>)].concat(items);
+    const getSelectItemsForDropdown = (items: GenericReactComponent[]) =>
+        [(<MenuItem key={0} value="">None</MenuItem>)].concat(items);
 
     const getFirstDropdownItems = () => getSelectItemsForDropdown(buildSelectItems("Attribute"));
 

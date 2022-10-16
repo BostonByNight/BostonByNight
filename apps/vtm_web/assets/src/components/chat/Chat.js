@@ -10,7 +10,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import useMap from "../../services/queries/map/MapQuery";
-import type {ChatEntry, Map} from "../../services/base-types";
+import type {ChatEntry, Map, SessionCharacter} from "../../services/base-types";
 import Box from "@mui/material/Box";
 import {useRelayEnvironment} from "react-relay";
 import type {ChatDiceRequest} from "./controls/ChatThrowDiceInput";
@@ -43,6 +43,13 @@ type ChatProps = {
     map: Map
 }
 
+type ShowChatInputProps = {
+    character: SessionCharacter;
+    characterId: string;
+    onNewEntry: string => void;
+    onNewDiceEntry: ChatDiceRequest => void;
+}
+
 const Chat = ({id}: {id: string}): GenericReactComponent => {
     const map = useMap(id);
     const userHasAccess = useHasUserAccessToMap(id);
@@ -58,7 +65,7 @@ const Chat = ({id}: {id: string}): GenericReactComponent => {
     );
 };
 
-const ShowChatInput = ({character, characterId, onNewEntry, onNewDiceEntry}) => {
+const ShowChatInput = ({character, characterId, onNewEntry, onNewDiceEntry}: ShowChatInputProps) => {
     const isCharacterAwake = useIsCharacterAwake(characterId, 1);
 
     if (!isCharacterAwake) {
@@ -123,13 +130,13 @@ const ChatInternal = ({map}: ChatProps): GenericReactComponent => {
         setMapModalOpen(_ => true);
     };
 
-    const showCharacterDescription = (id, name) => {
+    const showCharacterDescription = (id: string, name: string) => {
         setSelectedCharacterId(_ => id);
         setSelectedCharacterName(_ => name);
         setCharacterModalOpen(_ => true);
     };
 
-    const deletePhrase = entryId => {
+    const deletePhrase = (entryId: string) => {
         if (isUserMaster) {
             showDialog(
                 "Cancellazione frase",
@@ -147,7 +154,7 @@ const ChatInternal = ({map}: ChatProps): GenericReactComponent => {
 
     const createEntry = (action: (string, string) => Promise<any>) => {
         // Bug
-        // If the master changes the character in the left hand side menu, being in the chat doesn't update the
+        // If the master changes the character on the left hand side menu, being in the chat doesn't update the
         // character in session directly, because here it's a closure.
         const ch = character;
 

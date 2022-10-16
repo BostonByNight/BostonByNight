@@ -15,7 +15,7 @@ import {menuIconStyle} from "../../_layout/menu/menu-base-utils";
 import Typography from "@mui/material/Typography";
 import ChatInputHelp from "./ChatInputHelp";
 import {isNullOrEmpty} from "../../../_base/utils";
-import type {GenericReactComponent} from "../../../_base/types";
+import type {GenericEvent, GenericReactComponent} from "../../../_base/types";
 import {useRecoilValue} from "recoil";
 import {isUserMasterSelector} from "../../../session/selectors";
 
@@ -42,15 +42,15 @@ const ChatInput = ({newChatEntry, newDiceEntry}: ChatInputProps): GenericReactCo
     const fontSize = showMiniFont ? "16px" : "18px";
     const textBoxRows = showMiniFont ? 3 : 4;
 
-    const setNewValue = val => {
+    const setNewValue = (val: string) => {
         setValue(_ => val);
         setInDices(_ => isNullOrEmpty(val));
         setCharactersCount(val.length);
     }
 
-    const onControlChanged = ({ target: { value: val } }) => setNewValue(val);
+    const onControlChanged = ({target: {value: val}}: GenericEvent) => setNewValue(val);
 
-    const handleControlKeyDown = event => {
+    const handleControlKeyDown = (event: GenericEvent) => {
         const {key} = event;
         
         if (key === "Enter") {
@@ -101,7 +101,10 @@ const ChatInput = ({newChatEntry, newDiceEntry}: ChatInputProps): GenericReactCo
     const remainingCharacterDescription = () =>
         `Numero di caratteri rimanenti: ${maxCharacters - charactersCount}, consigliati ${preferredCharacters - charactersCount}, minimo ${minCharacters}`;
 
-    const CountCharacterMessageWrapper = ({message, color}) => (
+    const CountCharacterMessageWrapper = ({message, color}: {
+        message: string,
+        color: string
+    }) => (
         <Box component="span" sx={{color}}>{message}</Box>
     );
 

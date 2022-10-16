@@ -16,7 +16,7 @@ const useChatSubscription = (id: string, setAdditionalEntries: (Array<ChatEntry>
     const setAdditionalEntriesRef = useRef(setAdditionalEntries);
 
     useEffect(() => {
-        const handleUnhandledExceptionAtChat = e => {
+        const handleUnhandledExceptionAtChat = (e: Error) => {
             console.error("Unhandled error while subscribing", e);
 
             if (typeof e === "string" && e.indexOf("message [") !== -1) {
@@ -42,7 +42,7 @@ const useChatSubscription = (id: string, setAdditionalEntries: (Array<ChatEntry>
             }
         }
 
-        const performSubscription = token =>
+        const performSubscription = (token: string) =>
             subscribe(subscriptionObservable(id, token), showNewChatEntry, (e, _) => {
                 console.error("Error while performing chat subscription.", e);
                 // enqueueSnackbar({

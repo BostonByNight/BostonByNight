@@ -5,7 +5,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import type {Formik} from "./FormTypes";
-import type {GenericReactComponent} from "../types";
+import type {GenericEvent, GenericReactComponent} from "../types";
 import FormHelperText from "@mui/material/FormHelperText";
 
 type Props = {
@@ -18,7 +18,7 @@ type Props = {
 const FormCheckboxField = ({formik, fieldName, label, onChanged}: Props): GenericReactComponent => {
     const [checked, setChecked] = React.useState<boolean>(formik.values[fieldName] === true);
 
-    const onControlChanged = e => {
+    const onControlChanged = (e: GenericEvent) => {
         setChecked(e.target.checked);
 
         e.target.value = e.target.value === "on";

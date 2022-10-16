@@ -8,7 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import type {
-    ClanDisciplinesQueryResponse
+    ClanDisciplinesQuery$data
 } from "../../../services/queries/info/__generated__/ClanDisciplinesQuery.graphql";
 import {clanDisciplinesQuery} from "../../../services/queries/info/ClanDisciplinesQuery";
 import {useCustomLazyLoadQuery} from "../../../_base/relay-utils";
@@ -16,13 +16,13 @@ import {characterHasDisciplines} from "../../../_base/utils";
 import {Link} from "react-router-dom";
 import {GuideRoutes} from "../../guides/GuidesMain";
 import type {
-    CharacterFragments_characterConcealedInfo
+    CharacterFragments_characterConcealedInfo$data
 } from "../../../services/queries/character/__generated__/CharacterFragments_characterConcealedInfo.graphql";
 import TextField from "@mui/material/TextField";
 import type {GenericReactComponent} from "../../../_base/types";
 
 type Props = {|
-    characterInfo: CharacterFragments_characterConcealedInfo;
+    characterInfo: CharacterFragments_characterConcealedInfo$data;
     classes: any;
     onFirstDisciplineChange?: ?(Event) => void;
     onSecondDisciplineChange?: ?(Event) => void;
@@ -33,7 +33,7 @@ type Props = {|
     firstError?: boolean;
     secondError?: boolean;
     disciplinePowersErrors?: boolean;
-|};
+|}
 
 const DisciplinesControl = (props: Props): GenericReactComponent => {
     if (props.characterInfo.clan?.id != null) {
@@ -56,8 +56,8 @@ const DisciplinesControlInternal = ({
     firstError,
     secondError,
     disciplinePowersErrors
-}) => {
-    const { clanDisciplines }: ClanDisciplinesQueryResponse =
+}: any) => {
+    const { clanDisciplines }: ClanDisciplinesQuery$data =
         useCustomLazyLoadQuery(clanDisciplinesQuery, { clanId: clanId });
 
     const showDisciplines = () => {

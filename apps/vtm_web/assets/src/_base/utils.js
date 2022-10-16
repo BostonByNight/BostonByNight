@@ -5,10 +5,10 @@ import MenuItem from "@mui/material/MenuItem";
 import React from "react";
 import type {Character} from "../services/queries/character/GetCharacterCompleteQuery";
 import type {
-    CharacterFragments_characterStats
+    CharacterFragments_characterStats$data
 } from "../services/queries/character/__generated__/CharacterFragments_characterStats.graphql";
 import type {
-    CharacterFragments_characterConcealedInfo
+    CharacterFragments_characterConcealedInfo$data
 } from "../services/queries/character/__generated__/CharacterFragments_characterConcealedInfo.graphql";
 import {Routes} from "../AppRouter";
 import type {SessionCharacter} from "../services/base-types";
@@ -221,12 +221,18 @@ export const handleMutation = <T>(mutation: () => Promise<T>, showNotification: 
         });
 };
 
+type CharacterIsVampireInputType =
+    ?CharacterFragments_characterConcealedInfo$data |
+    ?Character |
+    ?CharacterFragments_characterStats$data |
+    ?SessionCharacter
+
 /**
  * Determines whether the caracter is a vampire or not based on the clan.
  * @param character The character.
  * @return True if the character is a vampire, False otherwise
  */
-export const characterIsVampire = (character: ?CharacterFragments_characterConcealedInfo | ?Character | ?CharacterFragments_characterStats | ?SessionCharacter): boolean => {
+export const characterIsVampire = (character: CharacterIsVampireInputType): boolean => {
     return character?.clan?.name !== "Umano";
 }
 
@@ -236,7 +242,7 @@ export const characterIsVampire = (character: ?CharacterFragments_characterConce
  * @param character The character.
  * @return True if the character has disciplines, False otherwise.
  */
-export const characterHasDisciplines = (character: ?CharacterFragments_characterConcealedInfo): boolean => {
+export const characterHasDisciplines = (character: ?CharacterFragments_characterConcealedInfo$data): boolean => {
     const clanName = character?.clan?.name;
     return !(clanName === "Umano" || clanName === "Sangue Debole");
 }

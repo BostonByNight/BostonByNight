@@ -16,7 +16,12 @@ import type {Character} from "../../../../services/queries/character/GetCharacte
 
 type Props = {
     sheet: Character;
-};
+}
+
+type CharacterSheetStatusStatsSectionInternalProps = {
+    sheet: Character;
+    characterId: string;
+}
 
 const CharacterSheetStatusStatsSection = ({sheet}: Props): GenericReactComponent => {
     if (sheet?.id != null) {
@@ -29,7 +34,9 @@ const CharacterSheetStatusStatsSection = ({sheet}: Props): GenericReactComponent
     return (<></>);
 };
 
-const CharacterSheetStatusStatsSectionInternal = ({sheet, characterId}): GenericReactComponent => {
+const CharacterSheetStatusStatsSectionInternal = (
+    {sheet, characterId}: CharacterSheetStatusStatsSectionInternalProps
+): GenericReactComponent => {
     const characterStatus = useCustomLazyLoadQuery(getCharacterStatusQuery, {characterId}, {
         fetchPolicy: "network-only"
     })?.getCharacterStatus;

@@ -20,11 +20,13 @@ export const compressImage = (file: File, maxWidth: number, maxHeight: number): 
     img.src = blobURL;
 
     return new Promise<string>((res, rej) => {
+        // $FlowFixMe
         img.onerror = function () {
             window.URL.revokeObjectURL(this.src);
             console.error("Cannot load image.");
         }
 
+        // $FlowFixMe
         img.onload = function () {
             window.URL.revokeObjectURL(this.src);
             const [newWidth, newHeight] = getResizedImageDimensions(maxWidth, maxHeight)(img.width, img.height);

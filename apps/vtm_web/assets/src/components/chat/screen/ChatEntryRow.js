@@ -25,6 +25,8 @@ type ChatEntryComponentProps = {
     sx?: any;
 }
 
+type PositionEvent = any;
+
 const ChatEntryRow = ({entry, isLast, showCharacterDescription, canDelete, deletePhrase, sx}: ChatEntryComponentProps): GenericReactComponent => {
     const {enqueueSnackbar} = useCustomSnackbar()
     const [contextMenu, setContextMenu] = React.useState(null);
@@ -67,7 +69,7 @@ const ChatEntryRow = ({entry, isLast, showCharacterDescription, canDelete, delet
         }
     };
 
-    const handleContextMenu = (event) => {
+    const handleContextMenu = (event: PositionEvent) => {
         event.preventDefault();
         setContextMenu(cm =>
             cm == null

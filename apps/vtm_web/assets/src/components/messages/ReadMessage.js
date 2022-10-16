@@ -65,7 +65,7 @@ const ReadMessage = ({messageId}: Props): GenericReactComponent => {
         return (<Avatar sx={avatarStyle}>{getInitials(getSenderName() ?? "")}</Avatar>);
     };
 
-    const deleteMessage = _ =>
+    const deleteMessage = (_: any) =>
         showDialog("Cancella messaggio", "Sei sicuro di voler cancellare il messaggio?", () => {
             DeleteMessageMutation(environment, messageId)
                 .catch(e => enqueueSnackbar({

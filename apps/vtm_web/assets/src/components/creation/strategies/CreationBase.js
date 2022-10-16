@@ -72,6 +72,7 @@ const CreationBase = <TFormAttributes>(props: CreationBaseProps<TFormAttributes>
         setControlValue: SetControlValue,
         setControlError: SetControlError) => {
 
+        // $FlowFixMe
         if (Object.values(values).some(x => x === propertyValue)) {
             setControlValue("");
             setControlError("Attribute already taken");
@@ -113,6 +114,7 @@ const CreationBase = <TFormAttributes>(props: CreationBaseProps<TFormAttributes>
             return;
         }
 
+        // $FlowFixMe
         if (Object.values(values).some(v => v === "")) {
             return;
         }

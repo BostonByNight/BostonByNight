@@ -5,16 +5,16 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import toggleSessionVisible from "../../services/mutations/admin/ToggleSessionVisibleMutation";
 import {useRelayEnvironment} from "react-relay";
-import type {GenericReactComponent} from "../../_base/types";
+import type {GenericEvent, GenericReactComponent} from "../../_base/types";
 import {useCustomLazyLoadQuery} from "../../_base/relay-utils";
 import {getUserVisibleQuery} from "../../services/queries/accounts/GetUserVisibleQuery";
 
 const ToggleVisible = (): GenericReactComponent => {
     const environment = useRelayEnvironment()
-    const {userOnlineVisible: visible} = useCustomLazyLoadQuery(getUserVisibleQuery)
+    const {userOnlineVisible: visible} = useCustomLazyLoadQuery(getUserVisibleQuery, {})
     const [checked, setChecked] = useState(visible ?? false)
 
-    const toggleSession = ({target: {checked}}: React.ChangeEvent<HTMLInputElement>) => {
+    const toggleSession = ({target: {checked}}: GenericEvent) => {
         setChecked(_ => checked)
 
         toggleSessionVisible(environment)

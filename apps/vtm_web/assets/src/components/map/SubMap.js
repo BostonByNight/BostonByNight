@@ -26,9 +26,16 @@ import {sessionMapStateAtom} from "../../session/atoms";
 type SubMapProps = {
     maps: Array<Map>,
     imageUrl: string
-};
+}
 
-const SubMapResponsive = ({classes, imageUrl, subHeader, mapLinks}) => (
+type SubMapInternalProps = {
+    classes: any,
+    imageUrl: string,
+    subHeader: () => GenericReactComponent,
+    mapLinks: any
+}
+
+const SubMapResponsive = ({classes, imageUrl, subHeader, mapLinks}: SubMapInternalProps) => (
     <Container maxWidth="lg" className={classes.container}>
         <Grid container>
             <Grid item xs={12}>
@@ -50,7 +57,7 @@ const SubMapResponsive = ({classes, imageUrl, subHeader, mapLinks}) => (
     </Container>
 );
 
-const SubMapWide = ({classes, imageUrl, subHeader, mapLinks}) => (
+const SubMapWide = ({classes, imageUrl, subHeader, mapLinks}: SubMapInternalProps) => (
     <Container maxWidth="lg" className={classes.container}>
         <Grid container>
             <Grid item xs={12} sm={8} md={9}>
