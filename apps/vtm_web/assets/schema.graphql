@@ -190,6 +190,7 @@ type Character implements Node {
   lastHunt: DateTime
   lastResonance: String
   lastResonanceIntensity: Int
+  money: Int
   name: String
   notes: String
   objects: String
@@ -563,6 +564,17 @@ type HuntPayload {
   result: String
 }
 
+input InsertTransactionInput {
+  amount: Int!
+  characterId: ID!
+  reason: String
+  toCharacterId: ID!
+}
+
+type InsertTransactionPayload {
+  result: Transaction
+}
+
 type LoginResponse {
   character: Character
   reloginToken: String
@@ -750,6 +762,7 @@ type RootMutationType {
   heal(input: HealInput!): HealPayload
   healWillpower(input: HealWillpowerInput!): HealWillpowerPayload
   hunt(input: HuntInput!): HuntPayload
+  insertTransaction(input: InsertTransactionInput!): InsertTransactionPayload
   login(email: String!, password: String!, remember: Boolean!): LoginResponse
   logout: Boolean
   modifyForumPost(input: ModifyForumPostInput!): ModifyForumPostPayload
@@ -776,6 +789,7 @@ type RootMutationType {
   spendCharacterExperience(input: SpendCharacterExperienceInput!): SpendCharacterExperiencePayload
   switchCharacterAttributes(characterId: ID, firstAttribute: String, secondAttribute: String): Character
   toggleSessionVisible: Boolean
+  updateCharacterMoney(input: UpdateCharacterMoneyInput!): UpdateCharacterMoneyPayload
   updateSessionCharacter(characterId: ID): Character
   updateSessionMap(mapId: ID): ID
   updateUserPassword(newPassword: String!, oldPassword: String!, repeatPassword: String!): Boolean
@@ -802,6 +816,7 @@ type RootQueryType {
   getCharacterPublicInfo(id: ID): Character
   getCharacterStats(characterId: ID): CharacterStats
   getCharacterStatus(characterId: ID): Character
+  getCharacterTransactions(characterId: ID): [Transaction]
   getCharacterUser(characterId: ID!): User
   getCharactersAvatar(characterIds: [ID!]): [CharacterAvatarResponse]
   getCharactersChatAvatar(characterIds: [ID!]): [CharacterChatAvatarResponse]
@@ -812,9 +827,11 @@ type RootQueryType {
   getForumThreadPosts(id: ID!, page: Int!, pageSize: Int!): [ForumPost]
   getForumThreads(characterId: ID, forumSectionId: ID!, page: Int!, pageSize: Int!): GetThreadsResponse
   getHavens: GetHavensPayload
+  getLatestTransactions: [Transaction]
   getMessage(messageId: ID): Message
   getResonanceTypes: GetResonanceTypesPayload
   getSessionCharacter: Character
+  getTransaction(transactionId: ID): Transaction
   getUnresolvedEvents: GetUnresolvedEventsPayload
   hasUserAccessToMap(chatId: ID): Boolean
   hasUserAlreadyBooked: Boolean
@@ -956,6 +973,26 @@ input SpendCharacterExperienceInput {
 
 type SpendCharacterExperiencePayload {
   result: Character
+}
+
+type Transaction implements Node {
+  amount: Int
+  characterId: ID!
+
+  """The ID of an object"""
+  id: ID!
+  reason: String
+  toCharacterId: ID
+  transactionTime: DateTime
+}
+
+input UpdateCharacterMoneyInput {
+  characterId: ID!
+  money: Int!
+}
+
+type UpdateCharacterMoneyPayload {
+  result: Transaction
 }
 
 type User implements Node {
