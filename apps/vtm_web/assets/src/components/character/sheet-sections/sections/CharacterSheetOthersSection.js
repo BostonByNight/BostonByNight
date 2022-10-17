@@ -29,6 +29,7 @@ const CharacterSheetOthersSection = ({characterQuery}: Props): GenericReactCompo
         <>
             <Clan sheet={sheet} />
             <Experience sheet={sheet} />
+            <Money sheet={sheet} />
             <PredatorType sheet={sheet} />
             <Biography sheet={sheet} />
             <DisciplinePowers sheet={sheet} />
@@ -96,6 +97,20 @@ const Experience = ({sheet}: SheetElementProps) => (
         </Typography>
     </>
 );
+
+const Money = ({sheet}: SheetElementProps) => (
+    <>
+        <Typography sx={sectionTitleStyle}>
+            Denaro
+        </Typography>
+        <Typography sx={{
+            ...mainFontFamily,
+            marginBottom: "10px"
+        }}>
+            <b>$ {sheet?.money}</b>
+        </Typography>
+    </>
+)
 
 type InfoElementProps = {
     title: string;

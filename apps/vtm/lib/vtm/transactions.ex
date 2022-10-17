@@ -64,21 +64,21 @@ defmodule Vtm.Transactions do
       {:ok, Transaction.t()} | 
       {:error, binary()}
   def update_character_money(character_id, money, user = %{id: user_id}) do
-    attrs = fn id, amount -> %{
-      character_id: id,
-      amount: amount,
-      reason: "Transazione del Narratore",
-      master_user_id: user_id
-    } end
-
     case Characters.get_specific_character(user, character_id) do
       nil ->
         {:error, :not_found}
-      %{id: id} ->
-        with {:ok, %{money: current_money}} <- Characters.update_character(id, %{money: money}),
-             transaction_amount             <- (money - current_money),
-             {:ok, transaction}             <- insert_transaction(attrs.(id, transaction_amount)) do
-          {:ok, transaction}
+      %{id: id, money: current_money} ->
+        with {:ok, _} <- Characters.update_character(id, %{money: money}) do
+          transaction_amount = money - current_money
+
+          attrs = %{
+            character_id: id,
+            amount: transaction_amount,
+            reason: "Transazione del Narratore",
+            master_user_id: user_id
+          }
+
+          insert_transaction(attrs)
         end
     end
   end

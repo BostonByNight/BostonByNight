@@ -13,6 +13,9 @@ cd apps/vtm && mix ecto.migrate && cd ../../
 
 mix run apps/vtm_auth/priv/repo/seeds.exs
 mix run apps/vtm/priv/repo/seeds.exs
+mix run apps/vtm/priv/repo/seeds_havens.exs
+mix run apps/vtm/priv/repo/seeds_locations.exs
+mix run apps/vtm/priv/repo/seeds_templates.exs
 
 # Installing Front End dependencies
 yarn --cwd apps/vtm_web/assets install

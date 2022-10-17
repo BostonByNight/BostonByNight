@@ -27,7 +27,9 @@ const mutationPromise = (
     environment: IEnvironment,
     input: UpdateCharacterMoneyInput
 ): Promise<UpdateCharacterMoneyMutation$data> => {
-    return wrapMutation<UpdateCharacterMoneyMutation$data>(environment, mutation, input);
+    return wrapMutation<UpdateCharacterMoneyMutation$data>(environment, mutation, {
+        input: input
+    });
 }
 
 export default mutationPromise;

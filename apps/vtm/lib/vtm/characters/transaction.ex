@@ -38,7 +38,7 @@ defmodule Vtm.Characters.Transaction do
   @doc false
   def changeset(transaction, attrs) do
     transaction
-    |> cast(attrs, [:amount, :reason])
+    |> cast(attrs, [:character_id, :to_character_id, :master_user_id, :amount, :reason])
     |> foreign_key_constraint(:character_id)
     |> foreign_key_constraint(:to_character_id)
     |> foreign_key_constraint(:master_user_id)
