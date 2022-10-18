@@ -4,7 +4,9 @@ import ReactMarkdown from "react-markdown";
 import Dice from './Dice.js'
 
 const DiceComponent = ({result, components}) => {
-    let parsedResultText = result.substring(0, result.indexOf('('));
+    let difficolta = result.substring(result.indexOf('difficolt'), result.length - 1);
+    let parsedResultText = result.substring(0, result.indexOf('(')) + ' - ' + difficolta;
+    console.log(result);
 
     const createDices= () => {
         let results = result.substring(result.indexOf('(') + 1, result.indexOf(', difficolt')).split(', ');
@@ -29,13 +31,13 @@ const DiceComponent = ({result, components}) => {
                 } else {
                     el = parseInt(el);
                     if (el < 6) {
-                        src="/dice/normal-fail.webp";
+                        src="/dice/normal-fail-white.webp";
                         alt="fallimento";
                     } else if (el === 10) {
-                        src="/dice/normal-crit.webp";
+                        src="/dice/normal-crit-white.webp";
                         alt="successo critico";
                     } else {
-                        src="/dice/normal-success.webp";
+                        src="/dice/normal-success-white.webp";
                         alt="successo";
                     }
                 }
@@ -46,6 +48,7 @@ const DiceComponent = ({result, components}) => {
 
     return (
         <>
+
             <ReactMarkdown components={components} className="no-padding-paragraph">
                 {parsedResultText}
             </ReactMarkdown>
