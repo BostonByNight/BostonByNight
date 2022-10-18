@@ -12,7 +12,9 @@ export const getCharacterTransactionsQuery: Query<GetCharacterTransactionsQuery$
         getCharacterTransactions(characterId: $characterId) {
             id
             characterId
+            characterName
             toCharacterId
+            toCharacterName
             amount
             reason
             transactionTime

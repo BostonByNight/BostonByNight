@@ -64,7 +64,6 @@ const MessageTemplate = ({
     }
 
     const onSubmit = (values: SubmitProperties) => {
-        console.debug("values", values);
         const cleanedInput = cleanInput(values);
         submitted(cleanedInput);
     };

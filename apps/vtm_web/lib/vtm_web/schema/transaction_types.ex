@@ -8,7 +8,9 @@ defmodule VtmWeb.Schema.TransactionTypes do
 
   node object :transaction do
     field :character_id, non_null(:id)
+    field :character_name, :string
     field :to_character_id, :id
+    field :to_character_name, :string
     field :amount, :integer
     field :reason, :string
     field :transaction_time, :date_time
@@ -39,7 +41,7 @@ defmodule VtmWeb.Schema.TransactionTypes do
   end
 
   object :transaction_mutations do
-    payload field :insert_transaction do
+    payload field :perform_transaction do
       input do
         field :character_id, non_null(:id)
         field :to_character_id, non_null(:id)
@@ -52,7 +54,7 @@ defmodule VtmWeb.Schema.TransactionTypes do
       end
 
       middleware VtmWeb.Schema.Middlewares.Authorize, :any
-      resolve parsing_node_ids(&TransactionResolvers.insert_transaction/2, 
+      resolve parsing_node_ids(&TransactionResolvers.perform_transaction/2,
         character_id: :character, 
         to_character_id: :character)
       middleware VtmWeb.Schema.Middlewares.ChangesetErrors
