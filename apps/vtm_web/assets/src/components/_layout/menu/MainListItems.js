@@ -73,7 +73,7 @@ const MainListItems = ({drawerDone, reloadCount, onUpdate}: MenuProps): GenericR
                                   reloadCount={reloadCount}
                                   onUpdate={onUpdate} />
             <MenuHuntSection />
-            <ListItem button onClick={_ => pushHistory(MainRoutes.havenEvents)}>
+            <ListItem button onClick={_ => pushHistory(MainRoutes.listTransactions)}>
                 <ListItemIcon>
                     <AttachMoneyIcon sx={menuIconStyle} />
                 </ListItemIcon>
