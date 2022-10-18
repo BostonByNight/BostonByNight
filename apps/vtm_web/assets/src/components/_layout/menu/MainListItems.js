@@ -12,6 +12,7 @@ import MenuCharacterSection from "./menu-character/MenuCharacterSection";
 import MenuHuntSection from "./sections/MenuHuntSection";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import CameraIndoorTwoToneIcon from '@mui/icons-material/CameraIndoorTwoTone';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import type {MenuProps} from "./menu-base-utils";
 import {menuIconStyle, MenuSecondaryText} from "./menu-base-utils";
 import useIsChatRoute from "../../_hooks/useIsChatRoute";
@@ -72,6 +73,12 @@ const MainListItems = ({drawerDone, reloadCount, onUpdate}: MenuProps): GenericR
                                   reloadCount={reloadCount}
                                   onUpdate={onUpdate} />
             <MenuHuntSection />
+            <ListItem button onClick={_ => pushHistory(MainRoutes.havenEvents)}>
+                <ListItemIcon>
+                    <AttachMoneyIcon sx={menuIconStyle} />
+                </ListItemIcon>
+                <ListItemText secondary={<MenuSecondaryText text="Scambia denaro" />} />
+            </ListItem>
             <ListItem button onClick={_ => pushHistory(MainRoutes.havenEvents)}>
                 <ListItemIcon>
                     <CameraIndoorTwoToneIcon sx={menuIconStyle} />

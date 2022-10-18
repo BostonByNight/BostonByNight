@@ -77,4 +77,15 @@ defmodule Vtm.Helpers do
       _               -> date |> NaiveDateTime.to_date()
     end
   end
+
+  @doc """
+  Transform a struct to a map.
+  """
+  @spec struct_to_map(struct()) :: map()
+  def struct_to_map(struct) do
+    struct
+    |> Map.from_struct()
+    |> Map.new(fn {k, v} -> {k |> to_string(), v} end)
+    |> Map.delete("__meta__")
+  end
 end

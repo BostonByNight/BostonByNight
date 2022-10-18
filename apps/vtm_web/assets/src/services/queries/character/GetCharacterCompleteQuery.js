@@ -62,6 +62,7 @@ export type Character = {|
         +id: string,
         +name: ?string,
     |},
+    +money: ?number
 |};
 
 export const useCharacterCompleteQuery = (characterId: string): ?Character => {

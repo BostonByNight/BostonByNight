@@ -112,6 +112,7 @@ export const characterStateFragment: Fragment<CharacterFragments_characterState$
             name
         }
         huntDifficulty
+        money
     }
 `;
 

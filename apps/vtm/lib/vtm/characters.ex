@@ -567,6 +567,13 @@ defmodule Vtm.Characters do
     end
   end
 
+  def get_character_money_by_id(character_id) do
+    case Character |> Repo.get(character_id) do
+      %{money: money} -> {:ok, money}
+      _ -> {:error, :not_found}
+    end
+  end
+
   def create(attrs, %{role: :master}) do
     %Character{}
     |> Character.changeset(attrs)

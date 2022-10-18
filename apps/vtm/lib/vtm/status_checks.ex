@@ -35,6 +35,7 @@ defmodule Vtm.StatusChecks do
           health: c.health,
           damage: c.damage,
           aggravated_damage: c.aggravated_damage,
+          money: c.money
         }
 
     Repo.one(query)

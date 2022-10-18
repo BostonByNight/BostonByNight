@@ -1,16 +1,16 @@
 // @flow
 
 import React, {useState} from "react";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 import {useCharacterCompleteQuery} from "../../../services/queries/character/GetCharacterCompleteQuery";
 import CharacterSheet from "../../character/CharacterSheet";
-import Grid from "@mui/material/Grid";
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import ApproveCharacterForm from "../approvation/ApproveCharacterForm";
 import ChangeCharacterAttributeForm from "./forms/ChangeCharacterAttributeForm";
 import ChangeCharacterOtherStatsForm from "./forms/ChangeCharacterOtherStatsForm";
-import Paper from "@mui/material/Paper";
 import ChangeCharacterNotesForm from "./forms/ChangeCharacterNotesForm";
 import AddCharacterExperienceForm from "./forms/AddCharacterExperienceForm";
 import ChangeCharacterStatusForm from "./forms/ChangeCharacterStatusForm";
@@ -18,6 +18,7 @@ import ResetHuntForm from "./forms/ResetHuntForm";
 import SpendCharacterExperienceForm from "./forms/SpendCharacterExperienceForm";
 import SendMessageToUserOrCharacter from "./forms/SendMessageToUserOrCharacter";
 import SetHuntDifficultyForm from "./forms/SetHuntDifficultyForm";
+import ChangeCharacterMoneyForm from "./forms/ChangeCharacterMoneyForm";
 import type {GenericEvent, GenericReactComponent} from "../../../_base/types";
 
 type Props = {
@@ -82,6 +83,12 @@ const CharacterDashboard = ({characterId}: Props): GenericReactComponent => {
                     <Grid item xs={12}>
                         <Paper variant="outlined" sx={{margin: "10px"}}>
                             <ChangeCharacterNotesForm character={character}
+                                                      onUpdate={onUpdate} />
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Paper variant="outlined" sx={{margin: "10px"}}>
+                            <ChangeCharacterMoneyForm character={character}
                                                       onUpdate={onUpdate} />
                         </Paper>
                     </Grid>

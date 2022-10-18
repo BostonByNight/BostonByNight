@@ -53,6 +53,7 @@ defmodule Vtm.Characters.Character do
     clan: Clan.t(),
     predator_type_id: non_neg_integer(),
     predator_type: PredatorType.t(),
+    money: integer(),
     inserted_at: NaiveDateTime.t(),
     updated_at: NaiveDateTime.t(),
   }
@@ -96,6 +97,7 @@ defmodule Vtm.Characters.Character do
     field :specialties, :string
     field :convictions, :string
     field :objects, :string
+    field :money, :integer
 
     belongs_to :user, User
     belongs_to :clan, Clan
@@ -169,7 +171,8 @@ defmodule Vtm.Characters.Character do
       :hunt_difficulty,
       :last_awake,
       :torpor,
-      :dead
+      :dead,
+      :money
     ])
     |> foreign_key_constraint(:clan_id)
     |> foreign_key_constraint(:predator_type_id)
@@ -215,7 +218,8 @@ defmodule Vtm.Characters.Character do
       :hunt_difficulty,
       :last_awake,
       :torpor,
-      :dead
+      :dead,
+      :money
     ])
     |> foreign_key_constraint(:user_id)
     |> foreign_key_constraint(:clan_id)
