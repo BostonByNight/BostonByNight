@@ -54,7 +54,7 @@ defmodule VtmWeb.Schema.TransactionTypes do
       end
 
       middleware VtmWeb.Schema.Middlewares.Authorize, :any
-      resolve parsing_node_ids(&TransactionResolvers.perform_transaction/2, 
+      resolve parsing_node_ids(&TransactionResolvers.perform_transaction/2,
         character_id: :character, 
         to_character_id: :character)
       middleware VtmWeb.Schema.Middlewares.ChangesetErrors
