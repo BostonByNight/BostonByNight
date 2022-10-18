@@ -32,6 +32,8 @@ defmodule Vtm.Transactions do
     |> from()
     |> where([t], t.character_id == ^character_id)
     |> or_where([t], t.to_character_id == ^character_id)
+    |> preload(:character)
+    |> preload(:to_character)
     |> Repo.all()
   end
 
@@ -57,6 +59,41 @@ defmodule Vtm.Transactions do
     |> Repo.insert()
   end
 
+  @spec perform_transaction(
+    character_id :: non_neg_integer(),
+    to_character_id :: non_neg_integer(),
+    amount :: non_neg_integer(),
+    reason :: binary()
+  ) ::
+    {:ok, Transaction.t()} |
+    {:error, Changeset.t()} |
+    {:error, :not_found}
+  def perform_transaction(
+    character_id,
+    to_character_id,
+    amount,
+    reason
+  ) do
+    with {:ok, character_money} <- Characters.get_character_money_by_id(character_id),
+         {:ok, recipient_money} <- Characters.get_character_money_by_id(to_character_id),
+         {:ok, _} <- Characters.update_character(character_id, %{money: character_money - amount}),
+         {:ok, _} <- Characters.update_character(to_character_id, %{money: recipient_money + amount}),
+         {:ok, transaction} <- insert_transaction(%{
+           character_id: character_id,
+           to_character_id: to_character_id,
+           amount: amount,
+           reason: reason
+         }) do
+      {:ok, transaction}
+    else
+      {:error, :not_found} ->
+        {:error, :not_found}
+
+      {:error, changeset} ->
+        {:error, changeset}
+    end
+  end
+
   @spec update_character_money(
     character_id :: non_neg_integer(), 
     money :: integer(), 
@@ -67,7 +104,7 @@ defmodule Vtm.Transactions do
     case Characters.get_specific_character(user, character_id) do
       nil ->
         {:error, :not_found}
-      %{id: id, money: current_money} ->
+      %{id: id, money: current_money} when current_money >= money ->
         with {:ok, _} <- Characters.update_character(id, %{money: money}) do
           transaction_amount = money - current_money
 
@@ -80,6 +117,8 @@ defmodule Vtm.Transactions do
 
           insert_transaction(attrs)
         end
+      _ ->
+        {:error, :not_enough_money}
     end
   end
 end

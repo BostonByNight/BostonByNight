@@ -3,7 +3,7 @@ defmodule Vtm.Repo.Migrations.AddMasterToTransaction do
 
   def change do
     alter table(:transactions) do
-      add :master_user_id, references(:users, on_delete: :nothing), null: false
+      add :master_user_id, references(:users, on_delete: :nothing)
     end
 
     create index(:transactions, [:master_user_id])
