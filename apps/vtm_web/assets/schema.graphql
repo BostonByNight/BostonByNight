@@ -190,6 +190,7 @@ type Character implements Node {
   lastHunt: DateTime
   lastResonance: String
   lastResonanceIntensity: Int
+  money: Int
   name: String
   notes: String
   objects: String
@@ -677,6 +678,17 @@ input NpcStatsRequest {
   willpower: Int!
 }
 
+input PerformTransactionInput {
+  amount: Int!
+  characterId: ID!
+  reason: String
+  toCharacterId: ID!
+}
+
+type PerformTransactionPayload {
+  result: Transaction
+}
+
 type PredatorType implements Node {
   description: String
 
@@ -756,6 +768,7 @@ type RootMutationType {
   modifyForumThread(input: ModifyForumThreadInput!): ModifyForumThreadPayload
   newForumPost(input: NewForumPostInput!): NewForumPostPayload
   newForumThread(input: NewForumThreadInput!): NewForumThreadPayload
+  performTransaction(input: PerformTransactionInput!): PerformTransactionPayload
   rejectCharacter(characterId: ID!, reason: String!): Boolean
   requestNewPassword(userEmail: String!): Boolean
   resetCharacterHunt(input: ResetCharacterHuntInput!): ResetCharacterHuntPayload
@@ -776,6 +789,7 @@ type RootMutationType {
   spendCharacterExperience(input: SpendCharacterExperienceInput!): SpendCharacterExperiencePayload
   switchCharacterAttributes(characterId: ID, firstAttribute: String, secondAttribute: String): Character
   toggleSessionVisible: Boolean
+  updateCharacterMoney(input: UpdateCharacterMoneyInput!): UpdateCharacterMoneyPayload
   updateSessionCharacter(characterId: ID): Character
   updateSessionMap(mapId: ID): ID
   updateUserPassword(newPassword: String!, oldPassword: String!, repeatPassword: String!): Boolean
@@ -802,6 +816,7 @@ type RootQueryType {
   getCharacterPublicInfo(id: ID): Character
   getCharacterStats(characterId: ID): CharacterStats
   getCharacterStatus(characterId: ID): Character
+  getCharacterTransactions(characterId: ID): [Transaction]
   getCharacterUser(characterId: ID!): User
   getCharactersAvatar(characterIds: [ID!]): [CharacterAvatarResponse]
   getCharactersChatAvatar(characterIds: [ID!]): [CharacterChatAvatarResponse]
@@ -812,9 +827,11 @@ type RootQueryType {
   getForumThreadPosts(id: ID!, page: Int!, pageSize: Int!): [ForumPost]
   getForumThreads(characterId: ID, forumSectionId: ID!, page: Int!, pageSize: Int!): GetThreadsResponse
   getHavens: GetHavensPayload
+  getLatestTransactions: [Transaction]
   getMessage(messageId: ID): Message
   getResonanceTypes: GetResonanceTypesPayload
   getSessionCharacter: Character
+  getTransaction(transactionId: ID): Transaction
   getUnresolvedEvents: GetUnresolvedEventsPayload
   hasUserAccessToMap(chatId: ID): Boolean
   hasUserAlreadyBooked: Boolean
@@ -956,6 +973,28 @@ input SpendCharacterExperienceInput {
 
 type SpendCharacterExperiencePayload {
   result: Character
+}
+
+type Transaction implements Node {
+  amount: Int
+  characterId: ID!
+  characterName: String
+
+  """The ID of an object"""
+  id: ID!
+  reason: String
+  toCharacterId: ID
+  toCharacterName: String
+  transactionTime: DateTime
+}
+
+input UpdateCharacterMoneyInput {
+  characterId: ID!
+  money: Int!
+}
+
+type UpdateCharacterMoneyPayload {
+  result: Transaction
 }
 
 type User implements Node {

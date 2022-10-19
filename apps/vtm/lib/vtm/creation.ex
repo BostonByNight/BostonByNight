@@ -3,6 +3,8 @@ defmodule Vtm.Creation do
 
   import Ecto.Query, warn: false
 
+  import Vtm.Helpers
+
   alias Vtm.Repo
 
   alias Vtm.Characters
@@ -178,11 +180,9 @@ defmodule Vtm.Creation do
   @spec create_attribute_value_from_template(struct(), non_neg_integer()) :: struct()
   defp create_attribute_value_from_template(%{attribute_id: a_id, value: v}, character_id) do
     with now <- NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second) do
-      %CharacterAttribute{
+      %{
         character_id: character_id,
         attribute_id: a_id,
-        character: nil,
-        attribute: nil,
         value: v,
         inserted_at: now,
         updated_at: now
@@ -196,8 +196,9 @@ defmodule Vtm.Creation do
         where: ta.template_id == ^template_id)
       |> Repo.all()
       |> Enum.map(&create_attribute_value_from_template(&1, character_id))
+      |> IO.inspect()
 
-    case CharacterAttribute |> Repo.insert_all(css) do
+    case Repo.insert_all(CharacterAttribute, css) do
       {24, nil} -> :ok
       _         -> {:error, "Not all the attributes were inserted."}
     end

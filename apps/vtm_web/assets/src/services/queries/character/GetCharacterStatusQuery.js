@@ -22,6 +22,7 @@ export const getCharacterStatusQuery: Query<GetCharacterStatusQuery$variables, G
             health
             damage
             aggravatedDamage
+            money
         }
     }
 `;

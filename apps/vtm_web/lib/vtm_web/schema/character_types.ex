@@ -80,6 +80,7 @@ defmodule VtmWeb.Schema.CharacterTypes do
     field :is_awake, :boolean
     field :last_awake, :date_time
     field :last_resonance_intensity, :integer
+    field :money, :integer
   end
 
   node object :character_attribute do
