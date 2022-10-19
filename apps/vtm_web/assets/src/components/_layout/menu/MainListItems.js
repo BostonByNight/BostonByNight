@@ -81,12 +81,6 @@ const MainListItems = ({drawerDone, reloadCount, onUpdate}: MenuProps): GenericR
             </ListItem>
             <ListItem button onClick={_ => pushHistory(MainRoutes.havenEvents)}>
                 <ListItemIcon>
-                    <AttachMoneyIcon sx={menuIconStyle} />
-                </ListItemIcon>
-                <ListItemText secondary={<MenuSecondaryText text="Scambia denaro" />} />
-            </ListItem>
-            <ListItem button onClick={_ => pushHistory(MainRoutes.havenEvents)}>
-                <ListItemIcon>
                     <CameraIndoorTwoToneIcon sx={menuIconStyle} />
                 </ListItemIcon>
                 <ListItemText secondary={<MenuSecondaryText text="Eventi Dominio" />} />
