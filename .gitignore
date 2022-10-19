@@ -18,7 +18,6 @@ erl_crash.dump
 
 # Also ignore archive artifacts (built via "mix archive.build").
 *.ez
-apps/vtm_web/assets/.yarn
 apps/vtm_web/assets/package-lock.json
 apps/vtm_web/assets/yarn.lock
 **/.elixir_ls
