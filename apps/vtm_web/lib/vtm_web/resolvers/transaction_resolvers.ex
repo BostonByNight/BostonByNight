@@ -7,7 +7,6 @@ defmodule VtmWeb.Resolvers.TransactionResolvers do
   alias Vtm.Characters
   alias VtmAuth.Accounts
   alias Vtm.Characters.Transaction
-  alias Vtm.Characters.Character
 
   def all(_, _, _) do
     {:ok, 
@@ -31,7 +30,7 @@ defmodule VtmWeb.Resolvers.TransactionResolvers do
     with {:ok, transaction = %{
         character_id: c_id
       }} <- Transactions.get_transaction_by_id(transaction_id) do
-      
+
       if Characters.character_of_user?(user_id, c_id) || Accounts.is_user_master?(user_id) do
         {:ok, 
           transaction
@@ -40,7 +39,6 @@ defmodule VtmWeb.Resolvers.TransactionResolvers do
       else
         {:error, :unauthorized}
       end
-
     end
   end
 
