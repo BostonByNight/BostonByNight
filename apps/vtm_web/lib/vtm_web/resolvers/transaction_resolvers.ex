@@ -31,8 +31,6 @@ defmodule VtmWeb.Resolvers.TransactionResolvers do
         character_id: c_id
       }} <- Transactions.get_transaction_by_id(transaction_id) do
 
-      Enum
-
       if Characters.character_of_user?(user_id, c_id) || Accounts.is_user_master?(user_id) do
         {:ok, 
           transaction
