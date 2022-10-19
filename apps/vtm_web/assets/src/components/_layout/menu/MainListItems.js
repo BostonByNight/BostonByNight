@@ -73,12 +73,6 @@ const MainListItems = ({drawerDone, reloadCount, onUpdate}: MenuProps): GenericR
                                   reloadCount={reloadCount}
                                   onUpdate={onUpdate} />
             <MenuHuntSection />
-            <ListItem button onClick={_ => pushHistory(MainRoutes.listTransactions)}>
-                <ListItemIcon>
-                    <AttachMoneyIcon sx={menuIconStyle} />
-                </ListItemIcon>
-                <ListItemText secondary={<MenuSecondaryText text="Scambia denaro" />} />
-            </ListItem>
             <ListItem button onClick={_ => pushHistory(MainRoutes.havenEvents)}>
                 <ListItemIcon>
                     <CameraIndoorTwoToneIcon sx={menuIconStyle} />

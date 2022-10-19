@@ -41,8 +41,6 @@ export const MainRoutes = {
     subMap: (id: string): string => `/main/map/${id}`,
     chat: (id: string): string => `/main/chat/${id}`,
     bookChat: "/main/book-chat",
-    listTransactions: "/main/transactions",
-    newTransaction: "/main/transaction/new",
 
     admin: "/main/admin",
     unapprovedCharacters: "/main/admin/unapproved",
@@ -91,8 +89,6 @@ const CreateNewNpc = React.lazy(() => import('./character/npcs/CreateNewNpc'));
 const DefineNpc = React.lazy(() => import('./character/npcs/DefineNpc'));
 const AdminHavens = React.lazy(() => import('./admin/havens/AdminHavens'));
 const ChatViewer = React.lazy(() => import('./admin/chat/ChatViewer'));
-const TransactionsList = React.lazy(() => import('./transactions/TransactionsList'));
-const Transactions = React.lazy(() => import('./transactions/Transactions'));
 
 const MainRouter = (): GenericReactComponent => {
     return (
@@ -110,8 +106,6 @@ const MainRouter = (): GenericReactComponent => {
             <AuthRoute exact path="/main/sheet" component={() => <CharacterSheet />} />
             <AuthRoute exact path="/main/sheet/:id/reload" component={({match: {params: {id}}}) => <CharacterSheet id={id} reload={true} />} />
             <AuthRoute exact path="/main/sheet/:id" component={({match: {params: {id}}}) => <CharacterSheet id={id} />} />
-            <AuthRoute exact path="/main/transactions" component={() => <TransactionsList />} />
-            <AuthRoute exact path="/main/transaction/new" component={() => <Transactions />} />
 
             <AuthRoute exact path="/main/map" component={() => <MainMap />} />
             <AuthRoute exact path="/main/map/:id" component={({match: {params: {id}}}) => <Map id={id} />} />

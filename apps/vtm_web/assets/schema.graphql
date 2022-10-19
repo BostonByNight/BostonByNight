@@ -564,6 +564,17 @@ type HuntPayload {
   result: String
 }
 
+input InsertTransactionInput {
+  amount: Int!
+  characterId: ID!
+  reason: String
+  toCharacterId: ID!
+}
+
+type InsertTransactionPayload {
+  result: Transaction
+}
+
 type LoginResponse {
   character: Character
   reloginToken: String
@@ -678,17 +689,6 @@ input NpcStatsRequest {
   willpower: Int!
 }
 
-input PerformTransactionInput {
-  amount: Int!
-  characterId: ID!
-  reason: String
-  toCharacterId: ID!
-}
-
-type PerformTransactionPayload {
-  result: Transaction
-}
-
 type PredatorType implements Node {
   description: String
 
@@ -762,13 +762,13 @@ type RootMutationType {
   heal(input: HealInput!): HealPayload
   healWillpower(input: HealWillpowerInput!): HealWillpowerPayload
   hunt(input: HuntInput!): HuntPayload
+  insertTransaction(input: InsertTransactionInput!): InsertTransactionPayload
   login(email: String!, password: String!, remember: Boolean!): LoginResponse
   logout: Boolean
   modifyForumPost(input: ModifyForumPostInput!): ModifyForumPostPayload
   modifyForumThread(input: ModifyForumThreadInput!): ModifyForumThreadPayload
   newForumPost(input: NewForumPostInput!): NewForumPostPayload
   newForumThread(input: NewForumThreadInput!): NewForumThreadPayload
-  performTransaction(input: PerformTransactionInput!): PerformTransactionPayload
   rejectCharacter(characterId: ID!, reason: String!): Boolean
   requestNewPassword(userEmail: String!): Boolean
   resetCharacterHunt(input: ResetCharacterHuntInput!): ResetCharacterHuntPayload
@@ -978,13 +978,11 @@ type SpendCharacterExperiencePayload {
 type Transaction implements Node {
   amount: Int
   characterId: ID!
-  characterName: String
 
   """The ID of an object"""
   id: ID!
   reason: String
   toCharacterId: ID
-  toCharacterName: String
   transactionTime: DateTime
 }
 
