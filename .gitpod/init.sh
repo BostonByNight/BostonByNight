@@ -17,13 +17,7 @@ mix run apps/vtm/priv/repo/seeds_havens.exs
 mix run apps/vtm/priv/repo/seeds_locations.exs
 mix run apps/vtm/priv/repo/seeds_templates.exs
 
-# Changing directory to assets
-cd apps/vtm_web/assets && \
-
-# Installing yarn 2
-yarn set version berry && \
-
 # Installing Front End dependencies
-yarn install && \
-yarn build
+yarn --cwd apps/vtm_web/assets install
+yarn --cwd apps/vtm_web/assets build
 

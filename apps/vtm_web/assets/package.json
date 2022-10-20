@@ -45,7 +45,6 @@
     "yup": "~0.32.11"
   },
   "scripts": {
-    "preinstall": "yarn set version berry",
     "refresh-graphql": "get-graphql-schema http://localhost:4000/api > schema.graphql",
     "start": "yarn run relay && craco start",
     "podstart": "yarn run relay && DANGEROUSLY_DISABLE_HOST_CHECK=true craco start",
@@ -102,6 +101,5 @@
     "sass-loader": "~12.4.0",
     "style-loader": "~3.3.1",
     "url-loader": "~4.1.1"
-  },
-  "packageManager": "yarn@3.2.4"
+  }
 }
