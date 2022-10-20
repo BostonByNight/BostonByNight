@@ -1,4 +1,5 @@
 #!/bin/bash
 
-mix phx.server &
-yarn --cwd apps/vtm_web/assets podstart
+mix phx.server & 
+cd apps/vtm_web/assets && \
+yarn podstart
