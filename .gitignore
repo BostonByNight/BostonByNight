@@ -31,3 +31,4 @@ mix.lock
 **/.DS_Store
 
 apps/vtm_web/assets/.yarn
+apps/vtm_web/assets/.yarnrc
