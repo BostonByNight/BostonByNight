@@ -43,7 +43,7 @@ const DiceComponent = ({result, components}: DiceComponentProps): GenericReactCo
 
         const [src, alt] =
             isBeastDice
-                ? getBeastDiceComponent(Number(rest.replace("*", "")))
+                ? getBeastDiceComponent(Number(rest.replaceAll("*", "")))
                 : getNormalDiceComponent(Number(rest))
 
         return <Dice src ={src} alt={alt} key={index} />
