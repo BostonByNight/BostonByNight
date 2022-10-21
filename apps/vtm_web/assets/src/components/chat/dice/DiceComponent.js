@@ -1,12 +1,17 @@
 // @flow
 import React from 'react';
 import ReactMarkdown from "react-markdown";
-import Dice from './Dice.js'
+import Dice from './Dice.js';
+import type {GenericReactComponent} from "../../../_base/types";
 
-const DiceComponent = ({result, components}) => {
-    let difficolta = result.substring(result.indexOf('difficolt'), result.length - 1);
-    let parsedResultText = result.substring(0, result.indexOf('(')) + ' - ' + difficolta;
-    console.log(result);
+type DiceComponentProps = {
+    result: string;
+    components: any;
+}
+
+const DiceComponent = ({result, components}: DiceComponentProps): GenericReactComponent => {
+    let difficulty = result.substring(result.indexOf('difficolt'), result.length - 1);
+    let parsedResultText = result.substring(0, result.indexOf('(')) + ' - ' + difficulty;
 
     const createDices= () => {
         let results = result.substring(result.indexOf('(') + 1, result.indexOf(', difficolt')).split(', ');
@@ -14,7 +19,7 @@ const DiceComponent = ({result, components}) => {
             if(el) {
                 let src, alt;
                 if (el.charAt(0) === '*') {
-                    let parsedEl = parseInt(el.replace('*', ''));
+                    let parsedEl = Number(el.replace('*', ''));
                     if (parsedEl === 1) {
                         src="/dice/bestial-fail.webp";
                         alt="fallimento bestiale";
@@ -29,7 +34,7 @@ const DiceComponent = ({result, components}) => {
                         alt="successo";
                     }
                 } else {
-                    el = parseInt(el);
+                    el = Number(el);
                     if (el < 6) {
                         src="/dice/normal-fail-white.webp";
                         alt="fallimento";
