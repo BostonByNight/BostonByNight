@@ -115,6 +115,16 @@ type ChangeCharacterNotesPayload {
   result: Character
 }
 
+input ChangeCharacterOccupationInput {
+  characterId: ID!
+  level: Int!
+  occupationId: ID!
+}
+
+type ChangeCharacterOccupationPayload {
+  result: Occupation
+}
+
 input ChangeCharacterOtherStatsInput {
   bloodPotency: Int!
   characterId: ID!
@@ -262,6 +272,16 @@ input CharacterFinalizationRequest {
   notes: String
   predatorTypeId: ID
   specialties: String
+}
+
+type CharacterOccupation implements Node {
+  characterId: ID!
+
+  """The ID of an object"""
+  id: ID!
+  lastChecked: DateTime
+  level: Int
+  occupationId: ID!
 }
 
 type CharacterStats {
@@ -678,6 +698,26 @@ input NpcStatsRequest {
   willpower: Int!
 }
 
+type Occupation implements Node {
+  description: String
+
+  """The ID of an object"""
+  id: ID!
+  level1Name: String!
+  level1Salary: Int!
+  level2Name: String
+  level2Salary: Int
+  level3Name: String
+  level3Salary: Int
+  level4Name: String
+  level4Salary: Int
+  level5Name: String
+  level5Salary: Int
+  level6Name: String
+  level6Salary: Int
+  name: String!
+}
+
 input PerformTransactionInput {
   amount: Int!
   characterId: ID!
@@ -695,6 +735,14 @@ type PredatorType implements Node {
   """The ID of an object"""
   id: ID!
   name: String
+}
+
+input RefreshCharacterOccupationSalaryInput {
+  characterId: ID!
+}
+
+type RefreshCharacterOccupationSalaryPayload {
+  result: Occupation
 }
 
 input ResetCharacterHuntInput {
@@ -740,6 +788,7 @@ type RootMutationType {
   changeCharacterExperience(input: ChangeCharacterExperienceInput!): ChangeCharacterExperiencePayload
   changeCharacterHuntDifficulty(input: ChangeCharacterHuntDifficultyInput!): ChangeCharacterHuntDifficultyPayload
   changeCharacterNotes(input: ChangeCharacterNotesInput!): ChangeCharacterNotesPayload
+  changeCharacterOccupation(input: ChangeCharacterOccupationInput!): ChangeCharacterOccupationPayload
   changeCharacterOtherStats(input: ChangeCharacterOtherStatsInput!): ChangeCharacterOtherStatsPayload
   changeCharacterStatus(input: ChangeCharacterStatusInput!): ChangeCharacterStatusPayload
   changeSheetInfo(input: ChangeSheetInfoInput!): ChangeSheetInfoPayload
@@ -769,6 +818,7 @@ type RootMutationType {
   newForumPost(input: NewForumPostInput!): NewForumPostPayload
   newForumThread(input: NewForumThreadInput!): NewForumThreadPayload
   performTransaction(input: PerformTransactionInput!): PerformTransactionPayload
+  refreshCharacterOccupationSalary(input: RefreshCharacterOccupationSalaryInput!): RefreshCharacterOccupationSalaryPayload
   rejectCharacter(characterId: ID!, reason: String!): Boolean
   requestNewPassword(userEmail: String!): Boolean
   resetCharacterHunt(input: ResetCharacterHuntInput!): ResetCharacterHuntPayload
@@ -804,6 +854,7 @@ type RootQueryType {
   allUsers: [User]
   attributes: [Attribute]
   availablePrivateChats: [ChatLocation]
+  canCharacterRequestSalary(characterId: ID): Boolean
   charactersList: [Character]
   clanDisciplines(clanId: ID!): [Discipline]
   clans: [Clan]
@@ -813,6 +864,7 @@ type RootQueryType {
   getCharacterChatAvatar(characterId: ID!): CharacterChatAvatar
   getCharacterDescription(characterId: ID): Character
   getCharacterDomainEvents(input: GetCharacterDomainEventsInput!): GetCharacterDomainEventsPayload
+  getCharacterOccupation(characterId: ID): CharacterOccupation
   getCharacterPublicInfo(id: ID): Character
   getCharacterStats(characterId: ID): CharacterStats
   getCharacterStatus(characterId: ID): Character
@@ -829,6 +881,8 @@ type RootQueryType {
   getHavens: GetHavensPayload
   getLatestTransactions: [Transaction]
   getMessage(messageId: ID): Message
+  getOccupation(occupationId: ID): Occupation
+  getOccupations: [Occupation]
   getResonanceTypes: GetResonanceTypesPayload
   getSessionCharacter: Character
   getTransaction(transactionId: ID): Transaction
