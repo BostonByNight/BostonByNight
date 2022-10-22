@@ -53,4 +53,8 @@ defmodule VtmWeb.Resolvers.OccupationResolvers do
   defp character_of_user_or_master?(character_id, user_id) do
     Accounts.is_user_master?(user_id) or Characters.character_of_user?(user_id, character_id)
   end
+
+  def reset_occupation_timer(%{character_id: character_id}, _) do
+    Occupations.reset_occupation_timer(character_id)
+  end
 end

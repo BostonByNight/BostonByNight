@@ -281,6 +281,7 @@ type CharacterOccupation implements Node {
   id: ID!
   lastChecked: DateTime
   level: Int
+  occupation: Occupation
   occupationId: ID!
 }
 
@@ -742,7 +743,7 @@ input RefreshCharacterOccupationSalaryInput {
 }
 
 type RefreshCharacterOccupationSalaryPayload {
-  result: Occupation
+  result: CharacterOccupation
 }
 
 input ResetCharacterHuntInput {
@@ -755,6 +756,14 @@ type ResetCharacterHuntPayload {
 
 type ResetDangerPayload {
   result: Int
+}
+
+input ResetOccupationTimerInput {
+  characterId: ID!
+}
+
+type ResetOccupationTimerPayload {
+  result: CharacterOccupation
 }
 
 type ResetResonancesPayload {
@@ -823,6 +832,7 @@ type RootMutationType {
   requestNewPassword(userEmail: String!): Boolean
   resetCharacterHunt(input: ResetCharacterHuntInput!): ResetCharacterHuntPayload
   resetDanger: ResetDangerPayload
+  resetOccupationTimer(input: ResetOccupationTimerInput!): ResetOccupationTimerPayload
   resetResonances: ResetResonancesPayload
   resetSession: Boolean
   resetSessionMap: Boolean

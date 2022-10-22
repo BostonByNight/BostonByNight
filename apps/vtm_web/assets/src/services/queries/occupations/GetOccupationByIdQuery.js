@@ -3,6 +3,7 @@
 import graphql from 'babel-plugin-relay/macro';
 import type {GetOccupationByIdQuery$variables, GetOccupationByIdQuery$data} from "./__generated__/GetOccupationByIdQuery.graphql";
 import type {Query} from "relay-runtime/util/RelayRuntimeTypes";
+import {isNotNullNorEmpty} from "../../../_base/utils";
 
 export const GetOccupationByIdQuery: Query<GetOccupationByIdQuery$variables, GetOccupationByIdQuery$data> = graphql`
     query GetOccupationByIdQuery($id: ID!) {
@@ -25,3 +26,10 @@ export const GetOccupationByIdQuery: Query<GetOccupationByIdQuery$variables, Get
         }
     }
 `;
+
+type Occupation = {
+    +level2Name: ?string;
+}
+
+export const isOccupationCorporation = (occupation: ?Occupation): boolean =>
+    isNotNullNorEmpty(occupation?.level2Name)

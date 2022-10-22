@@ -1,13 +1,15 @@
 // @flow
 
 import React from "react";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 import {useRelayEnvironment} from "react-relay";
-import {handleMutation} from "../../../../_base/utils";
-import ResetHuntMutation from "../../../../services/mutations/admin/ResetHuntMutation";
 import {useDialog} from "../../../../_base/providers/DialogProvider";
 import {useCustomSnackbar} from "../../../../_base/notification-utils";
+import {handleMutation} from "../../../../_base/utils";
+import ResetOccupationSalaryCheckMutation
+    from "../../../../services/mutations/admin/ResetOccupationSalaryCheckMutation";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+
 import type {GenericReactComponent} from "../../../../_base/types";
 import type {Character} from "../../../../services/queries/character/GetCharacterCompleteQuery";
 
@@ -16,10 +18,10 @@ type Props = {
     onUpdate: () => void;
 }
 
-const ResetHuntForm = ({character, onUpdate}: Props): GenericReactComponent => {
-    const environment = useRelayEnvironment();
+const ResetOccupationSalaryCheckForm = ({character, onUpdate}: Props): GenericReactComponent => {
+    const environment = useRelayEnvironment()
     const {showDialog} = useDialog()
-    const {enqueueSnackbar} = useCustomSnackbar();
+    const {enqueueSnackbar} = useCustomSnackbar()
 
     const resetCharacterHunt = () =>
         showDialog(
@@ -27,7 +29,7 @@ const ResetHuntForm = ({character, onUpdate}: Props): GenericReactComponent => {
             `Sei sicuro di voler resettare l'esito della caccia di ${character?.name ?? ""}?`,
             () => {
                 handleMutation(
-                    () => ResetHuntMutation(environment, character?.id),
+                    () => ResetOccupationSalaryCheckMutation(environment, {characterId: character?.id}),
                     enqueueSnackbar, {
                         successMessage: "L'esito della caccia è stato correttamente resettato.",
                         onCompleted: onUpdate
@@ -42,10 +44,10 @@ const ResetHuntForm = ({character, onUpdate}: Props): GenericReactComponent => {
         }}>
             <Button variant="container"
                     onClick={resetCharacterHunt}>
-                Resetta l'esito della Caccia
+                Resetta il tempo dell'ultima richiesta di stipendio
             </Button>
         </Grid>
     );
 }
 
-export default ResetHuntForm;
+export default ResetOccupationSalaryCheckForm;

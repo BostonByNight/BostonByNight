@@ -199,4 +199,21 @@ defmodule Vtm.Occupations do
     })
     |> Repo.update()
   end
+
+  @spec reset_occupation_timer(character_id :: non_neg_integer()) :: 
+    {:ok, CharacterOccupation.t()} | 
+    {:error, :not_found}
+  def reset_occupation_timer(character_id) do
+    case get_character_occupation(character_id) do
+      nil ->
+        {:error, :not_found}
+
+      occupation ->
+        new_checked = NaiveDateTime.add(NaiveDateTime.utc_now(), @occupation_refresh_interval)
+        occupation
+        |> Occupation.changeset(%{
+          last_checked: new_checked
+        })
+    end
+  end
 end

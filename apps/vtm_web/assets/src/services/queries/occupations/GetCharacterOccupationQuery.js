@@ -9,7 +9,10 @@ export const GetCharacterOccupationQuery: Query<GetCharacterOccupationQuery$vari
         getCharacterOccupation(characterId: $characterId) {
             id
             characterId
-            occupationId
+            occupation {
+                id
+                name
+            }
             level
             lastChecked
         }

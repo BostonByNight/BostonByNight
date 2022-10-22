@@ -26,6 +26,7 @@ defmodule VtmWeb.Schema.OccupationTypes do
   node object :character_occupation do
     field :character_id, non_null(:id)
     field :occupation_id, non_null(:id)
+    field :occupation, :occupation
     field :last_checked, :date_time
     field :level, :integer
   end
@@ -87,11 +88,25 @@ defmodule VtmWeb.Schema.OccupationTypes do
       end
 
       output do
-        field :result, :occupation
+        field :result, :character_occupation
       end
 
       middleware VtmWeb.Schema.Middlewares.Authorize, :any
       resolve parsing_node_ids(&OccupationResolvers.refresh_character_occupation_salary/2, character_id: :character)
+      middleware VtmWeb.Schema.Middlewares.ChangesetErrors
+    end
+
+    payload field :reset_occupation_timer do
+      input do
+        field :character_id, non_null(:id)
+      end
+
+      output do
+        field :result, :character_occupation
+      end
+
+      middleware VtmWeb.Schema.Middlewares.Authorize, :master
+      resolve parsing_node_ids(&OccupationResolvers.reset_occupation_timer/2, character_id: :character)
       middleware VtmWeb.Schema.Middlewares.ChangesetErrors
     end
   end
