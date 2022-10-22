@@ -743,7 +743,12 @@ input RefreshCharacterOccupationSalaryInput {
 }
 
 type RefreshCharacterOccupationSalaryPayload {
-  result: CharacterOccupation
+  result: RefreshOccupationSalaryResult
+}
+
+type RefreshOccupationSalaryResult {
+  message: String!
+  type: String!
 }
 
 input ResetCharacterHuntInput {

@@ -180,7 +180,10 @@ defmodule Vtm.Occupations do
   @spec refresh_character_occupation_salary(
     character_id :: non_neg_integer(),
     user :: User.t()
-  ) :: {:ok, CharacterOccupation.t()} | {:error, :invalid_occupation}
+  ) :: 
+    {:ok, CharacterOccupation.t()} 
+    | {:error, :no_occupation}
+    | {:error, :refresh_too_soon}
   def refresh_character_occupation_salary(character_id, user) do
     case get_character_occupation(character_id) do
       nil ->

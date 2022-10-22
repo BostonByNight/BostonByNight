@@ -31,6 +31,11 @@ defmodule VtmWeb.Schema.OccupationTypes do
     field :level, :integer
   end
 
+  object :refresh_occupation_salary_result do
+    field :type, non_null(:string)
+    field :message, non_null(:string)
+  end
+
   object :occupation_queries do
     field :get_occupations, list_of(:occupation) do
       middleware VtmWeb.Schema.Middlewares.Authorize, :any
@@ -88,7 +93,7 @@ defmodule VtmWeb.Schema.OccupationTypes do
       end
 
       output do
-        field :result, :character_occupation
+        field :result, :refresh_occupation_salary_result
       end
 
       middleware VtmWeb.Schema.Middlewares.Authorize, :any

@@ -47,7 +47,22 @@ defmodule VtmWeb.Resolvers.OccupationResolvers do
   end
 
   def refresh_character_occupation_salary(%{character_id: character_id}, %{context: %{current_user: user}}) do
-    Occupations.refresh_character_occupation_salary(character_id, user)
+    case Occupations.refresh_character_occupation_salary(character_id, user) do
+      {:ok, _} ->
+        {:ok, %{
+          type: "ok",
+          message: "Stipendio correttamente incassato"
+        }}
+
+      {:error, :refresh_too_soon} ->
+        {:ok, %{
+          type: "error",
+          message: "Non è ancora passato un giorno dall'ultima volta che hai incassato lo stipendio"
+        }}
+
+      error ->
+        error
+    end
   end
 
   defp character_of_user_or_master?(character_id, user_id) do

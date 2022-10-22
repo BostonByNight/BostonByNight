@@ -12,7 +12,8 @@ const mutation = graphql`
     mutation RefreshCharacterOccupationSalaryMutation($input: RefreshCharacterOccupationSalaryInput!) {
         refreshCharacterOccupationSalary(input: $input) {
             result {
-                id
+                type
+                message
             }
         }
     }
