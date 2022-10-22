@@ -170,11 +170,11 @@ const ShowOccupation = ({occupationId, level}: {occupationId: string, level: num
 }
 
 const Occupation = ({sheet}: SheetElementProps) => {
-    const occupation = useCustomLazyLoadQuery(GetCharacterOccupationQuery, {characterId: sheet?.id})
+    const characterOccupation = useCustomLazyLoadQuery(GetCharacterOccupationQuery, {characterId: sheet?.id})
         ?.getCharacterOccupation
 
-    if (occupation?.occupationId != null) {
-        return (<ShowOccupation occupationId={occupation.occupationId} level={occupation.level ?? 1} />)
+    if (characterOccupation?.occupation?.id != null) {
+        return (<ShowOccupation occupationId={characterOccupation.occupation.id} level={characterOccupation.level ?? 1} />)
     }
 
     return (<></>)

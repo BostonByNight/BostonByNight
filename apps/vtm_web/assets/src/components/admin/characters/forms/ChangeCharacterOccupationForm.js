@@ -1,6 +1,6 @@
 // @flow
 
-import React, {useState} from "react";
+import React from "react";
 import Grid from "@mui/material/Grid";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -89,7 +89,7 @@ const ChangeCharacterOccupationForm = ({character, onUpdate}: Props): GenericRea
 
     const occupations = toNotNullArray(useCustomLazyLoadQuery(GetAllOccupationsQuery, {})?.getOccupations)
 
-    const [selectedOccupationId, setSelectedOccupationId] = React.useState(characterOccupation?.occupationId ?? "")
+    const [selectedOccupationId, setSelectedOccupationId] = React.useState(characterOccupation?.occupation?.id ?? "")
     const [level, setLevel] = React.useState(characterOccupation?.level ?? 1)
 
     const onOccupationChanged = ({target: {value}}: any) => {
