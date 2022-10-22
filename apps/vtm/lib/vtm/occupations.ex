@@ -45,6 +45,15 @@ defmodule Vtm.Occupations do
   @spec get_occupation(id :: non_neg_integer()) :: Occupation.t() | nil
   def get_occupation(id), do: Repo.get(Occupation, id)
 
+  @spec get_occupation_by_name(name :: binary()) ::
+    Occupation.t() | nil
+  def get_occupation_by_name(name) do
+    Occupation
+    |> from()
+    |> where([o], o.name == ^name)
+    |> Repo.one()
+  end
+
   @doc """
   Creates a occupation.
 

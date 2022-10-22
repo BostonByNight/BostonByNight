@@ -39,7 +39,7 @@ const LevelSelectionForm = ({occupationId, characterLevel, onLevelSelected}: Lev
     const getLevelInfo = (level: number): [string, number] =>
         // TODO - Find a more intelligent way to express the array from properties
         // $FlowFixMe
-        [occupation[`level${level}Name`], occupation[`level${level}Name`]]
+        [occupation[`level${level}Name`], occupation[`level${level}Salary`]]
 
     const getLevelDescriptions = () => rangeArray(1, 6).map(getLevelInfo)
 
@@ -62,7 +62,7 @@ const LevelSelectionForm = ({occupationId, characterLevel, onLevelSelected}: Lev
 
     if (isLevelNecessary()) {
         return (
-            <Grid item xs={12} sm={6} sx={{textAlign: "center"}}>
+            <Grid item xs={12} sm={4} sx={{textAlign: "center"}}>
                 <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <InputLabel htmlFor="level">Livello</InputLabel>
                     <Select defaultValue="1"
@@ -80,7 +80,7 @@ const LevelSelectionForm = ({occupationId, characterLevel, onLevelSelected}: Lev
 }
 
 const ChangeCharacterOccupationForm = ({character, onUpdate}: Props): GenericReactComponent => {
-    const environment = useRelayEnvironment();
+    const environment = useRelayEnvironment()
     const {showDialog} = useDialog()
     const {enqueueSnackbar} = useCustomSnackbar()
 
@@ -126,7 +126,7 @@ const ChangeCharacterOccupationForm = ({character, onUpdate}: Props): GenericRea
     return (
         <Grid item xs={12}>
             <Grid container>
-                <Grid item xs={12} sm={6} sx={{textAlign: "center"}}>
+                <Grid item xs={12} sm={4} sx={{textAlign: "center"}}>
                     <FormControl sx={{ m: 1, minWidth: 120 }}>
                         <InputLabel htmlFor="occupation">Maschera/Corporazione</InputLabel>
                         <Select defaultValue="1"
@@ -140,10 +140,10 @@ const ChangeCharacterOccupationForm = ({character, onUpdate}: Props): GenericRea
                 <LevelSelectionForm characterLevel={characterOccupation?.level}
                                     occupationId={selectedOccupationId}
                                     onLevelSelected={onLevelChanged} />
-                <Grid item xs={12} sm={6} sx={{paddingTop: "20px", textAlign: "center"}}>
+                <Grid item xs={12} sm={4} sx={{paddingTop: "20px", textAlign: "center"}}>
                     <Button variant="outlined"
                             onClick={changeCharacterOccupation}>
-                        Aggiungi / Sottrai Esperienza
+                        Assegna occupazione
                     </Button>
                 </Grid>
             </Grid>
