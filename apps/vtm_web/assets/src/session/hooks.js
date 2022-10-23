@@ -16,7 +16,6 @@ export const useCharacterRecoilState = (): [?SessionCharacter, ((?SessionCharact
         if (character == null) {
             getSessionCharacter(environment)
                 .then(response => {
-                    console.debug("session character", response)
                     const character = response?.getSessionCharacter
 
                     if (character != null) {

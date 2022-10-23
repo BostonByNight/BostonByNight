@@ -63,18 +63,18 @@ const HavenMapInternal = ({
 }: HavenInternalProps) => {
     const radius = 20.8;
 
-    const groupedHavens = groupHavens(havens);
+    const groupedHavens = groupHavens(havens)
 
     const areas = getMapKeys(groupedHavens)
         .map(x => Number(x))
         .sort((a, b) => a - b)
         .flatMap(key => {
-            const value = groupedHavens
+            const values = groupedHavens
                 .get(key)
                 ?.sort((a, b) => (a?.x ?? 0) - (b?.x ?? 0));
 
-            if (value != null) {
-                return drawLine(showResonances, character?.id, key - 1, value, radius);
+            if (values != null) {
+                return drawLine(showResonances, character?.id, key - 1, values, radius);
             }
 
             return [];
