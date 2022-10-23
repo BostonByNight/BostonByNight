@@ -118,7 +118,7 @@ const MainListItems = ({drawerDone, reloadCount, onUpdate}: MenuProps): GenericR
                                   onUpdate={onUpdate} />
             <MenuHuntSection />
             {
-                character?.id != null
+                character?.id != null && character?.approved
                     ? (
                         <>
                             <ListItem button onClick={checkSalary}>
