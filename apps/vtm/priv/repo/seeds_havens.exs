@@ -2,8 +2,8 @@ defmodule Vtm.SeedsHavens.Helpers do
   alias Vtm.Havens.Haven
   alias Vtm.Repo
 
-  @center_x 16
-  @center_y 8
+  @center_x 9
+  @center_y 7
   @max_distance 23
 
   @max_danger 3
@@ -14,6 +14,34 @@ defmodule Vtm.SeedsHavens.Helpers do
   @max_difficulty 5
 
   @unreachable_coordinates [
+    {10, 1},
+    {11, 1},
+    {12, 1},
+    {13, 1},
+    {19, 1},
+    {21, 1},
+    {12, 2},
+    {17, 2},
+    {18, 2},
+    {19, 2},
+    {20, 2},
+    {12, 3},
+    {13, 3},
+    {16, 3},
+    {17, 3},
+    {18, 3},
+    {19, 3},
+    {20, 3},
+    {11, 4},
+    {12, 4},
+    {15, 4},
+    {16, 4},
+    {17, 4},
+    {18, 4},
+    {19, 4},
+    {20, 4},
+    {12, 5},
+    {13, 5},
     {7, 7},
     {7, 6},
     {4, 8},
@@ -67,19 +95,19 @@ end
 
 # Vtm.Repo.query!("truncate table haven_locations cascade")
 
-Vtm.SeedsHavens.Helpers.insert_row(1, 12)
-Vtm.SeedsHavens.Helpers.insert_row(2, 11)
-Vtm.SeedsHavens.Helpers.insert_row(3, 12)
-Vtm.SeedsHavens.Helpers.insert_row(4, 10)
-Vtm.SeedsHavens.Helpers.insert_row(5, 12)
+Vtm.SeedsHavens.Helpers.insert_row(1, 22)
+Vtm.SeedsHavens.Helpers.insert_row(2, 21)
+Vtm.SeedsHavens.Helpers.insert_row(3, 22)
+Vtm.SeedsHavens.Helpers.insert_row(4, 21)
+Vtm.SeedsHavens.Helpers.insert_row(5, 15)
 Vtm.SeedsHavens.Helpers.insert_row(6, 11)
 Vtm.SeedsHavens.Helpers.insert_row(7, 12)
-Vtm.SeedsHavens.Helpers.insert_row(8, 12)
-Vtm.SeedsHavens.Helpers.insert_row(9, 14)
+Vtm.SeedsHavens.Helpers.insert_row(8, 11)
+Vtm.SeedsHavens.Helpers.insert_row(9, 13)
 Vtm.SeedsHavens.Helpers.insert_row(10, 15)
 Vtm.SeedsHavens.Helpers.insert_row(11, 16)
 Vtm.SeedsHavens.Helpers.insert_row(12, 17)
 Vtm.SeedsHavens.Helpers.insert_row(13, 16)
 Vtm.SeedsHavens.Helpers.insert_row(14, 15)
 Vtm.SeedsHavens.Helpers.insert_row(15, 12)
-Vtm.SeedsHavens.Helpers.insert_row(16, 12)
+Vtm.SeedsHavens.Helpers.insert_row(16, 11)
