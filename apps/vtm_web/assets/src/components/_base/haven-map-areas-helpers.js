@@ -175,10 +175,10 @@ export const drawLine = (showResonances: boolean, characterId: ?string, index: n
         radius + d * cos30 * index
     ];
 
-    return havens.map((haven, i) => buildArea(
+    return havens.map(haven => buildArea(
         showResonances,
         characterId,
         haven,
-        computeHexagonCoords([x1 + d * i, y1], radius),
-        `Posizione ${i} - ${index}`));
+        computeHexagonCoords([x1 + d * (haven.x - 1), y1], radius),
+        `Posizione ${haven.x} - ${index}`));
 };

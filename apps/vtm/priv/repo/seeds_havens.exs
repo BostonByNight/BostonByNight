@@ -13,6 +13,14 @@ defmodule Vtm.SeedsHavens.Helpers do
   @max_resources 5
   @max_difficulty 5
 
+  @unreachable_coordinates [
+    {7, 7},
+    {7, 8},
+    {4, 8},
+    {5, 8},
+    {6, 8},
+  ]
+
   def insert_haven(x, y) do
     distance_coefficient_from_center = abs(@center_x - x) + abs(@center_y - y)
     distance_coefficient = distance_coefficient_from_center / @max_distance
@@ -43,28 +51,35 @@ defmodule Vtm.SeedsHavens.Helpers do
   end
 
   def insert_row(y, max_x) when max_x > 0 do
-    insert_haven(max_x, y)
+    if not is_unreachable(max_x, y) do
+      insert_haven(max_x, y)
+    end
     insert_row(y, max_x - 1)
   end
 
   def insert_row(_, _), do: {:ok, %{}}
+
+  defp is_unreachable(x, y) do
+    @unreachable_coordinates
+    |> Enum.any?(fn {x1, y1} -> x == x1 and y == y1 end)
+  end
 end
 
 # Vtm.Repo.query!("truncate table haven_locations cascade")
 
-Vtm.SeedsHavens.Helpers.insert_row(1, 9)
-Vtm.SeedsHavens.Helpers.insert_row(2, 9)
-Vtm.SeedsHavens.Helpers.insert_row(3, 11)
-Vtm.SeedsHavens.Helpers.insert_row(4, 12)
-Vtm.SeedsHavens.Helpers.insert_row(5, 13)
-Vtm.SeedsHavens.Helpers.insert_row(6, 15)
-Vtm.SeedsHavens.Helpers.insert_row(7, 15)
-Vtm.SeedsHavens.Helpers.insert_row(8, 16)
-Vtm.SeedsHavens.Helpers.insert_row(9, 16)
-Vtm.SeedsHavens.Helpers.insert_row(10, 16)
-Vtm.SeedsHavens.Helpers.insert_row(11, 17)
+Vtm.SeedsHavens.Helpers.insert_row(1, 12)
+Vtm.SeedsHavens.Helpers.insert_row(2, 11)
+Vtm.SeedsHavens.Helpers.insert_row(3, 12)
+Vtm.SeedsHavens.Helpers.insert_row(4, 10)
+Vtm.SeedsHavens.Helpers.insert_row(5, 12)
+Vtm.SeedsHavens.Helpers.insert_row(6, 11)
+Vtm.SeedsHavens.Helpers.insert_row(7, 12)
+Vtm.SeedsHavens.Helpers.insert_row(8, 12)
+Vtm.SeedsHavens.Helpers.insert_row(9, 14)
+Vtm.SeedsHavens.Helpers.insert_row(10, 15)
+Vtm.SeedsHavens.Helpers.insert_row(11, 16)
 Vtm.SeedsHavens.Helpers.insert_row(12, 17)
-Vtm.SeedsHavens.Helpers.insert_row(13, 17)
-Vtm.SeedsHavens.Helpers.insert_row(14, 18)
-Vtm.SeedsHavens.Helpers.insert_row(15, 20)
-Vtm.SeedsHavens.Helpers.insert_row(16, 21)
+Vtm.SeedsHavens.Helpers.insert_row(13, 16)
+Vtm.SeedsHavens.Helpers.insert_row(14, 15)
+Vtm.SeedsHavens.Helpers.insert_row(15, 12)
+Vtm.SeedsHavens.Helpers.insert_row(16, 12)
