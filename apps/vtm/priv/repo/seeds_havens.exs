@@ -15,7 +15,7 @@ defmodule Vtm.SeedsHavens.Helpers do
 
   @unreachable_coordinates [
     {7, 7},
-    {7, 8},
+    {7, 6},
     {4, 8},
     {5, 8},
     {6, 8},
