@@ -567,7 +567,7 @@ const GuidesAttributesDisciplines = (): GenericReactComponent => {
                         <b>Ammantare le Masse</b> (&#9679;&#9679;&#9679;&#9679;&#9679;): il vampiro ora riesce a coprire anche altri compagni dietro la coltre di Oscurazione, attivando anche per loro i poteri di Cappa d'Ombra o di Passaggio Invisibile.<br />
                         <b>Sistema</b>: il vampiro dovr&agrave; effettuare 1 Prova di Risveglio supplementare rispetto al potere che verr&agrave; aumentato. Il vampiro potr&agrave; estendere il potere ad un numero di persone pari al suo punteggio di Prontezza; ogni persona
                         oltre quel numero, coster&agrave; 1 Prova di Risveglio. Ogni persona sar&agrave; sotto l'effetto del potere come se possedesse il livello di Oscurazione del cainita, ma tutti quelli interessati dal potere potranno vedersi tra di loro.
-                        Se uno dei personaggi interessati viene scoperto, gli altri continueranno a rimaere sotto l'effetto di Oscurazione. Se il vampiro che ha attivato il potere viene scoperto, invece, l'illusione svanisce per tutti.
+                        Se uno dei personaggi interessati viene scoperto, gli altri continueranno a rimanere sotto l'effetto di Oscurazione. Se il vampiro che ha attivato il potere viene scoperto, invece, l'illusione svanisce per tutti.
                     </li>
 
                     <li style={liStyle}>
