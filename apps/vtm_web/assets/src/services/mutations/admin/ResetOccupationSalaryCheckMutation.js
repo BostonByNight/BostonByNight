@@ -21,8 +21,7 @@ const mutation = graphql`
 const mutationPromise = (
     environment: IEnvironment,
     input: ResetOccupationTimerInput
-): Promise<ResetOccupationSalaryCheckMutation$data> => {
-    return wrapMutation<ResetOccupationSalaryCheckMutation$data>(environment, mutation, input);
-}
+): Promise<ResetOccupationSalaryCheckMutation$data> =>
+    wrapMutation<ResetOccupationSalaryCheckMutation$data>(environment, mutation, {input});
 
 export default mutationPromise;

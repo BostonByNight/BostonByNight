@@ -223,9 +223,10 @@ defmodule Vtm.Occupations do
       occupation ->
         new_checked = NaiveDateTime.add(NaiveDateTime.utc_now(), @occupation_refresh_interval)
         occupation
-        |> Occupation.changeset(%{
+        |> CharacterOccupation.changeset(%{
           last_checked: new_checked
         })
+        |> Repo.update()
     end
   end
 end

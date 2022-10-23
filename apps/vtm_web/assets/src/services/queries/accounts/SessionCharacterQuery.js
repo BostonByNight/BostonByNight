@@ -28,6 +28,4 @@ const sessionCharacterQuery: Query<SessionCharacterQuery$variables, SessionChara
 //     useCustomLazyLoadQuery(sessionCharacterQuery, emptyExactObject());
 
 export const getSessionCharacter = (environment: IEnvironment): Promise<?SessionCharacterQuery$data> =>
-    wrapQuery(environment, sessionCharacterQuery, emptyExactObject());
-
-
+    wrapQuery(environment, sessionCharacterQuery, emptyExactObject())

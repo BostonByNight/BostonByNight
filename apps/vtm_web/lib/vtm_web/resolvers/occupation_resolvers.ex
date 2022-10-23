@@ -50,15 +50,17 @@ defmodule VtmWeb.Resolvers.OccupationResolvers do
     case Occupations.refresh_character_occupation_salary(character_id, user) do
       {:ok, _} ->
         {:ok, %{
-          type: "ok",
-          message: "Stipendio correttamente incassato"
-        }}
+          result: %{
+            type: "ok",
+            message: "Stipendio correttamente incassato"
+        }}}
 
       {:error, :refresh_too_soon} ->
         {:ok, %{
-          type: "error",
-          message: "Non è ancora passato un giorno dall'ultima volta che hai incassato lo stipendio"
-        }}
+          result: %{
+            type: "error",
+            message: "Non è ancora passato un giorno dall'ultima volta che hai incassato lo stipendio"
+        }}}
 
       error ->
         error
@@ -70,6 +72,9 @@ defmodule VtmWeb.Resolvers.OccupationResolvers do
   end
 
   def reset_occupation_timer(%{character_id: character_id}, _) do
-    Occupations.reset_occupation_timer(character_id)
+    with {:ok, result} <- Occupations.reset_occupation_timer(character_id) do
+      {:ok, %{result: result}}
+    end
   end
 end
+

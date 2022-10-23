@@ -129,7 +129,7 @@ const ChangeCharacterOccupationForm = ({character, onUpdate}: Props): GenericRea
                 <Grid item xs={12} sm={4} sx={{textAlign: "center"}}>
                     <FormControl sx={{ m: 1, minWidth: 120 }}>
                         <InputLabel htmlFor="occupation">Maschera/Corporazione</InputLabel>
-                        <Select defaultValue="1"
+                        <Select defaultValue={characterOccupation?.occupation?.id}
                                 id="occupation"
                                 label="Maschera/Corporazione"
                                 onChange={onOccupationChanged}>
