@@ -13,8 +13,10 @@ config :vtm_web, VtmWeb.Endpoint,
   url: [host: "bostonbynight-gdr.it", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json",
   check_origin: [
-    "bostonbynight-gdr.it",
-    "test.bostonbynight-gdr.it",
+    "https://bostonbynight-gdr.it",
+    "https://test.bostonbynight-gdr.it",
+    "https://www.bostonbynight-gdr.it",
+    "https://www.test.bostonbynight-gdr.it",
   ]
 
 config :vtm_web, :environment, :prod
