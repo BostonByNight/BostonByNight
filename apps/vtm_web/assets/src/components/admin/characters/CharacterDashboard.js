@@ -20,6 +20,8 @@ import SendMessageToUserOrCharacter from "./forms/SendMessageToUserOrCharacter";
 import SetHuntDifficultyForm from "./forms/SetHuntDifficultyForm";
 import ChangeCharacterMoneyForm from "./forms/ChangeCharacterMoneyForm";
 import type {GenericEvent, GenericReactComponent} from "../../../_base/types";
+import ResetOccupationSalaryCheckForm from "./forms/ResetOccupationSalaryCheckForm";
+import ChangeCharacterOccupationForm from "./forms/ChangeCharacterOccupationForm";
 
 type Props = {
     characterId: string;
@@ -114,6 +116,18 @@ const CharacterDashboard = ({characterId}: Props): GenericReactComponent => {
                         <Paper variant="outlined" sx={{margin: "10px"}}>
                             <ResetHuntForm character={character}
                                            onUpdate={onUpdate} />
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Paper variant="outlined" sx={{margin: "10px"}}>
+                            <ResetOccupationSalaryCheckForm character={character}
+                                                            onUpdate={onUpdate} />
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Paper variant="outlined" sx={{margin: "10px"}}>
+                            <ChangeCharacterOccupationForm character={character}
+                                                           onUpdate={onUpdate} />
                         </Paper>
                     </Grid>
                     <ApproveCharacterForm character={character} />

@@ -11,6 +11,12 @@ import type {
 import ParsedText from "../../../../_base/components/ParsedText";
 import {mainFontFamily} from "../../../Main.Layout.Style";
 import type {GenericReactComponent} from "../../../../_base/types";
+import {useCustomLazyLoadQuery} from "../../../../_base/relay-utils";
+import {GetCharacterOccupationQuery} from "../../../../services/queries/occupations/GetCharacterOccupationQuery";
+import {
+    GetOccupationByIdQuery,
+    isOccupationCorporation
+} from "../../../../services/queries/occupations/GetOccupationByIdQuery";
 
 type Props = {
     characterQuery: CharacterFragments_characterState$key
@@ -30,6 +36,7 @@ const CharacterSheetOthersSection = ({characterQuery}: Props): GenericReactCompo
             <Clan sheet={sheet} />
             <Experience sheet={sheet} />
             <Money sheet={sheet} />
+            <Occupation sheet={sheet} />
             <PredatorType sheet={sheet} />
             <Biography sheet={sheet} />
             <DisciplinePowers sheet={sheet} />
@@ -111,6 +118,67 @@ const Money = ({sheet}: SheetElementProps) => (
         </Typography>
     </>
 )
+
+const ShowOccupation = ({occupationId, level}: {occupationId: string, level: number}) => {
+    const occupation = useCustomLazyLoadQuery(GetOccupationByIdQuery, {id: occupationId})
+        ?.getOccupation
+
+    if (isOccupationCorporation(occupation)) {
+        const [levelName, levelSalary] =
+            // TODO: find a cleverer way to get "numeric" properties
+            // $FlowFixMe
+            [occupation[`level${level}Name`], occupation[`level${level}Salary`]]
+
+        return (
+            <>
+                <Typography sx={sectionTitleStyle}>
+                    Corporazione
+                </Typography>
+                <Typography sx={{
+                    ...mainFontFamily,
+                    marginBottom: "10px"
+                }}>
+                    <b>{occupation?.name}</b>
+                </Typography>
+                <Typography sx={sectionTitleStyle}>
+                    Livello
+                </Typography>
+                <Typography sx={{
+                    ...mainFontFamily,
+                    marginBottom: "10px"
+                }}>
+                    <b>{levelName} ($ {levelSalary} giornalieri)</b>
+                </Typography>
+            </>
+        );
+    }
+    else {
+        return (
+            <>
+                <Typography sx={sectionTitleStyle}>
+                    Maschera
+                </Typography>
+                <Typography sx={{
+                    ...mainFontFamily,
+                    marginBottom: "10px"
+                }}>
+                    <b>{occupation?.name} ($ {occupation?.level1Salary ?? 0} giornalieri)</b>
+                </Typography>
+            </>
+        );
+    }
+}
+
+const Occupation = ({sheet}: SheetElementProps) => {
+    const characterOccupation = useCustomLazyLoadQuery(GetCharacterOccupationQuery, {characterId: sheet?.id})
+        ?.getCharacterOccupation
+
+    if (characterOccupation?.occupation?.id != null) {
+        return (<ShowOccupation occupationId={characterOccupation.occupation.id} level={characterOccupation.level ?? 1} />)
+    }
+
+    return (<></>)
+}
 
 type InfoElementProps = {
     title: string;

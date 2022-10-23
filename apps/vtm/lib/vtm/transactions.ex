@@ -94,31 +94,59 @@ defmodule Vtm.Transactions do
     end
   end
 
-  @spec update_character_money(
+  @spec increase_character_money(
     character_id :: non_neg_integer(), 
     money :: integer(), 
-    user :: User.t()) :: 
+    user :: User.t(),
+    reason :: binary() | nil) :: 
       {:ok, Transaction.t()} | 
       {:error, binary()}
-  def update_character_money(character_id, money, user = %{id: user_id}) do
+  def increase_character_money(character_id, money, user = %{id: user_id}, reason \\ "Transazione del Narratore") do    
     case Characters.get_specific_character(user, character_id) do
       nil ->
         {:error, :not_found}
-      %{id: id, money: current_money} when current_money >= money ->
-        with {:ok, _} <- Characters.update_character(id, %{money: money}) do
-          transaction_amount = money - current_money
-
-          attrs = %{
-            character_id: id,
-            amount: transaction_amount,
-            reason: "Transazione del Narratore",
-            master_user_id: user_id
-          }
-
-          insert_transaction(attrs)
-        end
-      _ ->
-        {:error, :not_enough_money}
+      character = %{money: current_money} ->
+        update_character_money_internal(character, current_money + money, user_id, reason)
     end
+  end
+
+  @spec update_character_money(
+    character_id :: non_neg_integer(), 
+    money :: integer(), 
+    user :: User.t(),
+    reason :: binary() | nil) :: 
+      {:ok, Transaction.t()} | 
+      {:error, binary()}
+  def update_character_money(character_id, money, user = %{id: user_id}, reason \\ "Transazione del Narratore") do
+    case Characters.get_specific_character(user, character_id) do
+      nil ->
+        {:error, :not_found}
+      character ->
+        update_character_money_internal(character, money, user_id, reason)
+    end
+  end
+
+  defp update_character_money_internal(
+    %{id: id, money: current_money}, 
+    money,
+    master_user_id,
+    reason
+  ) when current_money >= money do
+    with {:ok, _} <- Characters.update_character(id, %{money: money}) do
+      transaction_amount = money - current_money
+
+      attrs = %{
+        character_id: id,
+        amount: transaction_amount,
+        reason: reason,
+        master_user_id: master_user_id
+      }
+
+      insert_transaction(attrs)
+    end
+  end
+
+  defp update_character_money_internal(_, _) do
+    {:error, :not_enough_money}
   end
 end
