@@ -4,6 +4,7 @@ import {logout} from "./login-service";
 
 export const performLogout = (onLogoutCompleted: () => void) => {
     const clearClientSession = () => {
+        console.debug("clearing user cache")
         localStorage.clear();
         sessionStorage.clear();
         onLogoutCompleted();
@@ -22,12 +23,12 @@ export const performLogout = (onLogoutCompleted: () => void) => {
                 console.error("Error while performing logout", e);
             })
             .finally(() => {
-                clearClientSession();
+                clearClientSession()
             });
     }
     catch (e) {
         console.error("Catastrophic error", e);
-        clearClientSession();
+        clearClientSession()
     }
     finally {
         window.removeEventListener("unhandledrejection", handleUnhandledExceptionAtLogout);
