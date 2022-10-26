@@ -7,7 +7,6 @@ defmodule Vtm.Transactions do
 
   alias Vtm.Characters
   alias Vtm.Characters.Transaction
-  alias Vtm.Characters.Character
 
   @all_transactions_limit 60 * 60 * 24 * -1
   
@@ -146,7 +145,7 @@ defmodule Vtm.Transactions do
     end
   end
 
-  defp update_character_money_internal(_, _) do
+  defp update_character_money_internal(_, _, _, _) do
     {:error, :not_enough_money}
   end
 end

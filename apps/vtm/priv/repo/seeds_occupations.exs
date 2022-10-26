@@ -20,26 +20,63 @@ defmodule Vtm.SeedsOccupationsHelpers do
   end
 end
 
-Vtm.SeedsOccupationsHelpers.insert_or_update_occupation(%{
-  name: "Accountant",
-  description: "An accountant",
-  level1_name: "Accountant",
-  level1_salary: 10
-})
+pay = 15
 
-Vtm.SeedsOccupationsHelpers.insert_or_update_occupation(%{
-  name: "Banker",
-  description: "A banker",
-  level1_name: "Intern",
-  level1_salary: 10,
-  level2_name: "Junior Accountant",
-  level2_salary: 30,
-  level3_name: "Senior Accountant",
-  level3_salary: 60,
-  level4_name: "Principal Accountant",
-  level4_salary: 100,
-  level5_name: "Leader",
-  level5_salary: 200,
-  level6_name: "CEO",
-  level6_salary: 1000
-})
+masks = [
+  "GuardianoNotturno",
+  "Musicista",
+  "Netturbino",
+  "Programmatore",
+  "CommessodiMinimarket",
+  "DetectivePrivato",
+  "Barista",
+  "Tassista",
+  "Fattorino",
+  "Modello/a",
+  "Taccheggiatore",
+  "Professionistadelsesso",
+  "Senzatetto",
+  "Scultore",
+  "Pittore",
+  "AgentediRecuperoCrediti",
+  "Influencer",
+  "Fotografo",
+]
+
+for name <- masks do
+  Vtm.SeedsOccupationsHelpers.insert_or_update_occupation(%{
+    name: name,
+    description: name,
+    level1_name: name,
+    level1_salary: pay
+  })
+end
+
+corporations = [
+  "Forze dell'Ordine",
+  "Mass Media",
+  "Sanità",
+  "Alta Finanza",
+  "Politica",
+  "Criminalità",
+  "Cultura",
+]
+
+for name <- corporations do
+  Vtm.SeedsOccupationsHelpers.insert_or_update_occupation(%{
+    name: name,
+    description: name,
+    level1_name: "Associato di primo livello",
+    level1_salary: 10,
+    level2_name: "Associato di secondo livello",
+    level2_salary: 15,
+    level3_name: "Associato di terzo livello",
+    level3_salary: 20,
+    level4_name: "Associato di quarto livello",
+    level4_salary: 30,
+    level5_name: "Associato di quinto livello",
+    level5_salary: 50,
+    level6_name: "Associato di sesto livello",
+    level6_salary: 80
+  })
+end
