@@ -1,6 +1,6 @@
 [{
-    "title": "Aeroporto",
-    "name": "Aeroporto",
+    "title": "East Boston",
+    "name": "East Boston",
     "shape": "poly",
     "coords": [479,9,461,25,465,45,466,89,448,109,451,125,459,149,469,167,474,171,501,186,513,195,544,216,669,307,684,301,764,251,799,218,799,0,502,-1],
     "fillColor": "#1919C980",
@@ -8,8 +8,8 @@
     "lineWidth": 2,
     "preFillColor": "#59191940"
 }, {
-    "title": "Università",
-    "name": "Università",
+    "title": "Old Boston",
+    "name": "Old Boston",
     "shape": "poly",
     "coords": [1,124,19,140,21,180,21,221,32,246,68,258,119,246,249,189,281,141,300,135,344,127,391,106,410,110,425,95,431,60,428,-1,0,-1],
     "fillColor": "#19791980",
@@ -17,8 +17,8 @@
     "lineWidth": 2,
     "preFillColor": "#59191940"
 }, {
-    "title": "North-End",
-    "name": "North-End",
+    "title": "North Boston",
+    "name": "North Boston",
     "shape": "poly",
     "coords": [263,224,274,198,281,165,305,143,325,134,339,146,365,137,380,128,409,130,415,150,420,175,424,190,426,214,421,245,410,270,394,294,385,307,375,314,302,303],
     "fillColor": "#C9191980",
@@ -26,8 +26,8 @@
     "lineWidth": 2,
     "preFillColor": "#59191940"
 }, {
-    "title": "Bassifondi",
-    "name": "Bassifondi",
+    "title": "South Boston",
+    "name": "South Boston",
     "shape": "poly",
     "coords": [378,314,408,276,426,244,443,240,580,307,655,364,657,389,625,436,456,510,399,510,323,398,356,315],
     "fillColor": "#C9C91980",
@@ -35,8 +35,8 @@
     "lineWidth": 2,
     "preFillColor": "#59191940"
 }, {
-    "title": "Beacon Hill",
-    "name": "Beacon Hill",
+    "title": "West Boston",
+    "name": "West Boston",
     "shape": "poly",
     "coords": [165,267,261,226,303,303,354,313,323,396,394,509,126,508,163,410,224,344,163,302],
     "fillColor": "#5919A980",
